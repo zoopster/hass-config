@@ -1,0 +1,80 @@
+type: picture-elements
+image: /local/image/DS716+II.jpg
+title: DS716+ II
+elements:
+  - type: state-icon
+    entity: sensor.phousenas_cpu_utilization_total
+    style:
+      left: 15%
+      top: 35%
+  - type: state-label
+    entity: sensor.phousenas_cpu_utilization_total
+    prefix: 'CPU: '
+    style:
+      left: 15%
+      top: 45%
+      color: grey
+      font-weigh: null
+      font-size: 100%
+  - type: state-label
+    entity: sensor.phousenas_temperature
+    prefix: 'Temp: '
+    style:
+      left: 15%
+      top: 55%
+      color: grey
+      font-weigh: null
+      font-size: 100%
+  - type: state-icon
+    entity: sensor.phousenas_memory_usage_real
+    style:
+      left: 15%
+      top: 67%
+  - type: state-label
+    entity: sensor.phousenas_memory_usage_real
+    prefix: 'RAM: '
+    style:
+      left: 15%
+      top: 80%
+      color: grey
+      font-weigh: null
+      font-size: 100%
+  - type: state-label
+    entity: sensor.phousenas_memory_available_real
+    prefix: 'Free: '
+    style:
+      left: 15%
+      top: 92%
+      color: grey
+      font-weigh: null
+      font-size: 100%
+  - type: state-icon
+    entity: sensor.phousenas_volume_used
+    style:
+      left: 85%
+      top: 35%
+  - type: state-label
+    entity: sensor.phousenas_volume_used
+    prefix: 'Disk: '
+    style:
+      left: 85%
+      top: 45%
+      color: grey
+      font-weigh: null
+      font-size: 100%
+  - type: state-label
+    entity: sensor.phousenas_average_disk_temp
+    prefix: 'Disk Temp: '
+    style:
+      left: 85%
+      top: 55%
+      color: grey
+      font-weight: null
+  - type: state-label
+    entity: binary_sensor.phousenas_update_available
+    prefix: null
+    style:
+      left: 85%
+      top: 65%
+      color: grey
+      font-weight: null
