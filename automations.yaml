@@ -1,0 +1,42 @@
+- id: '1650203295394'
+  alias: Frigate Notification
+  description: ''
+  use_blueprint:
+    path: hunterjm/frigate_notification.yaml
+    input:
+      camera: camera.se_corner
+      notify_device: 7c2c64d81eaed1816c7d5be334339e24
+- id: '1650327153428'
+  alias: se_corner
+  description: ''
+  trigger:
+  - type: motion
+    platform: device
+    device_id: 4b903b2ebcbd57314b3acf50a0c01320
+    entity_id: binary_sensor.se_corner_car_motion
+    domain: binary_sensor
+  condition: []
+  action:
+  - device_id: 7c2c64d81eaed1816c7d5be334339e24
+    domain: mobile_app
+    type: notify
+    message: SE Corner - Motion
+    title: Motion Detected
+  mode: single
+- id: '1651019706765'
+  alias: driveway car
+  description: ''
+  trigger:
+  - type: motion
+    platform: device
+    device_id: 68f2adc0de8959cbf587e5262aaf79a7
+    entity_id: binary_sensor.driveway_car_motion
+    domain: binary_sensor
+  condition: []
+  action:
+  - device_id: 7c2c64d81eaed1816c7d5be334339e24
+    domain: mobile_app
+    type: notify
+    message: Car detected in driveway
+    title: Car detected in Driveway
+  mode: single
