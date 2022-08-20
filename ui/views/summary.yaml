@@ -2122,7 +2122,7 @@ popup_cards:
     title: Traffic
     card:       
       type: picture
-      image: !secret virtualearth_image_path
+#      image: !secret virtualearth_image_path
       tap_action:
         action: url
         url_path: !secret googlemaps_path
