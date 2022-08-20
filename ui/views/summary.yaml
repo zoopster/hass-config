@@ -549,7 +549,8 @@ cards:
                   - aspect_ratio: 2/1
                   - points_per_hour: 4
                   - entities:
-                      - entity: sensor.total_energy_use
+#                      - entity: sensor.total_energy_use
+                       - entity: sensor.fpl_4362074298_projected_kwh
                   - title: Total Energy Usage
                   - icon: 'mdi:home-lightning-bolt'
                   - line_width: 2
