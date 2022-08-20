@@ -4,7 +4,7 @@ lovelace:
   dashboards:
     lovelace-yaml:
       mode: yaml
-      resources: !include lovelace-resources.yaml
+#      resources: !include lovelace-resources.yaml
       title: YAML
       icon: mdi:script
       show_in_sidebar: true
@@ -17,6 +17,7 @@ default_config:
 tts:
   - platform: google_translate
 
+resources: !include lovelace-resources.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
