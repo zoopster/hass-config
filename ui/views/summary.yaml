@@ -565,73 +565,73 @@ cards:
               card_margin: 1px
             cards:
 
-              - type: 'custom:button-card'
-                template: header_card
-                variables:
-                  name: SECURITY
-                  label: More
-                  link: /ui-dashboard/security
-                view_layout:
-                  grid-column: 1/-1
+              # - type: 'custom:button-card'
+              #   template: header_card
+              #   variables:
+              #     name: SECURITY
+              #     label: More
+              #     link: /ui-dashboard/security
+              #   view_layout:
+              #     grid-column: 1/-1
 
-              - type: 'custom:button-card'
-                template:
-                  - live_tile_card
-                  - live_tile_with_long_state
-                  - live_tile_with_state_countdown
-                entity: binary_sensor.front_door_switchbot_contact_sensor_door_open
-                name: Front Door
-                triggers_update: all
-                state_display: |
-                  [[[
-                    var lockState = states["lock.front_door_lock"].state
-                    return (lockState.charAt(0).toUpperCase() + lockState.slice(1)) + " + " + ((entity.state == "on") ? "Open" : "Closed")
-                  ]]]
-                styles:
-                  grid:
-                    - background: |
-                        [[[
-                          if (entity.state == "on") { return "var(--accent-color)" }
-                          if (states["lock.front_door_lock"].state == "unlocked") { return "rgb(var(--rgb-primary-color), .5)" }
-                          return "var(--ha-card-background)"
-                        ]]]
-                variables:
-                  aspect_ratio: '[[[ return Math.round(this.offsetWidth / 112) ]]]'
-                  duration: 300
-                view_layout:
-                  grid-column: 1/-2
+              # - type: 'custom:button-card'
+              #   template:
+              #     - live_tile_card
+              #     - live_tile_with_long_state
+              #     - live_tile_with_state_countdown
+              #   entity: binary_sensor.front_door_switchbot_contact_sensor_door_open
+              #   name: Front Door
+              #   triggers_update: all
+              #   state_display: |
+              #     [[[
+              #       var lockState = states["lock.front_door_lock"].state
+              #       return (lockState.charAt(0).toUpperCase() + lockState.slice(1)) + " + " + ((entity.state == "on") ? "Open" : "Closed")
+              #     ]]]
+              #   styles:
+              #     grid:
+              #       - background: |
+              #           [[[
+              #             if (entity.state == "on") { return "var(--accent-color)" }
+              #             if (states["lock.front_door_lock"].state == "unlocked") { return "rgb(var(--rgb-primary-color), .5)" }
+              #             return "var(--ha-card-background)"
+              #           ]]]
+              #   variables:
+              #     aspect_ratio: '[[[ return Math.round(this.offsetWidth / 112) ]]]'
+              #     duration: 300
+              #   view_layout:
+              #     grid-column: 1/-2
 
-              - type: 'custom:button-card'
-                template:
-                  - live_tile
-                entity: alarm_control_panel.alexa_guard
-                show_state: false
-                state:
-                  - value: armed_away
-                    color: 'rgb(var(--rgb-primary-color))'
-                    icon: mdi:shield-home
-                  - value: disarmed
-                    color: >-
-                      [[[ return iif( person.madelena.state == "home",
-                      "none", "rgb(var(--rgb-primary-color))") ]]]
-                    icon: mdi:shield-off
+              # - type: 'custom:button-card'
+              #   template:
+              #     - live_tile
+              #   entity: alarm_control_panel.alexa_guard
+              #   show_state: false
+              #   state:
+              #     - value: armed_away
+              #       color: 'rgb(var(--rgb-primary-color))'
+              #       icon: mdi:shield-home
+              #     - value: disarmed
+              #       color: >-
+              #         [[[ return iif( person.madelena.state == "home",
+              #         "none", "rgb(var(--rgb-primary-color))") ]]]
+              #       icon: mdi:shield-off
 
-              - type: 'custom:button-card'
-                template: live_tile_with_camera
-                entity: camera.front_door_camera
-                name: Front Door
+              # - type: 'custom:button-card'
+              #   template: live_tile_with_camera
+              #   entity: camera.front_door_camera
+              #   name: Front Door
 
-              - type: 'custom:swipe-card'
-                parameters:
-                  direction: vertical
-                  autoHeight: true
-                  height: 112
-                  effect: cube
-                  cubeEffect:
-                    - slideShadows: false
-                  xautoplay:
-                    delay: 60000
-               # cards: !include secret/summary-cameras.yaml
+              # - type: 'custom:swipe-card'
+              #   parameters:
+              #     direction: vertical
+              #     autoHeight: true
+              #     height: 112
+              #     effect: cube
+              #     cubeEffect:
+              #       - slideShadows: false
+              #     xautoplay:
+              #       delay: 60000
+              #  # cards: !include secret/summary-cameras.yaml
 
 
       # [Column] Network / Lights
