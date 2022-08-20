@@ -4,6 +4,7 @@ lovelace:
   dashboards:
     lovelace-yaml:
       mode: yaml
+      resources: !include lovelace-resources.yaml
       title: YAML
       icon: mdi:script
       show_in_sidebar: true
