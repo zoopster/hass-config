@@ -107,7 +107,7 @@ cards:
                         style: 'ha-card {background: none;}'
                         tap_action:
                           action: url
-                          url_path: !secret router_url
+ #                         url_path: !secret router_url
                       "(min-width: 800px) and (max-width: 1023.99px)":
                         <<: *title-badge-2
                         layout: vertical
