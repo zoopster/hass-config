@@ -5,12 +5,12 @@
 !*.yaml
 !.gitignore
 !*.md
-!www
+!.www
 !snippets
-!ui
+!.ui
 !tts
-!custom_components
-!blueprints
+!.custom_components
+!.blueprints
 !themes
 # Ignore folders.
 .storage
