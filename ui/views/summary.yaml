@@ -687,7 +687,7 @@ cards:
                 template: mini_graph_tile
                 variables:
                   - entities:
-                      - entity: sensor.valhalla_router_connected_devices
+                      - entity: sensor.mikrotik_wired_clients
                   - title: Devices Connected
                   - unit: Devices
 
@@ -754,108 +754,108 @@ cards:
 
       # [Column] Maintenance / Devices
 
-      - type: 'custom:layout-card'
-        layout_type: 'custom:grid-layout'
-        layout:
-          margin: 0
-        view_layout:
-          grid-area: c3
-          show:
-            mediaquery: '(min-width: 1440.01px)'
-        cards: &summary-column-maintenance-device-cards
+      # - type: 'custom:layout-card'
+      #   layout_type: 'custom:grid-layout'
+      #   layout:
+      #     margin: 0
+      #   view_layout:
+      #     grid-area: c3
+      #     show:
+      #       mediaquery: '(min-width: 1440.01px)'
+      #   cards: &summary-column-maintenance-device-cards
 
-          - type: 'custom:layout-card'
-            layout_type: 'custom:grid-layout'
-            layout: !include snippets/layout-live-tile.yaml
-            cards:
+          # - type: 'custom:layout-card'
+          #   layout_type: 'custom:grid-layout'
+          #   layout: !include snippets/layout-live-tile.yaml
+          #   cards:
 
-              - type: 'custom:button-card'
-                template: header_card_no_link
-                variables:
-                  name: MAINTENANCE
-                  label: More
-                  link: /ui-dashboard/maintenance
-                view_layout:
-                  grid-column: 1/-1
+          #     - type: 'custom:button-card'
+          #       template: header_card_no_link
+          #       variables:
+          #         name: MAINTENANCE
+          #         label: More
+          #         link: /ui-dashboard/maintenance
+          #       view_layout:
+          #         grid-column: 1/-1
 
-              - type: 'custom:button-card'
-                template:
-                  - live_tile_card
-                  - live_tile_with_long_state
-                variables:
-                  aspect_ratio: 2
-                name: |
-                  [[[
-                    var choresOverdue = states["sensor.chores_overdue"].attributes.entities.length
-                    var choresToDo = states["sensor.chores_to_do"].attributes.entities.length
-                    if (choresOverdue > 0 || choresToDo > 0) {
-                      var chores = choresOverdue + choresToDo
-                      if (chores == 1) { return "Just 1 Chore!" } else { return chores + " Chores" }
-                    }
-                    return "Chores"
-                  ]]]
-                state_display: |
-                  [[[
-                    if (states["sensor.chores_overdue"].attributes.entities.length < 1 && states["sensor.chores_to_do"].attributes.entities.length < 1) { return "🦄 All Done!" }
-                  ]]]
-                xstate_display: |
-                  [[[
-                    var chores = ''
-                    var choresOverdue = states["sensor.chores_overdue"].attributes.entities.length
-                    var choresToDo = states["sensor.chores_to_do"].attributes.entities.length
-                    if (choresOverdue > 0) { chores = choresOverdue + " Overdue" }
-                    if (choresOverdue > 0 && choresToDo > 0) { chores = chores + " + " }
-                    if (choresToDo > 0) { chores = chores + choresToDo + " to Do" }
-                    return chores
-                  ]]]
-                label: |
-                  [[[
-                    var chores = ''
-                    var choresOverdue = states["sensor.chores_overdue"].attributes.entities
-                    for (let e in choresOverdue) {
-                      chores = chores + "<li>" + states[choresOverdue[e]].attributes.friendly_name + "</li>"
-                    }
-                    var choresToDo = states["sensor.chores_to_do"].attributes.entities
-                    for (let e in choresToDo) {
-                      chores = chores + "<li>" + states[choresToDo[e]].attributes.friendly_name + "</li>"
-                    }
-                    return chores
-                  ]]]
-                icon: mdi:clipboard-check-outline
-                styles:
-                  card:
-                    - background: |
-                        [[[
-                          if (states["sensor.chores_overdue"].attributes.entities.length > 0) { return "var(--primary-color)" }
-                          if (states["sensor.chores_to_do"].attributes.entities.length > 0) { return "rgba(var(--rgb-primary-color), .5)" }
-                          return "var(--ha-card-background)"
-                        ]]]
-                    - color: |
-                        [[[
-                          if (states["sensor.chores_overdue"].attributes.entities.length > 0) { return "var(--accent-text-color)" }
-                          if (states["sensor.chores_to_do"].attributes.entities.length > 0) { return "var(--primary-text-color)" }
-                          return "var(--disabled-text-color)"
-                        ]]]
-                  label:
-                    - padding-top: 8px
-                  state:
-                    - padding-top: 8px
-                tap_action:
-                  action: navigate
-                  navigation_path: /ui-dashboard/maintenance
-                triggers_update:
-                  - sensor.chores_overdue
-                  - sensor.chores_to_do
-                extra_styles: |
-                  li {
-                    list-style: square;
-                  }
-                  li:before {
-                    content: "";
-                    margin-left: -8px;
-                  }
-                view_layout:
-                  grid-column: span 2
+          #     - type: 'custom:button-card'
+          #       template:
+          #         - live_tile_card
+          #         - live_tile_with_long_state
+          #       variables:
+          #         aspect_ratio: 2
+          #       name: |
+          #         [[[
+          #           var choresOverdue = states["sensor.chores_overdue"].attributes.entities.length
+          #           var choresToDo = states["sensor.chores_to_do"].attributes.entities.length
+          #           if (choresOverdue > 0 || choresToDo > 0) {
+          #             var chores = choresOverdue + choresToDo
+          #             if (chores == 1) { return "Just 1 Chore!" } else { return chores + " Chores" }
+          #           }
+          #           return "Chores"
+          #         ]]]
+          #       state_display: |
+          #         [[[
+          #           if (states["sensor.chores_overdue"].attributes.entities.length < 1 && states["sensor.chores_to_do"].attributes.entities.length < 1) { return "🦄 All Done!" }
+          #         ]]]
+          #       xstate_display: |
+          #         [[[
+          #           var chores = ''
+          #           var choresOverdue = states["sensor.chores_overdue"].attributes.entities.length
+          #           var choresToDo = states["sensor.chores_to_do"].attributes.entities.length
+          #           if (choresOverdue > 0) { chores = choresOverdue + " Overdue" }
+          #           if (choresOverdue > 0 && choresToDo > 0) { chores = chores + " + " }
+          #           if (choresToDo > 0) { chores = chores + choresToDo + " to Do" }
+          #           return chores
+          #         ]]]
+          #       label: |
+          #         [[[
+          #           var chores = ''
+          #           var choresOverdue = states["sensor.chores_overdue"].attributes.entities
+          #           for (let e in choresOverdue) {
+          #             chores = chores + "<li>" + states[choresOverdue[e]].attributes.friendly_name + "</li>"
+          #           }
+          #           var choresToDo = states["sensor.chores_to_do"].attributes.entities
+          #           for (let e in choresToDo) {
+          #             chores = chores + "<li>" + states[choresToDo[e]].attributes.friendly_name + "</li>"
+          #           }
+          #           return chores
+          #         ]]]
+          #       icon: mdi:clipboard-check-outline
+          #       styles:
+          #         card:
+          #           - background: |
+          #               [[[
+          #                 if (states["sensor.chores_overdue"].attributes.entities.length > 0) { return "var(--primary-color)" }
+          #                 if (states["sensor.chores_to_do"].attributes.entities.length > 0) { return "rgba(var(--rgb-primary-color), .5)" }
+          #                 return "var(--ha-card-background)"
+          #               ]]]
+          #           - color: |
+          #               [[[
+          #                 if (states["sensor.chores_overdue"].attributes.entities.length > 0) { return "var(--accent-text-color)" }
+          #                 if (states["sensor.chores_to_do"].attributes.entities.length > 0) { return "var(--primary-text-color)" }
+          #                 return "var(--disabled-text-color)"
+          #               ]]]
+          #         label:
+          #           - padding-top: 8px
+          #         state:
+          #           - padding-top: 8px
+          #       tap_action:
+          #         action: navigate
+          #         navigation_path: /ui-dashboard/maintenance
+          #       triggers_update:
+          #         - sensor.chores_overdue
+          #         - sensor.chores_to_do
+          #       extra_styles: |
+          #         li {
+          #           list-style: square;
+          #         }
+          #         li:before {
+          #           content: "";
+          #           margin-left: -8px;
+          #         }
+          #       view_layout:
+          #         grid-column: span 2
 
               # - type: 'custom:button-card'
               #   template:
