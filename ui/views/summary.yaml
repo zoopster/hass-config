@@ -2064,7 +2064,7 @@ popup_cards:
 
   sensor.dorothy_intel_core_i5_750_load_cpu_total:
     title: Dorothy
-    card: !include machines/illinoise-cards.yaml
+#    card: !include machines/illinoise-cards.yaml
     style:
       .: |
         :host .content { width: 75vw; height: 75vh; }
@@ -2086,7 +2086,7 @@ popup_cards:
       layout:
         margin: 17px
       cards:
-        - !include machines/illinoise-plex-library.yaml
+#        - !include machines/illinoise-plex-library.yaml
     style:
       .: |
         :host .content { width: 75vw; height: 75vh; }
@@ -2104,7 +2104,7 @@ popup_cards:
         margin: 0
         padding: 0
         card_margin: 1px
-      cards: !include secret/neighborhood-transit.yaml
+#      cards: !include secret/neighborhood-transit.yaml
     style:
       .: |
         :host .content { width: 75vw; padding: 0 32px 32px; }
