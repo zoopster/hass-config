@@ -1,3 +1,13 @@
+lovelace:
+  mode: storage
+  # Add yaml dashboards
+  dashboards:
+    lovelace-yaml:
+      mode: yaml
+      title: YAML
+      icon: mdi:script
+      show_in_sidebar: true
+      filename: ui/ui-lovelace.yaml
 
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
