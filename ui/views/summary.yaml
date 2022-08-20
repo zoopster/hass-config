@@ -2125,7 +2125,7 @@ popup_cards:
 #      image: !secret virtualearth_image_path
       tap_action:
         action: url
-        url_path: !secret googlemaps_path
+#        url_path: !secret googlemaps_path
     style:
       .: |
         :host .content { width: 75vw; }
