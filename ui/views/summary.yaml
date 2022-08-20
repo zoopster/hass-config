@@ -630,7 +630,7 @@ cards:
                     - slideShadows: false
                   xautoplay:
                     delay: 60000
-                cards: !include secret/summary-cameras.yaml
+               # cards: !include secret/summary-cameras.yaml
 
 
       # [Column] Network / Lights
