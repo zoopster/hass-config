@@ -90,7 +90,7 @@ cards:
                         style: 'ha-card {background: none;}'
                         tap_action:
                           action: url
-                          url_path: !secret modem_url
+ #                         url_path: !secret modem_url
                       "(min-width: 800px) and (max-width: 1023.99px)":
                         <<: *title-badge-1
                         layout: vertical
@@ -124,7 +124,7 @@ cards:
                         style: 'ha-card {background: none;}'
                         tap_action:
                           action: url
-                          url_path: !secret outlet_home_url
+ #                         url_path: !secret outlet_home_url
                       "(min-width: 800px) and (max-width: 1023.99px)":
                         <<: *title-badge-3
                         layout: vertical
@@ -216,7 +216,7 @@ cards:
                   rail3_entity: binary_sensor.ping_valhalla_modem
                   station_rail: 3
                 name: Modem
-                label: !secret modem_ip
+ #               label: !secret modem_ip
                 state_display: '[[[ return entity.attributes.round_trip_time_avg ? (Math.round(entity.attributes.round_trip_time_avg)) + "ms" : "Off" ]]]'
 
               - type: 'custom:button-card'
@@ -249,7 +249,7 @@ cards:
                   station_size_from: 0
                   station_size_to: 3
                 name: Router
-                label: !secret router_ip
+#                label: !secret router_ip
                 state_display: '[[[ return entity.attributes.round_trip_time_avg ? (Math.round(entity.attributes.round_trip_time_avg)) + "ms" : "Off" ]]]'
 
               - entity: binary_sensor.ping_valhalla_outlet
@@ -263,7 +263,7 @@ cards:
                   station_rail: 2
                   terminate_at: bottom
                 name: Outlet
-                label: !secret outlet_ip
+#                label: !secret outlet_ip
                 state_display: '[[[ return entity.attributes.round_trip_time_avg ? (Math.round(entity.attributes.round_trip_time_avg)) + "ms" : "Off" ]]]'
 
               - entity: binary_sensor.ping_valhalla_router
@@ -276,7 +276,7 @@ cards:
                   station_rail: 3
                   terminate_at: bottom
                 name: Unison
-                label: !secret unison_ip
+#                label: !secret unison_ip
                 state_display: '-'
 
               - entity: binary_sensor.ping_blue_cave_mesh
@@ -314,7 +314,7 @@ cards:
                   rail2_entity: binary_sensor.ping_dorothy_illinoise
                   station_rail: 2
                   terminate_at: bottom
-                label: !secret dorothy_ip
+#                label: !secret dorothy_ip
                 state_display: '[[[ return entity.attributes.round_trip_time_avg ? (Math.round(entity.attributes.round_trip_time_avg)) + "ms" : "Off" ]]]'
 
               - entity: binary_sensor.ping_kitchen_mesh_repeater
@@ -635,7 +635,7 @@ cards:
               label: Open
               arrow: 'mdi:arrow-top-right'
               action: url
-              link: !secret router_url
+#              link: !secret router_url
             view_layout:
               grid-column-start: 1
               grid-column-end: -1
@@ -723,7 +723,7 @@ cards:
               label: Open
               arrow: 'mdi:arrow-top-right'
               action: url
-              link: !secret outlet_home_url
+#              link: !secret outlet_home_url
           - type: entities
             entities:
               - entity: binary_sensor.valhalla_outlet_modem
