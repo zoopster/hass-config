@@ -202,13 +202,13 @@ cards:
                 tap_action: more-info
               rules:
 
-                - entity: group.bedroom_lights
-                  element: group.bedroom_lights.bg
-                  state_action:
-                    action: call-service
-                    service: floorplan.class_set
-                    service_data:
-                      class: '${(entity.state === "on") ? "bg-on" : "bg-off"}'
+                # - entity: group.bedroom_lights
+                #   element: group.bedroom_lights.bg
+                #   state_action:
+                #     action: call-service
+                #     service: floorplan.class_set
+                #     service_data:
+                #       class: '${(entity.state === "on") ? "bg-on" : "bg-off"}'
 
                 - entity: group.kitchen_lights
                   element: group.kitchen_lights.bg
