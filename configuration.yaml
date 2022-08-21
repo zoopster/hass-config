@@ -41,7 +41,7 @@ sensor:
     station_id: MTBF1     # A buoy ID from https://www.ndbc.noaa.gov/
     scan_interval: 360
 
-  - platform: nooa_space_weather
+  - platform: noaa_space_weather
 
 device_tracker:
   - platform: ping
