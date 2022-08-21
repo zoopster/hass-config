@@ -92,7 +92,7 @@ cards:
         view_layout:
           grid-area: h
         states:
-          Maddy:
+          john.pugh:
             type: 'custom:layout-card'
             layout_type: 'custom:grid-layout'
 
@@ -131,7 +131,7 @@ cards:
                 layout_type: 'custom:horizontal-layout'
                 cards:
                   - type: 'custom:mushroom-person-card'
-                    entity: person.madelena
+                    entity: person.john_pugh
                     style: 'ha-card {background: none;}'
                     use_entity_picture: true
                     view_layout: null
@@ -182,7 +182,7 @@ cards:
                 type: 'custom:button-card'
                 template: header_card
                 variables:
-                  name: U.S.S. STRAWBERRY FIELDS
+                  name: P-House
                   label: Areas
                   link: /config/areas/dashboard
               Maddy:
@@ -202,13 +202,13 @@ cards:
                 tap_action: more-info
               rules:
 
-                # - entity: group.bedroom_lights
-                #   element: group.bedroom_lights.bg
-                #   state_action:
-                #     action: call-service
-                #     service: floorplan.class_set
-                #     service_data:
-                #       class: '${(entity.state === "on") ? "bg-on" : "bg-off"}'
+                - entity: group.bedroom_lights
+                  element: group.bedroom_lights.bg
+                  state_action:
+                   action: call-service
+                   service: floorplan.class_set
+                   service_data:
+                     class: '${(entity.state === "on") ? "bg-on" : "bg-off"}'
 
                 - entity: group.kitchen_lights
                   element: group.kitchen_lights.bg
@@ -242,10 +242,11 @@ cards:
                     service_data: '${entity.state}'
 
                 - entities:
-                    - binary_sensor.bedroom_hue_sensor_motion
-                    - binary_sensor.kitchen_counter_motion_sensor_motion
-                    - binary_sensor.workspace_room_hue_sensor_motion
-                    - binary_sensor.living_room_hue_sensor_motion
+                    # - binary_sensor.bedroom_hue_sensor_motion
+                    # - binary_sensor.kitchen_counter_motion_sensor_motion
+                    # - binary_sensor.workspace_room_hue_sensor_motion
+                    # - binary_sensor.living_room_hue_sensor_motion
+                    - binary_sensor.lr_multisensor_motion
                   state_action:
                     action: call-service
                     service: floorplan.text_set
@@ -555,15 +556,15 @@ cards:
                   - icon: 'mdi:home-lightning-bolt'
                   - line_width: 2
 
-          # - type: 'custom:layout-card'
-          #   layout_type: 'custom:grid-layout'
-          #   layout:
-          #     grid-template-columns: >-
-          #       repeat(auto-fill, [col-start] minmax(112px, 1fr)
-          #       [col-end])
-          #     margin: 0
-          #     card_margin: 1px
-          #   cards:
+          - type: 'custom:layout-card'
+            layout_type: 'custom:grid-layout'
+            layout:
+              grid-template-columns: >-
+                repeat(auto-fill, [col-start] minmax(112px, 1fr)
+                [col-end])
+              margin: 0
+              card_margin: 1px
+            cards:
 
               # - type: 'custom:button-card'
               #   template: header_card
