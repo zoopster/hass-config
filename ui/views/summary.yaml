@@ -663,10 +663,10 @@ cards:
                   link: /ui-dashboard/1
 
               - type: 'custom:button-card'
-                template:
-                  - live_tile_card
-                  - live_tile_with_long_state
-                  - live_tile_with_state_countdown
+                # template:
+                #   - live_tile_card
+                #   - live_tile_with_long_state
+                #   - live_tile_with_state_countdown
                 entity: binary_sensor.ping_cloudflare
                 name: WAN
                 state:
