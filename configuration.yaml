@@ -41,6 +41,8 @@ sensor:
     station_id: MTBF1     # A buoy ID from https://www.ndbc.noaa.gov/
     scan_interval: 360
 
+  - platform: nooa_space_weather
+
 device_tracker:
   - platform: ping
     hosts:
@@ -60,7 +62,4 @@ binary_sensor:
   - platform: ping
     name: "ping_devopstales"
     host: devopstales.com
-
-sensors:
-– platform: nooa_space_weather
 
