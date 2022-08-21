@@ -1927,127 +1927,127 @@ cards:
                             card:
                               - margin-top: '-2px'
 
-                  # - type: 'custom:button-card'
-                  #   template: live_tile
-                  #   entity: sensor.moon
-                  #   name: '[[[ return entity.state.replace("_", " ") ]]]'
-                  #   show_state: false
+                  - type: 'custom:button-card'
+                    template: live_tile
+                    entity: sensor.moon
+                    name: '[[[ return entity.state.replace("_", " ") ]]]'
+                    show_state: false
 
-                  # - type: 'custom:decluttering-card'
-                  #   template: mini_graph_tile
-                  #   variables:
-                  #     - entities:
-                  #       - entity: sensor.noaa_space_weather_solar_wind_speed
-                  #     - title: Solar Wind Speed
-                  #     - icon: mdi:weather-windy
+                  - type: 'custom:decluttering-card'
+                    template: mini_graph_tile
+                    variables:
+                      - entities:
+                        - entity: sensor.noaa_space_weather_solar_wind_speed
+                      - title: Solar Wind Speed
+                      - icon: mdi:weather-windy
 
-                  # - type: 'custom:button-card'
-                  #   template: live_tile
-                  #   entity: binary_sensor.iss
-                  #   name: ISS
-                  #   icon: mdi:space-station
-                  #   show_state: false
-                  #   # state_display: '[[[ return entity.attributes.number_of_people_in_space ]]]'
-                  #   show_label: true
-                  #   label: '[[[ return moment(entity.attributes.next_rise).format("HH:mm") ]]]'
-                  #   # custom_fields:
-                  #   #  unit: People
-                  #   styles:
-                  #     card:
-                  #       - background: |
-                  #           [[[
-                  #             return "url('https://dev.virtualearth.net/REST/v1/Imagery/Map/CanvasDark/" + entity.attributes.latitude + "," + entity.attributes.longitude + "/3?mapSize=400,400&format=png&key=X')"
-                  #           ]]]
-                  #       - background-size: 120% 120%
-                  #       - background-position: center center
+                  - type: 'custom:button-card'
+                    template: live_tile
+                    entity: binary_sensor.iss
+                    name: ISS
+                    icon: mdi:space-station
+                    show_state: false
+                    # state_display: '[[[ return entity.attributes.number_of_people_in_space ]]]'
+                    show_label: true
+                    label: '[[[ return moment(entity.attributes.next_rise).format("HH:mm") ]]]'
+                    # custom_fields:
+                    #  unit: People
+                    styles:
+                      card:
+                        - background: |
+                            [[[
+                              return "url('https://dev.virtualearth.net/REST/v1/Imagery/Map/CanvasDark/" + entity.attributes.latitude + "," + entity.attributes.longitude + "/3?mapSize=400,400&format=png&key=X')"
+                            ]]]
+                        - background-size: 120% 120%
+                        - background-position: center center
 
-                  # - type: map
-                  #   entities:
-                  #     - entity: binary_sensor.iss
-                  #   default_zoom: 0.25
-                  #   hours_to_show: 12
-                  #   card_mod:
-                  #     style:
-                  #       .: |
-                  #         ha-icon-button { display: none; }
-                  #       ha-map$: |
-                  #         .leaflet-control-container { display: none; }
-                  #       ha-map$ha-entity-marker$: >
-                  #         .marker { width: 8px !important; height: 8px !important; margin-top:
-                  #         20px; margin-left: 20px; border: 0 !important; background-color: var(--primary-color) !important; color: transparent !important; }
+                  - type: map
+                    entities:
+                      - entity: binary_sensor.iss
+                    default_zoom: 0.25
+                    hours_to_show: 12
+                    card_mod:
+                      style:
+                        .: |
+                          ha-icon-button { display: none; }
+                        ha-map$: |
+                          .leaflet-control-container { display: none; }
+                        ha-map$ha-entity-marker$: >
+                          .marker { width: 8px !important; height: 8px !important; margin-top:
+                          20px; margin-left: 20px; border: 0 !important; background-color: var(--primary-color) !important; color: transparent !important; }
 
-                #   - type: 'custom:swipe-card'
-                #     parameters:
-                #       direction: vertical
-                #       autoHeight: true
-                #       height: 112
-                #       effect: cube
-                #       autoplay:
-                #         delay: 15000
-                #       cubeEffect:
-                #         - slideShadows: false
-                #     cards:
+                  - type: 'custom:swipe-card'
+                    parameters:
+                      direction: vertical
+                      autoHeight: true
+                      height: 112
+                      effect: cube
+                      autoplay:
+                        delay: 15000
+                      cubeEffect:
+                        - slideShadows: false
+                    cards:
 
-                #       - &summary-card-noaa-space-weather
-                #         type: 'custom:button-card'
-                #         variables:
-                #           aspect_ratio: 2/1
-                #           slide: 0
-                #         template:
-                #           - live_tile_card
-                #           - live_tile_with_long_state
-                #         entity: sensor.noaa_space_weather_alert_1
-                #         name: '[[[ return entity.state + " &bull; " + entity.attributes.summary.split(": ")[0] + " &bull; " + moment(entity.attributes.date).subtract(5, "h").fromNow() ]]]'
-                #         state_display: '[[[ return entity.attributes.summary.split(": ")[1] ]]]'
-                #         label: '[[[ return entity.attributes.potential_impacts ]]]'
-                #         color: var(--ha-card-background)
-                #         icon: mdi:alert-octagram
-                #         styles:
-                #           card:
-                #             - color: |
-                #                 [[[
-                #                   var diff = (new Date() - new Date(entity.attributes.date)) / 1000
-                #                   if (diff > 57888) { return "var(--primary-text-color)" } else { return "var(--accent-text-color)" }
-                #                 ]]]
-                #             - background-image: |
-                #                 [[[
-                #                   var diff = (new Date() - new Date(entity.attributes.date)) / 1000
-                #                   var opacity = 1 - (diff / 86400)
-                #                   if (diff > 86400) { return '' }
-                #                   return 'linear-gradient( to top, rgba(var(--rgb-primary-color),' + opacity + ') 0%, rgba(var(--rgb-primary-color),' + opacity + ') 100%)'
-                #                 ]]]
+                      - &summary-card-noaa-space-weather
+                        type: 'custom:button-card'
+                        variables:
+                          aspect_ratio: 2/1
+                          slide: 0
+                        template:
+                          - live_tile_card
+                          - live_tile_with_long_state
+                        entity: sensor.noaa_space_weather_alert_1
+                        name: '[[[ return entity.state + " &bull; " + entity.attributes.summary.split(": ")[0] + " &bull; " + moment(entity.attributes.date).subtract(5, "h").fromNow() ]]]'
+                        state_display: '[[[ return entity.attributes.summary.split(": ")[1] ]]]'
+                        label: '[[[ return entity.attributes.potential_impacts ]]]'
+                        color: var(--ha-card-background)
+                        icon: mdi:alert-octagram
+                        styles:
+                          card:
+                            - color: |
+                                [[[
+                                  var diff = (new Date() - new Date(entity.attributes.date)) / 1000
+                                  if (diff > 57888) { return "var(--primary-text-color)" } else { return "var(--accent-text-color)" }
+                                ]]]
+                            - background-image: |
+                                [[[
+                                  var diff = (new Date() - new Date(entity.attributes.date)) / 1000
+                                  var opacity = 1 - (diff / 86400)
+                                  if (diff > 86400) { return '' }
+                                  return 'linear-gradient( to top, rgba(var(--rgb-primary-color),' + opacity + ') 0%, rgba(var(--rgb-primary-color),' + opacity + ') 100%)'
+                                ]]]
 
-                #       - <<: *summary-card-noaa-space-weather
-                #         entity: sensor.noaa_space_weather_alert_2
-                #         variables:
-                #           aspect_ratio: 2/1
+                      - <<: *summary-card-noaa-space-weather
+                        entity: sensor.noaa_space_weather_alert_2
+                        variables:
+                          aspect_ratio: 2/1
 
-                #       - <<: *summary-card-noaa-space-weather
-                #         entity: sensor.noaa_space_weather_alert_3
-                #         variables:
-                #           aspect_ratio: 2/1
+                      - <<: *summary-card-noaa-space-weather
+                        entity: sensor.noaa_space_weather_alert_3
+                        variables:
+                          aspect_ratio: 2/1
 
-                #       - <<: *summary-card-noaa-space-weather
-                #         entity: sensor.noaa_space_weather_alert_4
-                #         variables:
-                #           aspect_ratio: 2/1
+                      - <<: *summary-card-noaa-space-weather
+                        entity: sensor.noaa_space_weather_alert_4
+                        variables:
+                          aspect_ratio: 2/1
 
-                #       - <<: *summary-card-noaa-space-weather
-                #         entity: sensor.noaa_space_weather_alert_5
-                #         variables:
-                #           aspect_ratio: 2/1
+                      - <<: *summary-card-noaa-space-weather
+                        entity: sensor.noaa_space_weather_alert_5
+                        variables:
+                          aspect_ratio: 2/1
 
-                #     view_layout:
-                #       grid-column: span 2
+                    view_layout:
+                      grid-column: span 2
 
-                # layout:
-                #   grid-template-columns: 'repeat(auto-fill, [col-start] minmax(112px, 1fr) [col-end])'
-                #   margin: 0
+                layout:
+                  grid-template-columns: 'repeat(auto-fill, [col-start] minmax(112px, 1fr) [col-end])'
+                  margin: 0
 
 
 
 # [Pop Up Cards]
-# popup_cards:
+popup_cards:
 #   sensor.octoprint_current_state:
 #     title: Genesis
 #     card: !include machines/genesis-cards.yaml
@@ -2066,7 +2066,7 @@ cards:
 
 #   sensor.dorothy_intel_core_i5_750_load_cpu_total:
 #     title: Dorothy
-# #    card: !include machines/illinoise-cards.yaml
+#     card: !include machines/illinoise-cards.yaml
 #     style:
 #       .: |
 #         :host .content { width: 75vw; height: 75vh; }
@@ -2112,13 +2112,13 @@ cards:
 #         :host .content { width: 75vw; padding: 0 32px 32px; }
 #         @media (max-width: 1100px) { :host .content { width: 100vw; padding: 0 32px 32px; } }
 
-#   sensor.nws_alert_rss_feed:
-#     title: NWS Alerts
-#     card: !include cards/nws-alerts.yaml
-#     style:
-#       .: |
-#         :host .content { width: 75vw; }
-#         @media (max-width: 1100px) { :host .content { width: 100vw; } }
+  sensor.nws_alert_rss_feed:
+    title: NWS Alerts
+    card: !include cards/nws-alerts.yaml
+    style:
+      .: |
+        :host .content { width: 75vw; }
+        @media (max-width: 1100px) { :host .content { width: 100vw; } }
 
 #   xtraffic_map:
 #     title: Traffic
