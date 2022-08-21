@@ -61,4 +61,6 @@ binary_sensor:
     name: "ping_devopstales"
     host: devopstales.com
 
+sensors:
+– platform: nooa_space_weather
 
