@@ -8,6 +8,7 @@ title: Dashboard
 views:
   - !include views/summary.yaml
   - !include views/network.yaml
+  - !include views/power.yaml
  # - !include views/energy.yaml
  # - !include views/lights.yaml
  # - !include views/security.yaml
