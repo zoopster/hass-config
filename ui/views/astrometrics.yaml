@@ -29,7 +29,8 @@ cards:
       # [Header] Summary
       - type: 'custom:layout-card'
         layout_type: 'custom:grid-layout'
-        layout: !include snippets/layout-page-title-with-2-badges.yaml
+      #  layout: !include snippets/layout-page-title-with-2-badges.yaml
+        layout: !include snippets/layout-page-title.yaml
         view_layout:
           grid-column: 1/-1
         cards:
