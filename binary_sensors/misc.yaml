@@ -1,5 +1,4 @@
 - platform: ping
-  sensors:
 #- platform: ping
     name: "ping_cloudflare"
     host: 1.1.1.1
