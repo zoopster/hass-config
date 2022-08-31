@@ -20,5 +20,5 @@
     - type: processor_temperature
     - type: last_boot
 
-- platform: openhardwaremonitor
-  host: !secret dorothy_ip
+#- platform: openhardwaremonitor
+#  host: !secret dorothy_ip
