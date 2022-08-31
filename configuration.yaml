@@ -62,4 +62,7 @@ binary_sensor:
   - platform: ping
     name: "ping_devopstales"
     host: devopstales.com
-
+# International Space Station
+  - platform: iss
+    show_on_map: true 
+    scan_interval: 180

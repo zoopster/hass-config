@@ -17,7 +17,7 @@ views:
  # - !include views/neighborhood.yaml
  # - !include views/media.yaml
  # - !include views/me.yaml
- # - !include views/astrometrics.yaml
+  - !include views/astrometrics.yaml
 
 decluttering_templates: !include templates/decluttering-card.yaml
 button_card_templates: !include_dir_merge_named templates/button-card/
