@@ -1,22 +1,22 @@
-# - platform: ping
-#   sensors:
-# #- platform: ping
-#     name: "ping_cloudflare"
-#     host: 1.1.1.1
-# #- platform: ping
-#     name: "ping_google"
-#     host: 8.8.4.4
-# #- platform: ping
-#     name: "ping_my_website"
-#     host: zoopster.org
-# #- platform: ping
-#     name: "ping_router"
-#     host: 192.168.50.1
-# #- platform: ping
-#     name: "ping_devopstales"
-#     host: devopstales.com
+- platform: ping
+  sensors:
+#- platform: ping
+    name: "ping_cloudflare"
+    host: 1.1.1.1
+#- platform: ping
+    name: "ping_google"
+    host: 8.8.4.4
+#- platform: ping
+    name: "ping_my_website"
+    host: zoopster.org
+#- platform: ping
+    name: "ping_router"
+    host: 192.168.50.1
+#- platform: ping
+    name: "ping_devopstales"
+    host: devopstales.com
     
-# # International Space Station
-# - platform: iss
-# #    show_on_map: true 
-# #    scan_interval: 180
+# International Space Station
+- platform: iss
+    show_on_map: true 
+    scan_interval: 180
