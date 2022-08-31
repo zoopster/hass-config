@@ -45,5 +45,5 @@
 
 - platform: moon
 
-- platform: ha_skyfield
+#- platform: ha_skyfield
 

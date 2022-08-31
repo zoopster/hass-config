@@ -1096,311 +1096,311 @@ cards:
 
               # [Column] Weather
 
-              # - type: 'custom:layout-card'
-              #   layout_type: 'custom:grid-layout'
-              #   layout: !include snippets/layout-live-tile.yaml
-              #   cards:
-              #     - type: 'custom:button-card'
-              #       template: header_card
-              #       variables:
-              #         name: WEATHER
-              #         label: More
-              #         link: /ui-dashboard/neighborhood
-              #       view_layout:
-              #         grid-column: 1/-1
+              - type: 'custom:layout-card'
+                layout_type: 'custom:grid-layout'
+                layout: !include snippets/layout-live-tile.yaml
+                cards:
+                  - type: 'custom:button-card'
+                    template: header_card
+                    variables:
+                      name: WEATHER
+                      label: More
+                      link: /ui-dashboard/neighborhood
+                    view_layout:
+                      grid-column: 1/-1
 
-              #     - type: 'custom:button-card'
-              #       template: live_tile
-              #       icon: |
-              #         [[[
-              #           var weatherIconDict = {
-              #             'partlycloudy': 'partly-cloudy',
-              #             'clear-night': 'night'
-              #           }
-              #           var weatherIcon = weatherIconDict[entity.state]
-              #           if (weatherIcon == null) {weatherIcon = entity.state}
-              #           return "mdi:weather-" + weatherIcon
-              #         ]]]
-              #       name: |
-              #         [[[ 
-              #           var weatherNameDict = {
-              #             'partlycloudy': 'Partly Cloudy',
-              #             'clear-night': 'Clear Night'
-              #           }
-              #           var weatherName = weatherNameDict[entity.state]
-              #           if (weatherName == null) {weatherName = entity.state}
-              #           return weatherName
-              #         ]]]
-              #       label: |
-              #         [[[
-              #           var tempForecast = entity.attributes.forecast.map((item) => { return item.temperature }).slice(0, 4)
-              #           if (states['sensor.valhalla_hourly_forecast_temperature_rising'] == 'Rising') {
-              #             return '↗ ' + Math.max(...tempForecast) + '°'                      
-              #           } else {
-              #             return '↘ ' + Math.min(...tempForecast) + '°'
-              #           }
-              #         ]]]
-              #       state_display: >-
-              #         [[[ return Math.round(entity.attributes.temperature) + "°"
-              #         ]]]
-              #       entity: weather.valhalla_hourly
-              #       styles:
-              #         name:
-              #           - width: 50%
-              #         grid:
-              #           - background: var(--ha-card-background)
-              #         card:
-              #           - background: |
-              #               [[[
-              #                 var temp = parseFloat(entity.attributes.temperature)
-              #                 if (temp >= 25) {
-              #                   return "rgba(var(--rgb-primary-color)," + ((temp - 25) / 7) + ")"
-              #                 }
-              #                 if (temp <= 20) {
-              #                   return "rgba(var(--rgb-primary-color)," + ((20 - temp) / 14) + ")"
-              #                 }
-              #                 return "transparent"
-              #               ]]]
+                  - type: 'custom:button-card'
+                    template: live_tile
+                    icon: |
+                      [[[
+                        var weatherIconDict = {
+                          'partlycloudy': 'partly-cloudy',
+                          'clear-night': 'night'
+                        }
+                        var weatherIcon = weatherIconDict[entity.state]
+                        if (weatherIcon == null) {weatherIcon = entity.state}
+                        return "mdi:weather-" + weatherIcon
+                      ]]]
+                    name: |
+                      [[[ 
+                        var weatherNameDict = {
+                          'partlycloudy': 'Partly Cloudy',
+                          'clear-night': 'Clear Night'
+                        }
+                        var weatherName = weatherNameDict[entity.state]
+                        if (weatherName == null) {weatherName = entity.state}
+                        return weatherName
+                      ]]]
+                    label: |
+                      [[[
+                        var tempForecast = entity.attributes.forecast.map((item) => { return item.temperature }).slice(0, 4)
+                        if (states['sensor.valhalla_hourly_forecast_temperature_rising'] == 'Rising') {
+                          return '↗ ' + Math.max(...tempForecast) + '°'                      
+                        } else {
+                          return '↘ ' + Math.min(...tempForecast) + '°'
+                        }
+                      ]]]
+                    state_display: >-
+                      [[[ return Math.round(entity.attributes.temperature) + "°"
+                      ]]]
+                    entity: weather.valhalla_hourly
+                    styles:
+                      name:
+                        - width: 50%
+                      grid:
+                        - background: var(--ha-card-background)
+                      card:
+                        - background: |
+                            [[[
+                              var temp = parseFloat(entity.attributes.temperature)
+                              if (temp >= 25) {
+                                return "rgba(var(--rgb-primary-color)," + ((temp - 25) / 7) + ")"
+                              }
+                              if (temp <= 20) {
+                                return "rgba(var(--rgb-primary-color)," + ((20 - temp) / 14) + ")"
+                              }
+                              return "transparent"
+                            ]]]
 
-              #     - type: 'custom:button-card'
-              #       template: live_tile
-              #       variables:
-              #         day: |
-              #           [[[
-              #             var hour = new Date
-              #             hour = parseInt( hour.getHours() )
-              #             if (hour < 4) { return 1 }
-              #             if (hour < 21) { return 0 } else { return 1 }
-              #           ]]]
-              #       entity: weather.valhalla_2
-              #       name: Precipitation
-              #       state_display: '[[[ return entity.attributes.forecast[variables.day].precipitation_probability + "%" ]]]'
-              #       icon: '[[[ return (entity.attributes.forecast[variables.day].precipitation_probability >= 33) ? "mdi:water" : "mdi:water-outline" ]]]'
-              #       label: '[[[ return entity.attributes.forecast[variables.day].precipitation ]]]'
-              #       show_units: false
-              #       styles:
-              #         grid:
-              #           - background: '[[[ return "rgba(var(--rgb-primary-color)," + (parseInt(entity.attributes.forecast[variables.day].precipitation_probability)/100) + ")" ]]]'
-              #         card:
-              #           - background: var(--ha-card-background)
+                  - type: 'custom:button-card'
+                    template: live_tile
+                    variables:
+                      day: |
+                        [[[
+                          var hour = new Date
+                          hour = parseInt( hour.getHours() )
+                          if (hour < 4) { return 1 }
+                          if (hour < 21) { return 0 } else { return 1 }
+                        ]]]
+                    entity: weather.valhalla_2
+                    name: Precipitation
+                    state_display: '[[[ return entity.attributes.forecast[variables.day].precipitation_probability + "%" ]]]'
+                    icon: '[[[ return (entity.attributes.forecast[variables.day].precipitation_probability >= 33) ? "mdi:water" : "mdi:water-outline" ]]]'
+                    label: '[[[ return entity.attributes.forecast[variables.day].precipitation ]]]'
+                    show_units: false
+                    styles:
+                      grid:
+                        - background: '[[[ return "rgba(var(--rgb-primary-color)," + (parseInt(entity.attributes.forecast[variables.day].precipitation_probability)/100) + ")" ]]]'
+                      card:
+                        - background: var(--ha-card-background)
 
-              #     - type: 'custom:button-card'
-              #       template: live_tile
-              #       entity: sensor.waqi_newyork_air_quality_index
-              #       state_display: |
-              #         [[[ return Math.round(entity.state) ]]]
-              #       variables:
-              #         level: |
-              #           [[[
-              #             if (entity.state > 300) {
-              #               return "Hazardous"
-              #             } else if (entity.state > 200) {
-              #               return "Very Unhealthy"
-              #             } else if (entity.state > 150) {
-              #               return "Unhealthy"
-              #             } else if (entity.state > 100) {
-              #               return "Unhealthy for Sensitive Groups"
-              #             } else if (entity.state > 50) {
-              #               return "Moderate"
-              #             } else {
-              #               return "Good"
-              #             }
-              #           ]]]
-              #       name: AQI
-              #       icon: mdi:molecule
-              #       label: '[[[ return variables.level ]]]'
-              #       show_units: false
-              #       styles:
-              #         card:
-              #           - background: |
-              #               [[[
-              #                 if (entity.state > 300) {
-              #                   return "maroon"
-              #                 } else if (entity.state > 200) {
-              #                   return "purple"
-              #                 } else if (entity.state > 150) {
-              #                   return "rgba(var(--rgb-primary-color),1)"
-              #                 } else if (entity.state > 100) {
-              #                   return "rgba(var(--rgb-primary-color),.66)"
-              #                 } else if (entity.state > 50) {
-              #                   return "rgba(var(--rgb-primary-color),.33)"
-              #                 } else {
-              #                   return "var(--ha-card-background)"
-              #                 }
-              #               ]]]
-              #       view_layout:
-              #         show:
-              #           mediaquery: "(min-width: 1129px)"
+                  - type: 'custom:button-card'
+                    template: live_tile
+                    entity: sensor.waqi_newyork_air_quality_index
+                    state_display: |
+                      [[[ return Math.round(entity.state) ]]]
+                    variables:
+                      level: |
+                        [[[
+                          if (entity.state > 300) {
+                            return "Hazardous"
+                          } else if (entity.state > 200) {
+                            return "Very Unhealthy"
+                          } else if (entity.state > 150) {
+                            return "Unhealthy"
+                          } else if (entity.state > 100) {
+                            return "Unhealthy for Sensitive Groups"
+                          } else if (entity.state > 50) {
+                            return "Moderate"
+                          } else {
+                            return "Good"
+                          }
+                        ]]]
+                    name: AQI
+                    icon: mdi:molecule
+                    label: '[[[ return variables.level ]]]'
+                    show_units: false
+                    styles:
+                      card:
+                        - background: |
+                            [[[
+                              if (entity.state > 300) {
+                                return "maroon"
+                              } else if (entity.state > 200) {
+                                return "purple"
+                              } else if (entity.state > 150) {
+                                return "rgba(var(--rgb-primary-color),1)"
+                              } else if (entity.state > 100) {
+                                return "rgba(var(--rgb-primary-color),.66)"
+                              } else if (entity.state > 50) {
+                                return "rgba(var(--rgb-primary-color),.33)"
+                              } else {
+                                return "var(--ha-card-background)"
+                              }
+                            ]]]
+                    view_layout:
+                      show:
+                        mediaquery: "(min-width: 1129px)"
 
-              #     - type: 'custom:button-card'
-              #       template:
-              #         - live_tile_card
-              #         - live_tile_with_long_state
-              #       entity: sensor.tomorrow_io_valhalla_tree_pollen_index
-              #       variables:
-              #         label: |
-              #           [[[
-              #             return "Grass - " + states['sensor.tomorrow_io_valhalla_grass_pollen_index'].state + "<br>Tree - " + states['sensor.tomorrow_io_valhalla_tree_pollen_index'].state + "<br>Weed - " + states['sensor.tomorrow_io_valhalla_weed_pollen_index'].state
-              #           ]]]
-              #         state: |
-              #           [[[
-              #             var sum = "Grass - " + states['sensor.tomorrow_io_valhalla_grass_pollen_index'].state + "<br>Tree - " + states['sensor.tomorrow_io_valhalla_tree_pollen_index'].state + "<br>Weed - " + states['sensor.tomorrow_io_valhalla_weed_pollen_index'].state
-              #             if (sum.includes('very_high')) {return 'Very High' }
-              #             if (sum.includes('high')) {return 'High' }
-              #             if (sum.includes('medium')) {return 'Medium' }
-              #             if (sum.includes('very_low')) {return 'Very Low' }
-              #             if (sum.includes('low')) {return 'Low' }
-              #             return 'None'
-              #           ]]]
-              #       name: Pollen
-              #       state_display: '[[[ return variables.state ]]]'
-              #       label: '[[[ return variables.label.replace("_", " ") ]]]'
-              #       styles:
-              #         card:
-              #           - color: |
-              #               [[[
-              #                 switch(variables.state) {
-              #                   case 'None': return 'var(--disabled-text-color)'
-              #                   case 'Very Low': return 'var(--primary-text-color)'
-              #                   case 'Low': return 'var(--primary-text-color)'
-              #                   default: return 'var(--text-accent-color)'
-              #                 }
-              #               ]]]
-              #           - background: |
-              #               [[[
-              #                 switch(variables.state) {
-              #                   case 'Very High': return 'var(--accent-color)'
-              #                   case 'High': return 'var(--primary-color)'
-              #                   case 'Medium': return 'rgba(var(--rgb-primary-color), .75)'
-              #                   case 'Low': return 'rgba(var(--rgb-primary-color), .5)'
-              #                   case 'Very Low': 'rgba(var(--rgb-primary-color), .25)'
-              #                   default: return 'var(--ha-card-background)'
-              #                 }
-              #               ]]]
-              #         label:
-              #           - text-transform: capitalize
+                  - type: 'custom:button-card'
+                    template:
+                      - live_tile_card
+                      - live_tile_with_long_state
+                    entity: sensor.tomorrow_io_valhalla_tree_pollen_index
+                    variables:
+                      label: |
+                        [[[
+                          return "Grass - " + states['sensor.tomorrow_io_valhalla_grass_pollen_index'].state + "<br>Tree - " + states['sensor.tomorrow_io_valhalla_tree_pollen_index'].state + "<br>Weed - " + states['sensor.tomorrow_io_valhalla_weed_pollen_index'].state
+                        ]]]
+                      state: |
+                        [[[
+                          var sum = "Grass - " + states['sensor.tomorrow_io_valhalla_grass_pollen_index'].state + "<br>Tree - " + states['sensor.tomorrow_io_valhalla_tree_pollen_index'].state + "<br>Weed - " + states['sensor.tomorrow_io_valhalla_weed_pollen_index'].state
+                          if (sum.includes('very_high')) {return 'Very High' }
+                          if (sum.includes('high')) {return 'High' }
+                          if (sum.includes('medium')) {return 'Medium' }
+                          if (sum.includes('very_low')) {return 'Very Low' }
+                          if (sum.includes('low')) {return 'Low' }
+                          return 'None'
+                        ]]]
+                    name: Pollen
+                    state_display: '[[[ return variables.state ]]]'
+                    label: '[[[ return variables.label.replace("_", " ") ]]]'
+                    styles:
+                      card:
+                        - color: |
+                            [[[
+                              switch(variables.state) {
+                                case 'None': return 'var(--disabled-text-color)'
+                                case 'Very Low': return 'var(--primary-text-color)'
+                                case 'Low': return 'var(--primary-text-color)'
+                                default: return 'var(--text-accent-color)'
+                              }
+                            ]]]
+                        - background: |
+                            [[[
+                              switch(variables.state) {
+                                case 'Very High': return 'var(--accent-color)'
+                                case 'High': return 'var(--primary-color)'
+                                case 'Medium': return 'rgba(var(--rgb-primary-color), .75)'
+                                case 'Low': return 'rgba(var(--rgb-primary-color), .5)'
+                                case 'Very Low': 'rgba(var(--rgb-primary-color), .25)'
+                                default: return 'var(--ha-card-background)'
+                              }
+                            ]]]
+                      label:
+                        - text-transform: capitalize
 
-              #     - type: 'custom:button-card'
-              #       template: live_tile
-              #       entity: sensor.valhalla_uv_index
-              #       name: UV
-              #       icon: mdi:sun-wireless-outline
-              #       label: '[[[ return entity.attributes.level ]]]'
-              #       state_display: '[[[ return entity.state.split(" ") ]]]'
-              #       styles:
-              #         card:
-              #           - color: |
-              #               [[[
-              #                 if (entity.state == 0) { return 'var(--disabled-text-color)' }
-              #                 switch(entity.attributes.level) {
-              #                   case 'Low': return 'var(--primary-text-color)'
-              #                   default: return 'var(--text-accent-color)'
-              #                 }
-              #               ]]]
-              #           - background: |
-              #               [[[
-              #                 if (entity.state == 0) { return 'var(--ha-card-background)' }
-              #                 switch(entity.attributes.level) {
-              #                   case 'Very High': return 'var(--accent-color)'
-              #                   case 'High': return 'var(--primary-color)'
-              #                   case 'Moderate': return 'rgba(var(--rgb-primary-color), .5)'
-              #                   case 'Low': return 'rgba(var(--rgb-primary-color), .25)'
-              #                   default: return 'var(--ha-card-background)'
-              #                 }
-              #               ]]]
+                  - type: 'custom:button-card'
+                    template: live_tile
+                    entity: sensor.valhalla_uv_index
+                    name: UV
+                    icon: mdi:sun-wireless-outline
+                    label: '[[[ return entity.attributes.level ]]]'
+                    state_display: '[[[ return entity.state.split(" ") ]]]'
+                    styles:
+                      card:
+                        - color: |
+                            [[[
+                              if (entity.state == 0) { return 'var(--disabled-text-color)' }
+                              switch(entity.attributes.level) {
+                                case 'Low': return 'var(--primary-text-color)'
+                                default: return 'var(--text-accent-color)'
+                              }
+                            ]]]
+                        - background: |
+                            [[[
+                              if (entity.state == 0) { return 'var(--ha-card-background)' }
+                              switch(entity.attributes.level) {
+                                case 'Very High': return 'var(--accent-color)'
+                                case 'High': return 'var(--primary-color)'
+                                case 'Moderate': return 'rgba(var(--rgb-primary-color), .5)'
+                                case 'Low': return 'rgba(var(--rgb-primary-color), .25)'
+                                default: return 'var(--ha-card-background)'
+                              }
+                            ]]]
 
-              #     - type: 'custom:button-card'
-              #       template: live_tile_with_unit
-              #       entity: sensor.valhalla_wind
-              #       name: '[[[ return states["sensor.wind_strength"].state ]]]'
-              #       icon: 'mdi:navigation'
-              #       label: '[[[ return states["sensor.wind_direction"].state ]]]'
-              #       state_display: '[[[ return Math.round(parseFloat(states["sensor.valhalla_wind"].state) * 0.6213712 * 10) / 10 ]]]'
-              #       custom_fields:
-              #         unit: MPH
-              #       styles:
-              #         grid:
-              #           - background: var(--ha-card-background)
-              #         card:
-              #           - background: |
-              #               [[[
-              #                 var wind_speed_mph = parseFloat(states["sensor.valhalla_wind"].state) * 0.6213712
-              #                 if (wind_speed_mph <= 30) { return "transparent" }
-              #                 if (wind_speed_mph <= 54) {
-              #                   return "rgba(var(--rgb-primary-color)," + (wind_speed_mph / 54) + ")"
-              #                 } else {
-              #                   return "var(--accent-color)"
-              #                 }
-              #               ]]]
-              #         icon:
-              #           - transform: '[[[ return "rotate(" + parseFloat(states["weather.valhalla_hourly"].attributes.wind_bearing) + "deg)" ]]]'
+                  - type: 'custom:button-card'
+                    template: live_tile_with_unit
+                    entity: sensor.valhalla_wind
+                    name: '[[[ return states["sensor.wind_strength"].state ]]]'
+                    icon: 'mdi:navigation'
+                    label: '[[[ return states["sensor.wind_direction"].state ]]]'
+                    state_display: '[[[ return Math.round(parseFloat(states["sensor.valhalla_wind"].state) * 0.6213712 * 10) / 10 ]]]'
+                    custom_fields:
+                      unit: MPH
+                    styles:
+                      grid:
+                        - background: var(--ha-card-background)
+                      card:
+                        - background: |
+                            [[[
+                              var wind_speed_mph = parseFloat(states["sensor.valhalla_wind"].state) * 0.6213712
+                              if (wind_speed_mph <= 30) { return "transparent" }
+                              if (wind_speed_mph <= 54) {
+                                return "rgba(var(--rgb-primary-color)," + (wind_speed_mph / 54) + ")"
+                              } else {
+                                return "var(--accent-color)"
+                              }
+                            ]]]
+                      icon:
+                        - transform: '[[[ return "rotate(" + parseFloat(states["weather.valhalla_hourly"].attributes.wind_bearing) + "deg)" ]]]'
 
 
-              #     - type: 'custom:auto-entities'
-              #       filter:
-              #         template: |
-              #           {% for alert in range(0,states('sensor.nws_alert_rss_feed')|int) -%}
-              #             {{
-              #               { 'entity': 'sensor.nws_alert_rss_feed',
-              #                 'type': 'custom:button-card',
-              #                 'template': ['live_tile_card', 'live_tile_with_long_state', 'nws_alerts'],
-              #                 'variables': {
-              #                   'slide': alert
-              #                 },
-              #               }
-              #             }},
-              #           {%- endfor %}
-              #       show_empty: false
-              #       card:
-              #         type: 'custom:swipe-card'
-              #         parameters:
-              #           direction: vertical
-              #           autoHeight: true
-              #           height: 112
-              #           effect: cube
-              #           autoplay:
-              #             delay: 5000
-              #           loop: true
-              #           cubeEffect:
-              #             - slideShadows: false
-              #       card_param: cards
-              #       view_layout:
-              #         show:
-              #           mediaquery: "(max-width: 1128px)"
+                  - type: 'custom:auto-entities'
+                    filter:
+                      template: |
+                        {% for alert in range(0,states('sensor.nws_alert_rss_feed')|int) -%}
+                          {{
+                            { 'entity': 'sensor.nws_alert_rss_feed',
+                              'type': 'custom:button-card',
+                              'template': ['live_tile_card', 'live_tile_with_long_state', 'nws_alerts'],
+                              'variables': {
+                                'slide': alert
+                              },
+                            }
+                          }},
+                        {%- endfor %}
+                    show_empty: false
+                    card:
+                      type: 'custom:swipe-card'
+                      parameters:
+                        direction: vertical
+                        autoHeight: true
+                        height: 112
+                        effect: cube
+                        autoplay:
+                          delay: 5000
+                        loop: true
+                        cubeEffect:
+                          - slideShadows: false
+                    card_param: cards
+                    view_layout:
+                      show:
+                        mediaquery: "(max-width: 1128px)"
 
-              #     - type: 'custom:auto-entities'
-              #       filter:
-              #         template: |
-              #           {% for alert in range(0,states('sensor.nws_alert_rss_feed')|int) -%}
-              #             {{
-              #               { 'entity': 'sensor.nws_alert_rss_feed',
-              #                 'type': 'custom:button-card',
-              #                 'template': ['live_tile_card', 'live_tile_with_long_state', 'nws_alerts'],
-              #                 'variables': {
-              #                   'slide': alert,
-              #                   'aspect_ratio': 2
-              #                 },
-              #               }
-              #             }},
-              #           {%- endfor %} 
-              #       show_empty: false
-              #       card:
-              #         type: 'custom:swipe-card'
-              #         parameters:
-              #           direction: vertical
-              #           autoHeight: true
-              #           height: 112
-              #           effect: cube
-              #           autoplay:
-              #             delay: 5000
-              #           loop: true
-              #           cubeEffect:
-              #             - slideShadows: false
-              #       card_param: cards
-              #       view_layout:
-              #         grid-column: span 2
-              #         show:
-              #           mediaquery: "(min-width: 1128px)"
+                  - type: 'custom:auto-entities'
+                    filter:
+                      template: |
+                        {% for alert in range(0,states('sensor.nws_alert_rss_feed')|int) -%}
+                          {{
+                            { 'entity': 'sensor.nws_alert_rss_feed',
+                              'type': 'custom:button-card',
+                              'template': ['live_tile_card', 'live_tile_with_long_state', 'nws_alerts'],
+                              'variables': {
+                                'slide': alert,
+                                'aspect_ratio': 2
+                              },
+                            }
+                          }},
+                        {%- endfor %} 
+                    show_empty: false
+                    card:
+                      type: 'custom:swipe-card'
+                      parameters:
+                        direction: vertical
+                        autoHeight: true
+                        height: 112
+                        effect: cube
+                        autoplay:
+                          delay: 5000
+                        loop: true
+                        cubeEffect:
+                          - slideShadows: false
+                    card_param: cards
+                    view_layout:
+                      grid-column: span 2
+                      show:
+                        mediaquery: "(min-width: 1128px)"
 
 
 
@@ -1941,40 +1941,40 @@ cards:
                       - title: Solar Wind Speed
                       - icon: mdi:weather-windy
 
-                  # - type: 'custom:button-card'
-                  #   template: live_tile
-                  #   entity: binary_sensor.iss
-                  #   name: ISS
-                  #   icon: mdi:space-station
-                  #   show_state: false
-                  #   # state_display: '[[[ return entity.attributes.number_of_people_in_space ]]]'
-                  #   show_label: true
-                  #   label: '[[[ return moment(entity.attributes.next_rise).format("HH:mm") ]]]'
-                  #   # custom_fields:
-                  #   #  unit: People
-                  #   styles:
-                  #     card:
-                  #       - background: |
-                  #           [[[
-                  #             return "url('https://dev.virtualearth.net/REST/v1/Imagery/Map/CanvasDark/" + entity.attributes.latitude + "," + entity.attributes.longitude + "/3?mapSize=400,400&format=png&key=X')"
-                  #           ]]]
-                  #       - background-size: 120% 120%
-                  #       - background-position: center center
+                  - type: 'custom:button-card'
+                    template: live_tile
+                    entity: binary_sensor.iss
+                    name: ISS
+                    icon: mdi:space-station
+                    show_state: false
+                    # state_display: '[[[ return entity.attributes.number_of_people_in_space ]]]'
+                    show_label: true
+                    label: '[[[ return moment(entity.attributes.next_rise).format("HH:mm") ]]]'
+                    # custom_fields:
+                    #  unit: People
+                    styles:
+                      card:
+                        - background: |
+                            [[[
+                              return "url('https://dev.virtualearth.net/REST/v1/Imagery/Map/CanvasDark/" + entity.attributes.latitude + "," + entity.attributes.longitude + "/3?mapSize=400,400&format=png&key=X')"
+                            ]]]
+                        - background-size: 120% 120%
+                        - background-position: center center
 
-                  # - type: map
-                  #   entities:
-                  #     - entity: binary_sensor.iss
-                  #   default_zoom: 0.25
-                  #   hours_to_show: 12
-                  #   card_mod:
-                  #     style:
-                  #       .: |
-                  #         ha-icon-button { display: none; }
-                  #       ha-map$: |
-                  #         .leaflet-control-container { display: none; }
-                  #       ha-map$ha-entity-marker$: >
-                  #         .marker { width: 8px !important; height: 8px !important; margin-top:
-                  #         20px; margin-left: 20px; border: 0 !important; background-color: var(--primary-color) !important; color: transparent !important; }
+                  - type: map
+                    entities:
+                      - entity: binary_sensor.iss
+                    default_zoom: 0.25
+                    hours_to_show: 12
+                    card_mod:
+                      style:
+                        .: |
+                          ha-icon-button { display: none; }
+                        ha-map$: |
+                          .leaflet-control-container { display: none; }
+                        ha-map$ha-entity-marker$: >
+                          .marker { width: 8px !important; height: 8px !important; margin-top:
+                          20px; margin-left: 20px; border: 0 !important; background-color: var(--primary-color) !important; color: transparent !important; }
 
                   - type: 'custom:swipe-card'
                     parameters:
