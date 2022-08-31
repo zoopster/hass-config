@@ -7,7 +7,7 @@
 
 - platform: feedparser
   name: NWS Alert RSS Feed
-  feed_url: !secret nws_alert_feed
+  feed_url: https://alerts.weather.gov/cap/wwaatmget.php?x=FLZ155&y=0
   date_format: "%a, %b %d %I:%M %p"
   inclusions:
     - title
