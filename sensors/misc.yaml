@@ -4,10 +4,28 @@
 #   latitude: !secret opensky_latitude
 #   longitude: !secret opensky_longitude
 
-- platform: google_fit
-  name: Google Fit
-  client_id: !secret google_client_id
-  client_secret: !secret google_client_secret
+#- platform: google_fit
+#  name: Google Fit
+#  client_id: !secret google_client_id
+#  client_secret: !secret google_client_secret
 
-- platform: torque
-  email: !secret torque_email
+#- platform: torque
+#  email: !secret torque_email
+
+- platform: noaa_tides
+  name: tides           # Useful when more than one sensor is used. Otherwise a name is generated.
+  station_id: 8726384   # A station ID from https://tidesandcurrents.noaa.gov/
+  type: tides           # This station will be used to measure water level
+  scan_interval: 360    # Polling interval for the NOAA API
+
+- platform: noaa_tides
+  station_id: 8726384
+  type: temp            # This station will be used to measure water temperature
+  name: water_temp
+  scan_interval: 360
+
+- platform: noaa_tides
+  name: buoy
+  type: buoy            # This station will be used for off-shore Buoy data
+  station_id: MTBF1     # A buoy ID from https://www.ndbc.noaa.gov/
+  scan_interval: 360

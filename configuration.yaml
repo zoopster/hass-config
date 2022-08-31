@@ -22,25 +22,7 @@ script: !include scripts.yaml
 scene: !include scenes.yaml
 frontend:
   themes: !include_dir_merge_named themes
-sensor:
-  - platform: noaa_tides
-    name: tides           # Useful when more than one sensor is used. Otherwise a name is generated.
-    station_id: 8726384   # A station ID from https://tidesandcurrents.noaa.gov/
-    type: tides           # This station will be used to measure water level
-    scan_interval: 360    # Polling interval for the NOAA API
-
-  - platform: noaa_tides
-    station_id: 8726384
-    type: temp            # This station will be used to measure water temperature
-    name: water_temp
-    scan_interval: 360
-
-  - platform: noaa_tides
-    name: buoy
-    type: buoy            # This station will be used for off-shore Buoy data
-    station_id: MTBF1     # A buoy ID from https://www.ndbc.noaa.gov/
-    scan_interval: 360
-
+# sensor: !include_dir_named sensors
   #- platform: noaa_space_weather
 
 device_tracker:
@@ -49,23 +31,4 @@ device_tracker:
       router: 192.168.50.1
       cloudflare: 1.1.1.1
 
-binary_sensor:
-  - platform: ping
-    name: "ping_cloudflare"
-    host: 1.1.1.1
-  - platform: ping
-    name: "ping_google"
-    host: 8.8.4.4
-  - platform: ping
-    name: "ping_my_website"
-    host: zoopster.org
-  - platform: ping
-    name: "ping_router"
-    host: 192.168.50.1
-  - platform: ping
-    name: "ping_devopstales"
-    host: devopstales.com
-# International Space Station
-  - platform: iss
-    show_on_map: true 
-    scan_interval: 180
+binary_sensor: !include_dir_named binary_sensors 
