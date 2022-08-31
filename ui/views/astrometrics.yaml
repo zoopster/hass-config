@@ -90,7 +90,7 @@ cards:
                         style: 'ha-card {background: none;}'
                         tap_action:
                           action: url
-                          url_path: 'https://MadelenaMak.com'
+                          url_path: 'https://zoopster.org'
                       "(min-width: 800px) and (max-width: 1023.99px)":
                         <<: *title-badge-1
                         layout: vertical

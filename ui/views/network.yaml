@@ -100,7 +100,7 @@ cards:
                     states:
                       "(max-width: 799.99px), (min-width: 1024px)": &title-badge-2
                         type: 'custom:mushroom-entity-card'
-                        entity: sensor.valhalla_router_connected_devices
+                        entity: sensor.mikrotik_wireless_clients
                         name: Router ↗
                         icon: 'mdi:router-wireless'
                         icon_color: pink
@@ -117,7 +117,7 @@ cards:
                     states:
                       "(max-width: 799.99px), (min-width: 1024px)": &title-badge-3
                         type: 'custom:mushroom-entity-card'
-                        entity: binary_sensor.ping_valhalla_outlet
+                        entity: binary_sensor.ping_router
                         name: Outlet ↗
                         icon: 'mdi:power-socket-us'
                         icon_color: pink
@@ -192,14 +192,14 @@ cards:
                 label: '[[[ entity.last_changed ]]]'
                 state_display: '[[[ return entity.attributes.round_trip_time_avg ? (Math.round(entity.attributes.round_trip_time_avg)) + "ms" : "Off" ]]]'
 
-              - entity: sensor.external_ip
+              - entity: sensor.myip
                 type: 'custom:button-card'
                 template: rail_interchange_row
                 variables:
                   rail0_top_entity: binary_sensor.ping_cloudflare
                   rail1_top_entity: binary_sensor.ping_google
                   rail2_top_entity: binary_sensor.ping_my_website
-                  rail3_bottom_entity: binary_sensor.ping_valhalla_modem
+                  rail3_bottom_entity: binary_sensor.ping_router
                   station_size_from: 0
                   station_size_to: 3
                 label: '[[[ return entity.state ]]]'
@@ -209,11 +209,11 @@ cards:
                     station:
                       - background-color: '[[[ return entity.state != "unavailable" ? "var(--primary-color)" : "var(--disabled-color)" ]]]'
 
-              - entity: binary_sensor.ping_valhalla_modem
+              - entity: binary_sensor.ping_router
                 type: 'custom:button-card'
                 template: rail_station_row
                 variables:
-                  rail3_entity: binary_sensor.ping_valhalla_modem
+                  rail3_entity: binary_sensor.ping_router
                   station_rail: 3
                 name: Modem
  #               label: !secret modem_ip
@@ -222,110 +222,110 @@ cards:
               - type: 'custom:button-card'
                 template: rail_section_row
                 variables:
-                  rail3_entity: binary_sensor.ping_valhalla_modem
+                  rail3_entity: binary_sensor.ping_router
                 name: Firewall
 
-              - entity: switch.adguard_protection
-                type: 'custom:button-card'
-                template: rail_section_row
-                variables:
-                  rail3_entity: binary_sensor.ping_valhalla_modem
-                  station_rail: 3
-                name: AdGuard DNS
-                styles:
-                  custom_fields:
-                    station:
-                      - --station-color: '[[[ return entity.state == "on" ? "var(--primary-color)" : "var(--disabled-color)" ]]]'
+              # - entity: switch.adguard_protection
+              #   type: 'custom:button-card'
+              #   template: rail_section_row
+              #   variables:
+              #     rail3_entity: binary_sensor.ping_valhalla_modem
+              #     station_rail: 3
+              #   name: AdGuard DNS
+              #   styles:
+              #     custom_fields:
+              #       station:
+              #         - --station-color: '[[[ return entity.state == "on" ? "var(--primary-color)" : "var(--disabled-color)" ]]]'
 
-              - entity: binary_sensor.ping_valhalla_router
-                type: 'custom:button-card'
-                template: rail_interchange_row
-                variables:
-                  rail0_bottom_entity: binary_sensor.ping_kitchen_mesh_repeater
-                  rail1_bottom_entity: binary_sensor.ping_blue_cave_mesh
-                  rail2_bottom_entity: binary_sensor.ping_valhalla_outlet
-                  rail3_bottom_entity: binary_sensor.ping_valhalla_router
-                  rail3_top_entity: binary_sensor.ping_valhalla_modem
-                  station_size_from: 0
-                  station_size_to: 3
-                name: Router
-#                label: !secret router_ip
-                state_display: '[[[ return entity.attributes.round_trip_time_avg ? (Math.round(entity.attributes.round_trip_time_avg)) + "ms" : "Off" ]]]'
+#               - entity: binary_sensor.ping_valhalla_router
+#                 type: 'custom:button-card'
+#                 template: rail_interchange_row
+#                 variables:
+#                   rail0_bottom_entity: binary_sensor.ping_kitchen_mesh_repeater
+#                   rail1_bottom_entity: binary_sensor.ping_blue_cave_mesh
+#                   rail2_bottom_entity: binary_sensor.ping_valhalla_outlet
+#                   rail3_bottom_entity: binary_sensor.ping_valhalla_router
+#                   rail3_top_entity: binary_sensor.ping_valhalla_modem
+#                   station_size_from: 0
+#                   station_size_to: 3
+#                 name: Router
+# #                label: !secret router_ip
+#                 state_display: '[[[ return entity.attributes.round_trip_time_avg ? (Math.round(entity.attributes.round_trip_time_avg)) + "ms" : "Off" ]]]'
 
-              - entity: binary_sensor.ping_valhalla_outlet
-                type: 'custom:button-card'
-                template: rail_station_row
-                variables:
-                  rail0_entity: binary_sensor.ping_kitchen_mesh_repeater
-                  rail1_entity: binary_sensor.ping_blue_cave_mesh
-                  rail2_entity: binary_sensor.ping_valhalla_outlet
-                  rail3_entity: binary_sensor.ping_valhalla_router
-                  station_rail: 2
-                  terminate_at: bottom
-                name: Outlet
-#                label: !secret outlet_ip
-                state_display: '[[[ return entity.attributes.round_trip_time_avg ? (Math.round(entity.attributes.round_trip_time_avg)) + "ms" : "Off" ]]]'
+#               - entity: binary_sensor.ping_valhalla_outlet
+#                 type: 'custom:button-card'
+#                 template: rail_station_row
+#                 variables:
+#                   rail0_entity: binary_sensor.ping_kitchen_mesh_repeater
+#                   rail1_entity: binary_sensor.ping_blue_cave_mesh
+#                   rail2_entity: binary_sensor.ping_valhalla_outlet
+#                   rail3_entity: binary_sensor.ping_valhalla_router
+#                   station_rail: 2
+#                   terminate_at: bottom
+#                 name: Outlet
+# #                label: !secret outlet_ip
+#                 state_display: '[[[ return entity.attributes.round_trip_time_avg ? (Math.round(entity.attributes.round_trip_time_avg)) + "ms" : "Off" ]]]'
 
-              - entity: binary_sensor.ping_valhalla_router
-                type: 'custom:button-card'
-                template: rail_station_row
-                variables:
-                  rail0_entity: binary_sensor.ping_kitchen_mesh_repeater
-                  rail1_entity: binary_sensor.ping_blue_cave_mesh
-                  rail3_entity: binary_sensor.ping_valhalla_router
-                  station_rail: 3
-                  terminate_at: bottom
-                name: Unison
-#                label: !secret unison_ip
-                state_display: '-'
+#               - entity: binary_sensor.ping_valhalla_router
+#                 type: 'custom:button-card'
+#                 template: rail_station_row
+#                 variables:
+#                   rail0_entity: binary_sensor.ping_kitchen_mesh_repeater
+#                   rail1_entity: binary_sensor.ping_blue_cave_mesh
+#                   rail3_entity: binary_sensor.ping_valhalla_router
+#                   station_rail: 3
+#                   terminate_at: bottom
+#                 name: Unison
+# #                label: !secret unison_ip
+#                 state_display: '-'
 
-              - entity: binary_sensor.ping_blue_cave_mesh
-                type: 'custom:button-card'
-                template: rail_interchange_row
-                variables:
-                  rail0_top_entity: binary_sensor.ping_kitchen_mesh_repeater
-                  rail0_bottom_entity: binary_sensor.ping_kitchen_mesh_repeater
-                  rail1_top_entity: binary_sensor.ping_blue_cave_mesh
-                  rail1_bottom_entity: binary_sensor.ping_bedroom_mesh_repeater
-                  rail2_bottom_entity: binary_sensor.ping_dorothy_illinoise
-                  station_size_from: 1
-                  station_size_to: 2
-                name: Workspace Mesh Node
-                label: '[[[ entity.last_changed ]]]'
-                state_display: '[[[ return entity.attributes.round_trip_time_avg ? (Math.round(entity.attributes.round_trip_time_avg)) + "ms" : "Off" ]]]'
+#               - entity: binary_sensor.ping_blue_cave_mesh
+#                 type: 'custom:button-card'
+#                 template: rail_interchange_row
+#                 variables:
+#                   rail0_top_entity: binary_sensor.ping_kitchen_mesh_repeater
+#                   rail0_bottom_entity: binary_sensor.ping_kitchen_mesh_repeater
+#                   rail1_top_entity: binary_sensor.ping_blue_cave_mesh
+#                   rail1_bottom_entity: binary_sensor.ping_bedroom_mesh_repeater
+#                   rail2_bottom_entity: binary_sensor.ping_dorothy_illinoise
+#                   station_size_from: 1
+#                   station_size_to: 2
+#                 name: Workspace Mesh Node
+#                 label: '[[[ entity.last_changed ]]]'
+#                 state_display: '[[[ return entity.attributes.round_trip_time_avg ? (Math.round(entity.attributes.round_trip_time_avg)) + "ms" : "Off" ]]]'
 
-              - entity: binary_sensor.ping_bedroom_mesh_repeater
-                type: 'custom:button-card'
-                template: rail_station_row
-                variables:
-                  rail0_entity: binary_sensor.ping_kitchen_mesh_repeater
-                  rail1_entity: binary_sensor.ping_bedroom_mesh_repeater
-                  rail2_entity: binary_sensor.ping_dorothy_illinoise
-                  station_rail: 1
-                  terminate_at: bottom
-                label: '[[[ entity.last_changed ]]]'
-                state_display: '[[[ return entity.attributes.round_trip_time_avg ? (Math.round(entity.attributes.round_trip_time_avg)) + "ms" : "Off" ]]]'
+#               - entity: binary_sensor.ping_bedroom_mesh_repeater
+#                 type: 'custom:button-card'
+#                 template: rail_station_row
+#                 variables:
+#                   rail0_entity: binary_sensor.ping_kitchen_mesh_repeater
+#                   rail1_entity: binary_sensor.ping_bedroom_mesh_repeater
+#                   rail2_entity: binary_sensor.ping_dorothy_illinoise
+#                   station_rail: 1
+#                   terminate_at: bottom
+#                 label: '[[[ entity.last_changed ]]]'
+#                 state_display: '[[[ return entity.attributes.round_trip_time_avg ? (Math.round(entity.attributes.round_trip_time_avg)) + "ms" : "Off" ]]]'
 
-              - entity: binary_sensor.ping_dorothy_illinoise
-                type: 'custom:button-card'
-                template: rail_station_row
-                variables:
-                  rail0_entity: binary_sensor.ping_kitchen_mesh_repeater
-                  rail2_entity: binary_sensor.ping_dorothy_illinoise
-                  station_rail: 2
-                  terminate_at: bottom
-#                label: !secret dorothy_ip
-                state_display: '[[[ return entity.attributes.round_trip_time_avg ? (Math.round(entity.attributes.round_trip_time_avg)) + "ms" : "Off" ]]]'
+#               - entity: binary_sensor.ping_dorothy_illinoise
+#                 type: 'custom:button-card'
+#                 template: rail_station_row
+#                 variables:
+#                   rail0_entity: binary_sensor.ping_kitchen_mesh_repeater
+#                   rail2_entity: binary_sensor.ping_dorothy_illinoise
+#                   station_rail: 2
+#                   terminate_at: bottom
+# #                label: !secret dorothy_ip
+#                 state_display: '[[[ return entity.attributes.round_trip_time_avg ? (Math.round(entity.attributes.round_trip_time_avg)) + "ms" : "Off" ]]]'
 
-              - entity: binary_sensor.ping_kitchen_mesh_repeater
-                type: 'custom:button-card'
-                template: rail_station_row
-                variables:
-                  rail0_entity: binary_sensor.ping_kitchen_mesh_repeater
-                  station_rail: 0
-                  terminate_at: bottom terminal
-                label: '[[[ entity.last_changed ]]]'
-                state_display: '[[[ return entity.attributes.round_trip_time_avg ? (Math.round(entity.attributes.round_trip_time_avg)) + "ms" : "Off" ]]]'
+#               - entity: binary_sensor.ping_kitchen_mesh_repeater
+#                 type: 'custom:button-card'
+#                 template: rail_station_row
+#                 variables:
+#                   rail0_entity: binary_sensor.ping_kitchen_mesh_repeater
+#                   station_rail: 0
+#                   terminate_at: bottom terminal
+#                 label: '[[[ entity.last_changed ]]]'
+#                 state_display: '[[[ return entity.attributes.round_trip_time_avg ? (Math.round(entity.attributes.round_trip_time_avg)) + "ms" : "Off" ]]]'
 
 
       # [Column] Download
@@ -349,20 +349,20 @@ cards:
           - hours_to_show: 24
             graph: line
             type: sensor
-            entity: sensor.valhalla_router_wan_download_speed
+            entity: sensor.mikrotik_wan_rx
             detail: 2
             name: Router Download Speed
 
           - type: sensor
-            entity: sensor.network_throughput_out_eth0
+            entity: sensor.mikrotik_ether4_rx
             graph: line
-            name: Unison Network Out
+            name: Mikrotik Network Out
             detail: 2
             
           - hours_to_show: 24
             graph: line
             type: sensor
-            entity: sensor.valhalla_router_wan_download
+            entity: sensor.mikrotik_wan_rx
             detail: 2
             name: Router Download
 
@@ -388,20 +388,20 @@ cards:
           - hours_to_show: 24
             graph: line
             type: sensor
-            entity: sensor.valhalla_router_wan_upload_speed
+            entity: sensor.mikrotik_wan_tx
             detail: 2
             name: Router Upload Speed
 
           - type: sensor
-            entity: sensor.network_throughput_in_eth0
+            entity: sensor.mikrotik_ether4_tx
             graph: line
             detail: 2
-            name: Unison Network In
+            name: Router Network In
 
           - hours_to_show: 24
             graph: line
             type: sensor
-            entity: sensor.valhalla_router_wan_upload
+            entity: sensor.mikrotik_wan_tx
             detail: 2
             name: Router Upload
 
@@ -457,12 +457,12 @@ cards:
             template: multi_graph_card
             variables:
               - entities:
-                  - entity: sensor.valhalla_router_wired_download_speed
+                  - entity: sensor.mikrotik_ether4_rx
                     name: Router
-                  - entity: sensor.workspace_mesh_node_wired_download_speed
+                  - entity: sensor.mikrotik_ether5_rx
                     name: Workspace Node
-                  - entity: sensor.bedroom_mesh_node_wired_download_speed
-                    name: Bedroom Node
+                  # - entity: sensor.bedroom_mesh_node_wired_download_speed
+                  #   name: Bedroom Node
               - title: Download Speed (Wired)
               - height: 120
 
@@ -470,66 +470,66 @@ cards:
             template: multi_graph_card
             variables:
               - entities:
-                  - entity: sensor.valhalla_router_wired_download
+                  - entity: sensor.mikrotik_ether4_tx
                     name: Router
-                  - entity: sensor.workspace_mesh_node_wired_download
+                  - entity: sensor.mikrotik_ether5_tx
                     name: Workspace Node
-                  - entity: sensor.bedroom_mesh_node_wired_download
-                    name: Bedroom Node
+                  # - entity: sensor.bedroom_mesh_node_wired_download
+                  #   name: Bedroom Node
               - title: Download (Wired)
               - height: 120
 
-          - type: 'custom:decluttering-card'
-            template: multi_graph_card
-            variables:
-              - entities:
-                  - entity: sensor.valhalla_router_wlan0_download_speed
-                    name: Router
-                  - entity: sensor.workspace_mesh_node_wlan0_download_speed
-                    name: Workspace Node
-                  - entity: sensor.bedroom_mesh_node_wlan0_download_speed
-                    name: Bedroom Node
-              - title: Download Speed (2.4GHz)
-              - height: 120
+          # - type: 'custom:decluttering-card'
+          #   template: multi_graph_card
+          #   variables:
+          #     - entities:
+          #         - entity: sensor.valhalla_router_wlan0_download_speed
+          #           name: Router
+          #         - entity: sensor.workspace_mesh_node_wlan0_download_speed
+          #           name: Workspace Node
+          #         - entity: sensor.bedroom_mesh_node_wlan0_download_speed
+          #           name: Bedroom Node
+          #     - title: Download Speed (2.4GHz)
+          #     - height: 120
 
-          - type: 'custom:decluttering-card'
-            template: multi_graph_card
-            variables:
-              - entities:
-                  - entity: sensor.valhalla_router_wlan0_download
-                    name: Router
-                  - entity: sensor.workspace_mesh_node_wlan0_download
-                    name: Workspace Node
-                  - entity: sensor.bedroom_mesh_node_wlan0_download
-                    name: Bedroom Node
-              - title: Download (2.4GHz)
-              - height: 120
+          # - type: 'custom:decluttering-card'
+          #   template: multi_graph_card
+          #   variables:
+          #     - entities:
+          #         - entity: sensor.valhalla_router_wlan0_download
+          #           name: Router
+          #         - entity: sensor.workspace_mesh_node_wlan0_download
+          #           name: Workspace Node
+          #         - entity: sensor.bedroom_mesh_node_wlan0_download
+          #           name: Bedroom Node
+          #     - title: Download (2.4GHz)
+          #     - height: 120
 
-          - type: 'custom:decluttering-card'
-            template: multi_graph_card
-            variables:
-              - entities:
-                  - entity: sensor.valhalla_router_wlan1_download_speed
-                    name: Router
-                  - entity: sensor.workspace_mesh_node_wlan1_download_speed
-                    name: Workspace Node
-                  - entity: sensor.bedroom_mesh_node_wlan1_download_speed
-                    name: Bedroom Node
-              - title: Download Speed (5GHz)
-              - height: 120
+          # - type: 'custom:decluttering-card'
+          #   template: multi_graph_card
+          #   variables:
+          #     - entities:
+          #         - entity: sensor.valhalla_router_wlan1_download_speed
+          #           name: Router
+          #         - entity: sensor.workspace_mesh_node_wlan1_download_speed
+          #           name: Workspace Node
+          #         - entity: sensor.bedroom_mesh_node_wlan1_download_speed
+          #           name: Bedroom Node
+          #     - title: Download Speed (5GHz)
+          #     - height: 120
 
-          - type: 'custom:decluttering-card'
-            template: multi_graph_card
-            variables:
-              - entities:
-                  - entity: sensor.valhalla_router_wlan1_download
-                    name: Router
-                  - entity: sensor.workspace_mesh_node_wlan1_download
-                    name: Workspace Node
-                  - entity: sensor.bedroom_mesh_node_wlan1_download
-                    name: Bedroom Node
-              - title: Download (5GHz)
-              - height: 120
+          # - type: 'custom:decluttering-card'
+          #   template: multi_graph_card
+          #   variables:
+          #     - entities:
+          #         - entity: sensor.valhalla_router_wlan1_download
+          #           name: Router
+          #         - entity: sensor.workspace_mesh_node_wlan1_download
+          #           name: Workspace Node
+          #         - entity: sensor.bedroom_mesh_node_wlan1_download
+          #           name: Bedroom Node
+          #     - title: Download (5GHz)
+          #     - height: 120
 
 
       # [Column] LAN Upload
