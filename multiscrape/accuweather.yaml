@@ -2,7 +2,7 @@
 # Get the details from Accuweather that I want that isn't in the official integration.
 
 - name: Accuweather - Detailed Hourly Forecast
-  resource: !secret accuweather_api_url
+  resource: http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/
   scan_interval: 3600
   sensor:
 
