@@ -1,6 +1,4 @@
 
-- platform: car_wash
-  weather: weather.valhalla_2
 - platform: ping
   name: "ping_cloudflare"
   host: 1.1.1.1
