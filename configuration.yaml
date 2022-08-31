@@ -22,8 +22,8 @@ script: !include scripts.yaml
 scene: !include scenes.yaml
 frontend:
   themes: !include_dir_merge_named themes
-sensor: !include_dir_merge_list sensors
-binary_sensor: !include binary_sensors/misc.yaml 
+sensor: !include_dir_list sensors
+binary_sensor: !include_dir_list binary_sensors 
 device_tracker:
   - platform: ping
     hosts:
