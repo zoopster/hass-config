@@ -1419,186 +1419,186 @@ cards:
                     view_layout:
                       grid-column: 1/-1
 
-                  - type: 'custom:button-card'
-                    view_layout:
-                      grid-column: span 2
-                    variables:
-                      aspect_ratio: 2
-                    template:
-                      - live_tile_card
-                      - live_tile_with_long_state
-                    entity: sensor.mta_subway_l_service_status
-                    state_display: >-
-                      [[[ 
-                        if (( entity.state == 'No Data' ) || ( entity.state == 'unavailable')) { return 'No Data' }
-                        return ((entity.attributes.direction_statuses != undefined) ? entity.attributes.direction_statuses.north : entity.state)
-                      ]]]
-                    name: L Train Northbound
-                    icon: 'mdi:train'
-                    label: |-
-                      [[[ 
-                        if (( entity.state == 'No Data' ) || ( entity.state == 'unavailable')) { return '' }
-                        if ( entity.state == 'No Service') {
-                          var label = entity.attributes.service_change_summaries.both[0] 
-                        } else {
-                          var label = ((entity.attributes.service_change_summaries.north.length > 0) ? entity.attributes.service_change_summaries.north[0] : '') +
-                            ((entity.attributes.delay_summaries.north != null) ? entity.attributes.delay_summaries.north : '') +
-                            ((entity.attributes.service_irregularity_summaries.north != null) ? entity.attributes.service_irregularity_summaries.north : '') +
-                            ((entity.attributes.service_change_summaries.both.length > 0) ? entity.attributes.service_change_summaries.both[0] : '') }
-                        if ((label !== undefined) || (label !== null)) { return label.charAt(0).toUpperCase() + label.slice(1) }
-                      ]]]
-                    state:
-                      - value: Slow
-                        styles:
-                          card:
-                            - background: rgba(var(--rgb-primary-color), .33)
-                            - color: var(--primary-text-color)
-                      - value: 'Not Good'
-                        color: 'rgba(var(--rgb-primary-color), .5)'
-                      - value: No Service
-                        color: var(--accent-color)
-                      - value: Service Change
-                        color: var(--accent-color)
-                      - value: Delay
-                        color: var(--primary-color)
-                      - value: No Data
-                        color: var(--primary-color)
-                      - value: Good Service
-                        styles:
-                          card:
-                            - background: var(--ha-card-background)
-                            - color: var(--disabled-text-color)
+                  # - type: 'custom:button-card'
+                  #   view_layout:
+                  #     grid-column: span 2
+                  #   variables:
+                  #     aspect_ratio: 2
+                  #   template:
+                  #     - live_tile_card
+                  #     - live_tile_with_long_state
+                  #   entity: sensor.mta_subway_l_service_status
+                  #   state_display: >-
+                  #     [[[ 
+                  #       if (( entity.state == 'No Data' ) || ( entity.state == 'unavailable')) { return 'No Data' }
+                  #       return ((entity.attributes.direction_statuses != undefined) ? entity.attributes.direction_statuses.north : entity.state)
+                  #     ]]]
+                  #   name: L Train Northbound
+                  #   icon: 'mdi:train'
+                  #   label: |-
+                  #     [[[ 
+                  #       if (( entity.state == 'No Data' ) || ( entity.state == 'unavailable')) { return '' }
+                  #       if ( entity.state == 'No Service') {
+                  #         var label = entity.attributes.service_change_summaries.both[0] 
+                  #       } else {
+                  #         var label = ((entity.attributes.service_change_summaries.north.length > 0) ? entity.attributes.service_change_summaries.north[0] : '') +
+                  #           ((entity.attributes.delay_summaries.north != null) ? entity.attributes.delay_summaries.north : '') +
+                  #           ((entity.attributes.service_irregularity_summaries.north != null) ? entity.attributes.service_irregularity_summaries.north : '') +
+                  #           ((entity.attributes.service_change_summaries.both.length > 0) ? entity.attributes.service_change_summaries.both[0] : '') }
+                  #       if ((label !== undefined) || (label !== null)) { return label.charAt(0).toUpperCase() + label.slice(1) }
+                  #     ]]]
+                  #   state:
+                  #     - value: Slow
+                  #       styles:
+                  #         card:
+                  #           - background: rgba(var(--rgb-primary-color), .33)
+                  #           - color: var(--primary-text-color)
+                  #     - value: 'Not Good'
+                  #       color: 'rgba(var(--rgb-primary-color), .5)'
+                  #     - value: No Service
+                  #       color: var(--accent-color)
+                  #     - value: Service Change
+                  #       color: var(--accent-color)
+                  #     - value: Delay
+                  #       color: var(--primary-color)
+                  #     - value: No Data
+                  #       color: var(--primary-color)
+                  #     - value: Good Service
+                  #       styles:
+                  #         card:
+                  #           - background: var(--ha-card-background)
+                  #           - color: var(--disabled-text-color)
 
-                  - type: 'custom:swipe-card'
-                    parameters:
-                      direction: vertical
-                      autoHeight: true
-                      height: 112
-                      effect: cube
-                      autoplay:
-                        delay: 15000
-                      cubeEffect:
-                        - slideShadows: false
-                    cards:
+                  # - type: 'custom:swipe-card'
+                  #   parameters:
+                  #     direction: vertical
+                  #     autoHeight: true
+                  #     height: 112
+                  #     effect: cube
+                  #     autoplay:
+                  #       delay: 15000
+                  #     cubeEffect:
+                  #       - slideShadows: false
+                  #   cards:
 
-                      - &summary-card-notify-nyc
-                        type: 'custom:button-card'
-                        variables:
-                          aspect_ratio: 2/1
-                          slide: 0
-                        template:
-                          - live_tile_card
-                          - live_tile_with_long_state
-                        name: >-
-                          [[[ return "Notify NYC - " + moment(entity.attributes.entries[variables.slide].published).fromNow()
-                          ]]]
-                        entity: sensor.notify_nyc
-                        color: var(--ha-card-background)
-                        state_display: >-
-                          [[[ return
-                          entity.attributes.entries[variables.slide].title.replace("Notify NYC
-                          - ", "") ]]]
-                        label: >-
-                          [[[ return
-                          entity.attributes.entries[variables.slide].summary.replace(/Notification
-                          issued .*/g, "").replace(/For more information, .*/g,
-                          "").replace(/To view this message in.*/g, "") ]]]
-                        styles:
-                          card:
-                            - color: |
-                                [[[
-                                  var diff = (new Date() - new Date(entity.attributes.entries[variables.slide].published)) / 1000
-                                  if (diff > 14472) { return "var(--primary-text-color)" } else { return "var(--accent-text-color)" }
-                                ]]]
-                            - background-image: |
-                                [[[
-                                  var diff = (new Date() - new Date(entity.attributes.entries[variables.slide].published)) / 1000
-                                  var opacity = 1 - (diff / 21600)
-                                  if (diff > 21600) { return '' }
-                                  return 'linear-gradient( to top, rgba(var(--rgb-primary-color),' + opacity + ') 0%, rgba(var(--rgb-primary-color),' + opacity + ') 100%)'
-                                ]]]
+                  #     - &summary-card-notify-nyc
+                  #       type: 'custom:button-card'
+                  #       variables:
+                  #         aspect_ratio: 2/1
+                  #         slide: 0
+                  #       template:
+                  #         - live_tile_card
+                  #         - live_tile_with_long_state
+                  #       name: >-
+                  #         [[[ return "Notify NYC - " + moment(entity.attributes.entries[variables.slide].published).fromNow()
+                  #         ]]]
+                  #       entity: sensor.notify_nyc
+                  #       color: var(--ha-card-background)
+                  #       state_display: >-
+                  #         [[[ return
+                  #         entity.attributes.entries[variables.slide].title.replace("Notify NYC
+                  #         - ", "") ]]]
+                  #       label: >-
+                  #         [[[ return
+                  #         entity.attributes.entries[variables.slide].summary.replace(/Notification
+                  #         issued .*/g, "").replace(/For more information, .*/g,
+                  #         "").replace(/To view this message in.*/g, "") ]]]
+                  #       styles:
+                  #         card:
+                  #           - color: |
+                  #               [[[
+                  #                 var diff = (new Date() - new Date(entity.attributes.entries[variables.slide].published)) / 1000
+                  #                 if (diff > 14472) { return "var(--primary-text-color)" } else { return "var(--accent-text-color)" }
+                  #               ]]]
+                  #           - background-image: |
+                  #               [[[
+                  #                 var diff = (new Date() - new Date(entity.attributes.entries[variables.slide].published)) / 1000
+                  #                 var opacity = 1 - (diff / 21600)
+                  #                 if (diff > 21600) { return '' }
+                  #                 return 'linear-gradient( to top, rgba(var(--rgb-primary-color),' + opacity + ') 0%, rgba(var(--rgb-primary-color),' + opacity + ') 100%)'
+                  #               ]]]
 
               #         # This is so fucking clever I have to pat myself in the back here.
-                      - <<: *summary-card-notify-nyc
-                        variables:
-                          aspect_ratio: 2/1
-                          slide: 1
+                      # - <<: *summary-card-notify-nyc
+                      #   variables:
+                      #     aspect_ratio: 2/1
+                      #     slide: 1
 
-                      - <<: *summary-card-notify-nyc
-                        variables:
-                          aspect_ratio: 2/1
-                          slide: 2
+                      # - <<: *summary-card-notify-nyc
+                      #   variables:
+                      #     aspect_ratio: 2/1
+                      #     slide: 2
 
-                      - <<: *summary-card-notify-nyc
-                        variables:
-                          aspect_ratio: 2/1
-                          slide: 3
+                      # - <<: *summary-card-notify-nyc
+                      #   variables:
+                      #     aspect_ratio: 2/1
+                      #     slide: 3
 
-                      - <<: *summary-card-notify-nyc
-                        variables:
-                          aspect_ratio: 2/1
-                          slide: 4
+                      # - <<: *summary-card-notify-nyc
+                      #   variables:
+                      #     aspect_ratio: 2/1
+                      #     slide: 4
 
-                    view_layout:
-                      grid-column: 1/3
-                      grid-row: 3/4
+                    # view_layout:
+                    #   grid-column: 1/3
+                    #   grid-row: 3/4
 
               #     # Force fix for the height of the swipe card tile above.
-                  - type: 'custom:button-card'
-                    template: live_tile
-                    styles:
-                      card:
-                        - background: none
-                    view_layout:
-                      grid-column: 1/1
-                      grid-row: 3/4
+                #   - type: 'custom:button-card'
+                #     template: live_tile
+                #     styles:
+                #       card:
+                #         - background: none
+                #     view_layout:
+                #       grid-column: 1/1
+                #       grid-row: 3/4
 
-                  - type: 'custom:decluttering-card'
-                    template: mini_graph_tile
-                    variables:
-                      - entities:
-                          - entity: sensor.gasbuddy_average_gas_price
-                      - title: Avg Gas Price
-                      - decimals: 2
+                #   - type: 'custom:decluttering-card'
+                #     template: mini_graph_tile
+                #     variables:
+                #       - entities:
+                #           - entity: sensor.gasbuddy_average_gas_price
+                #       - title: Avg Gas Price
+                #       - decimals: 2
 
-                  - type: 'custom:button-card'
-                    template:
-                      - live_tile_card
-                      - live_tile_with_long_state
-                    name: Parking Rules
-                    entity: sensor.nyc_311_alternate_side_parking_0d
-                    icon: mdi:car
-                    label: |
-                      [[[ return entity.attributes.details ]]]
-                    state:
-                      - value: 'In Effect'
-                        color: var(--ha-card-background)
-                        styles:
-                          card:
-                            - background: var(--ha-card-background)
-                            - color: var(--disabled-text-color)
-                      - operator: 'default'
-                        color: var(--primary-color)
+                #   - type: 'custom:button-card'
+                #     template:
+                #       - live_tile_card
+                #       - live_tile_with_long_state
+                #     name: Parking Rules
+                #     entity: sensor.nyc_311_alternate_side_parking_0d
+                #     icon: mdi:car
+                #     label: |
+                #       [[[ return entity.attributes.details ]]]
+                #     state:
+                #       - value: 'In Effect'
+                #         color: var(--ha-card-background)
+                #         styles:
+                #           card:
+                #             - background: var(--ha-card-background)
+                #             - color: var(--disabled-text-color)
+                #       - operator: 'default'
+                #         color: var(--primary-color)
 
-                  - type: 'custom:decluttering-card'
-                    template: mini_graph_tile
-                    variables:
-                      - entities:
-                          - entity: sensor.waze_travel_time
-                      - title: Driving Time
+                #   - type: 'custom:decluttering-card'
+                #     template: mini_graph_tile
+                #     variables:
+                #       - entities:
+                #           - entity: sensor.waze_travel_time
+                #       - title: Driving Time
 
-                  - type: 'custom:button-card'
-                    template:
-                      - live_tile_with_camera
-                    name: Traffic
-                    entity: camera.bing_maps_traffic
-                    show_state: false
-                    variables:
-                      picture: '[[[ return entity.attributes.entity_picture ]]]'
+                #   - type: 'custom:button-card'
+                #     template:
+                #       - live_tile_with_camera
+                #     name: Traffic
+                #     entity: camera.bing_maps_traffic
+                #     show_state: false
+                #     variables:
+                #       picture: '[[[ return entity.attributes.entity_picture ]]]'
 
-                layout:
-                  grid-template-columns: 'repeat(auto-fill, [col-start] minmax(112px, 1fr) [col-end])'
-                  margin: 0
+                # layout:
+                #   grid-template-columns: 'repeat(auto-fill, [col-start] minmax(112px, 1fr) [col-end])'
+                #   margin: 0
 
 
               # [Column] Media
@@ -1633,206 +1633,206 @@ cards:
                       grid-row: 2/3
                     cards:
                         
-                      - type: 'custom:auto-entities'
-                        filter:
-                          include:
-                            - domain: media_player
-                              state: playing
-                              options:
-                                type: 'custom:button-card'
-                                template: live_tile_media_player
-                                entity: this.entity_id
-                            - domain: media_player
-                              state: paused
-                              options:
-                                type: 'custom:button-card'
-                                template: live_tile_media_player
-                                entity: this.entity_id
-                        show_empty: false
-                        card:
-                          type: 'custom:swipe-card'
-                          parameters:
-                            direction: vertical
-                            autoHeight: true
-                            height: 112
-                            effect: cube
-                            autoplay:
-                              delay: 5000
-                            cubeEffect:
-                              - slideShadows: false
-                        card_param: cards
-                        view_layout:
-                          grid-column: 1/3
-                          grid-row: 1/2
+              #         - type: 'custom:auto-entities'
+              #           filter:
+              #             include:
+              #               - domain: media_player
+              #                 state: playing
+              #                 options:
+              #                   type: 'custom:button-card'
+              #                   template: live_tile_media_player
+              #                   entity: this.entity_id
+              #               - domain: media_player
+              #                 state: paused
+              #                 options:
+              #                   type: 'custom:button-card'
+              #                   template: live_tile_media_player
+              #                   entity: this.entity_id
+              #           show_empty: false
+              #           card:
+              #             type: 'custom:swipe-card'
+              #             parameters:
+              #               direction: vertical
+              #               autoHeight: true
+              #               height: 112
+              #               effect: cube
+              #               autoplay:
+              #                 delay: 5000
+              #               cubeEffect:
+              #                 - slideShadows: false
+              #           card_param: cards
+              #           view_layout:
+              #             grid-column: 1/3
+              #             grid-row: 1/2
 
-              #         # Force fix for the height of the swipe card tile above. Even harder than the previous one.
-                      - type: 'custom:button-card'
-                        template: live_tile
-                        triggers_update: all
-                        styles:
-                          card:
-                            - display: >-
-                                [[[
-                                  var mediaPlaying = Object.keys(states).filter(e => e.includes("media") && (states[e].state == "playing")).length
-                                  var mediaPaused = Object.keys(states).filter(e => e.includes("media") && (states[e].state == "paused")).length
-                                  if (mediaPlaying + mediaPaused > 0) { return 'block' } else { return 'none' }
-                                ]]]
-                            - background: none
-                        view_layout:
-                          grid-column: 1/1
-                          grid-row: 1/2
+              # #         # Force fix for the height of the swipe card tile above. Even harder than the previous one.
+              #         - type: 'custom:button-card'
+              #           template: live_tile
+              #           triggers_update: all
+              #           styles:
+              #             card:
+              #               - display: >-
+              #                   [[[
+              #                     var mediaPlaying = Object.keys(states).filter(e => e.includes("media") && (states[e].state == "playing")).length
+              #                     var mediaPaused = Object.keys(states).filter(e => e.includes("media") && (states[e].state == "paused")).length
+              #                     if (mediaPlaying + mediaPaused > 0) { return 'block' } else { return 'none' }
+              #                   ]]]
+              #               - background: none
+              #           view_layout:
+              #             grid-column: 1/1
+              #             grid-row: 1/2
 
-                  - type: 'custom:decluttering-card'
-                    template: mini_graph_tile
-                    variables:
-                      - entities:
-                          - entity: sensor.my_last_fm_play_count
-                      - title: Last.fm
-                      - icon: 'mdi:music'
-                      - hours_to_show: 48
-                      - lower_bound: ~100000
+              #     - type: 'custom:decluttering-card'
+              #       template: mini_graph_tile
+              #       variables:
+              #         - entities:
+              #             - entity: sensor.my_last_fm_play_count
+              #         - title: Last.fm
+              #         - icon: 'mdi:music'
+              #         - hours_to_show: 48
+              #         - lower_bound: ~100000
 
-                  - type: 'custom:button-card'
-                    variables:
-                      newest: |
-                        [[[
-                          var movieUpdate = new Date(states["sensor.dorothy_library_movies"].attributes.last_added_timestamp)
-                          var tvUpdate = new Date(states["sensor.dorothy_library_tv_shows"].attributes.last_added_timestamp)
-                          var flacUpdate = new Date(states["sensor.dorothy_library_flacs"].attributes.last_added_timestamp)
-                          if (flacUpdate > movieUpdate) {
-                            if (flacUpdate > tvUpdate) { return "flacs" } else {return "tv_shows" }
-                          } else {
-                            if (movieUpdate > tvUpdate) { return "movies" } else {return "tv_shows" }
-                          }
-                        ]]]
-                    template:
-                      - live_tile_card
-                      - live_tile_with_longer_state
-                    name: New to Plex
-                    icon: 'mdi:plex'
-                    entity: sensor.dorothy_library_flacs
-                    state_display: >-
-                      [[[ return states["sensor.dorothy_library_" +
-                      variables.newest].attributes.last_added_item ]]]
-                    label: |-
-                      [[[ 
-                        var diff = (-(new Date(states["sensor.dorothy_library_" +
-                          variables.newest].attributes.last_added_timestamp) - new Date()) /
-                          1000 / 60 / 60 / 24)
-                        if (diff > 1.5) {return Math.round(diff)  + " days ago" }
-                        if (diff < .03) {return "Just now" }
-                        if (diff <= 1.5) {return Math.round(diff * 24)  + " hours ago" }
+              #     - type: 'custom:button-card'
+              #       variables:
+              #         newest: |
+              #           [[[
+              #             var movieUpdate = new Date(states["sensor.dorothy_library_movies"].attributes.last_added_timestamp)
+              #             var tvUpdate = new Date(states["sensor.dorothy_library_tv_shows"].attributes.last_added_timestamp)
+              #             var flacUpdate = new Date(states["sensor.dorothy_library_flacs"].attributes.last_added_timestamp)
+              #             if (flacUpdate > movieUpdate) {
+              #               if (flacUpdate > tvUpdate) { return "flacs" } else {return "tv_shows" }
+              #             } else {
+              #               if (movieUpdate > tvUpdate) { return "movies" } else {return "tv_shows" }
+              #             }
+              #           ]]]
+              #       template:
+              #         - live_tile_card
+              #         - live_tile_with_longer_state
+              #       name: New to Plex
+              #       icon: 'mdi:plex'
+              #       entity: sensor.dorothy_library_flacs
+              #       state_display: >-
+              #         [[[ return states["sensor.dorothy_library_" +
+              #         variables.newest].attributes.last_added_item ]]]
+              #       label: |-
+              #         [[[ 
+              #           var diff = (-(new Date(states["sensor.dorothy_library_" +
+              #             variables.newest].attributes.last_added_timestamp) - new Date()) /
+              #             1000 / 60 / 60 / 24)
+              #           if (diff > 1.5) {return Math.round(diff)  + " days ago" }
+              #           if (diff < .03) {return "Just now" }
+              #           if (diff <= 1.5) {return Math.round(diff * 24)  + " hours ago" }
 
-                      ]]]
-                    styles:
-                      card:
-                        - background: var(--ha-card-background)
-                        - color: var(--primary-text-color)
-                      state:
-                        - display: '-webkit-box'
-                        - '-webkit-line-clamp': 3
-                        - '-webkit-box-orient': vertical
+              #         ]]]
+              #       styles:
+              #         card:
+              #           - background: var(--ha-card-background)
+              #           - color: var(--primary-text-color)
+              #         state:
+              #           - display: '-webkit-box'
+              #           - '-webkit-line-clamp': 3
+              #           - '-webkit-box-orient': vertical
 
-                  - type: 'custom:swipe-card'
-                    parameters:
-                      direction: vertical
-                      autoHeight: true
-                      height: 112
-                      effect: cube
-                      autoplay:
-                        delay: 60000
-                      cubeEffect:
-                        - slideShadows: false
-                    view_layout:
-                      grid-column: span 2
-                    cards:
+              #     - type: 'custom:swipe-card'
+              #       parameters:
+              #         direction: vertical
+              #         autoHeight: true
+              #         height: 112
+              #         effect: cube
+              #         autoplay:
+              #           delay: 60000
+              #         cubeEffect:
+              #           - slideShadows: false
+              #       view_layout:
+              #         grid-column: span 2
+              #       cards:
 
-                      - type: 'custom:button-card'
-                        template:
-                          - live_tile_card
-                          - live_tile_with_long_state
-                        entity: sensor.last_fm_top_artists
-                        icon: 'mdi:album'
-                        name: >-
-                          [[[ return
-                          states["sensor.last_fm_top_artists_json"].attributes.artist[0].playcount
-                          + " plays" ]]]
-                        label: >
-                          [[[ return
-                          states["sensor.last_fm_top_artists"].attributes.artist_2
-                          + "<br/>" + 
-                          states["sensor.last_fm_top_artists"].attributes.artist_3
-                          + "<br/>" + 
-                          states["sensor.last_fm_top_artists"].attributes.artist_4
-                          + "<br/>" + 
-                          states["sensor.last_fm_top_artists"].attributes.artist_5
-                          ]]]
-                        variables:
-                          aspect_ratio: 2/1
-                        styles:
-                          card:
-                            - color: var(--primary-text-color)
-                            - background-size: cover
-                            - background-image: >
-                                [[[ return "linear-gradient(to bottom, rgba(var(--rgb-primary-background-color), .5), rgba(var(--rgb-primary-background-color), .5)), url('" + 
-                                  states["sensor.last_fm_top_artist_photo"].state + "')" ]]]
+              #         - type: 'custom:button-card'
+              #           template:
+              #             - live_tile_card
+              #             - live_tile_with_long_state
+              #           entity: sensor.last_fm_top_artists
+              #           icon: 'mdi:album'
+              #           name: >-
+              #             [[[ return
+              #             states["sensor.last_fm_top_artists_json"].attributes.artist[0].playcount
+              #             + " plays" ]]]
+              #           label: >
+              #             [[[ return
+              #             states["sensor.last_fm_top_artists"].attributes.artist_2
+              #             + "<br/>" + 
+              #             states["sensor.last_fm_top_artists"].attributes.artist_3
+              #             + "<br/>" + 
+              #             states["sensor.last_fm_top_artists"].attributes.artist_4
+              #             + "<br/>" + 
+              #             states["sensor.last_fm_top_artists"].attributes.artist_5
+              #             ]]]
+              #           variables:
+              #             aspect_ratio: 2/1
+              #           styles:
+              #             card:
+              #               - color: var(--primary-text-color)
+              #               - background-size: cover
+              #               - background-image: >
+              #                   [[[ return "linear-gradient(to bottom, rgba(var(--rgb-primary-background-color), .5), rgba(var(--rgb-primary-background-color), .5)), url('" + 
+              #                     states["sensor.last_fm_top_artist_photo"].state + "')" ]]]
 
-                      - type: 'custom:button-card'
-                        template:
-                          - live_tile_card
-                          - live_tile_with_long_state
-                        entity: sensor.last_fm_top_albums
-                        icon: 'mdi:album'
-                        name: >-
-                          [[[ return
-                          states["sensor.last_fm_top_albums_json"].attributes.album[0].playcount
-                          + " plays" ]]]
-                        label: >
-                          [[[ return
-                          states["sensor.last_fm_top_albums"].attributes.album_2
-                          + "<br/>" + 
-                          states["sensor.last_fm_top_albums"].attributes.album_3
-                          + "<br/>" + 
-                          states["sensor.last_fm_top_albums"].attributes.album_4
-                          + "<br/>" + 
-                          states["sensor.last_fm_top_albums"].attributes.album_5
-                          ]]]
-                        variables:
-                          aspect_ratio: 2/1
-                        styles:
-                          card:
-                            - color: var(--primary-text-color)
-                            - background-size: cover
-                            - background-image: >
-                                [[[ return "linear-gradient(to bottom, rgba(var(--rgb-primary-background-color), .5), rgba(var(--rgb-primary-background-color), .5)), url('" + 
-                                  states["sensor.last_fm_top_albums"].attributes.album_1_image + "')" ]]]
+              #         - type: 'custom:button-card'
+              #           template:
+              #             - live_tile_card
+              #             - live_tile_with_long_state
+              #           entity: sensor.last_fm_top_albums
+              #           icon: 'mdi:album'
+              #           name: >-
+              #             [[[ return
+              #             states["sensor.last_fm_top_albums_json"].attributes.album[0].playcount
+              #             + " plays" ]]]
+              #           label: >
+              #             [[[ return
+              #             states["sensor.last_fm_top_albums"].attributes.album_2
+              #             + "<br/>" + 
+              #             states["sensor.last_fm_top_albums"].attributes.album_3
+              #             + "<br/>" + 
+              #             states["sensor.last_fm_top_albums"].attributes.album_4
+              #             + "<br/>" + 
+              #             states["sensor.last_fm_top_albums"].attributes.album_5
+              #             ]]]
+              #           variables:
+              #             aspect_ratio: 2/1
+              #           styles:
+              #             card:
+              #               - color: var(--primary-text-color)
+              #               - background-size: cover
+              #               - background-image: >
+              #                   [[[ return "linear-gradient(to bottom, rgba(var(--rgb-primary-background-color), .5), rgba(var(--rgb-primary-background-color), .5)), url('" + 
+              #                     states["sensor.last_fm_top_albums"].attributes.album_1_image + "')" ]]]
 
-                      - type: 'custom:button-card'
-                        template:
-                          - live_tile_card
-                          - live_tile_with_long_state
-                        entity: sensor.last_fm_top_tracks
-                        icon: 'mdi:album'
-                        name: >-
-                          [[[ return
-                          states["sensor.last_fm_top_tracks_json"].attributes.track[0].playcount
-                          + " plays" ]]]
-                        label: >
-                          [[[ return
-                          states["sensor.last_fm_top_tracks"].attributes.track_2
-                          + "<br/>" + 
-                          states["sensor.last_fm_top_tracks"].attributes.track_3
-                          + "<br/>" + 
-                          states["sensor.last_fm_top_tracks"].attributes.track_4
-                          + "<br/>" + 
-                          states["sensor.last_fm_top_tracks"].attributes.track_5
-                          ]]]
-                        variables:
-                          aspect_ratio: 2/1
-                        styles:
-                          card:
-                            - color: var(--primary-text-color)
-                            - background: var(--ha-card-background)
+              #         - type: 'custom:button-card'
+              #           template:
+              #             - live_tile_card
+              #             - live_tile_with_long_state
+              #           entity: sensor.last_fm_top_tracks
+              #           icon: 'mdi:album'
+              #           name: >-
+              #             [[[ return
+              #             states["sensor.last_fm_top_tracks_json"].attributes.track[0].playcount
+              #             + " plays" ]]]
+              #           label: >
+              #             [[[ return
+              #             states["sensor.last_fm_top_tracks"].attributes.track_2
+              #             + "<br/>" + 
+              #             states["sensor.last_fm_top_tracks"].attributes.track_3
+              #             + "<br/>" + 
+              #             states["sensor.last_fm_top_tracks"].attributes.track_4
+              #             + "<br/>" + 
+              #             states["sensor.last_fm_top_tracks"].attributes.track_5
+              #             ]]]
+              #           variables:
+              #             aspect_ratio: 2/1
+              #           styles:
+              #             card:
+              #               - color: var(--primary-text-color)
+              #               - background: var(--ha-card-background)
 
 
               # [Column] Astrometrics
