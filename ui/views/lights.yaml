@@ -72,7 +72,7 @@ cards:
                         style: 'ha-card {background: none;}'
                         tap_action:
                           action: url
-                          url_path: !secret rainbow_hub_url
+                        #  url_path: !secret rainbow_hub_url
                       "(min-width: 800px) and (max-width: 1023.99px)":
                         <<: *title-badge-1
                         layout: vertical
@@ -88,7 +88,7 @@ cards:
                         style: 'ha-card {background: none;}'
                         tap_action:
                           action: url
-                          url_path: !secret insteon_hub_url
+                        #  url_path: !secret insteon_hub_url
                       "(min-width: 800px) and (max-width: 1023.99px)":
                         <<: *title-badge-2
                         layout: vertical
