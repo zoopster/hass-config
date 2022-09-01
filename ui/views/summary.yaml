@@ -293,15 +293,15 @@ cards:
                     service: floorplan.text_set
                     service_data: '${(entity.state === "on") ? "Wet" : "Dry"}'
 
-                - entity: binary_sensor.bathroom_leak_sensor_wet
-                  element: binary_sensor.bathroom_leak_sensor_wet.bg
-                  state_action:
-                    action: call-service
-                    service: floorplan.class_set
-                    service_data:
-                      class: >-
-                        ${(entity.state === "on") ? "bg-urgent" :
-                        "bg-off"}
+                # - entity: binary_sensor.bathroom_leak_sensor_wet
+                #   element: binary_sensor.bathroom_leak_sensor_wet.bg
+                #   state_action:
+                #     action: call-service
+                #     service: floorplan.class_set
+                #     service_data:
+                #       class: >-
+                #         ${(entity.state === "on") ? "bg-urgent" :
+                #         "bg-off"}
 
                 - entity: binary_sensor.kitchen_leak_sensor_ias_zone
                   element: binary_sensor.kitchen_leak_sensor_ias_zone.bg
