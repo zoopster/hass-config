@@ -138,129 +138,129 @@ cards:
 
 
       # [Column] Transit
-      - type: vertical-stack
-        cards: !include secret/neighborhood-transit.yaml
+      # - type: vertical-stack
+      #   cards: !include secret/neighborhood-transit.yaml
 
 
       # [Column] Traffic
-      - type: vertical-stack
-        cards:
+    #   - type: vertical-stack
+    #     cards:
 
-          - type: 'custom:button-card'
-            template: header_card
-            variables:
-              name: TRAFFIC
-              label: Waze
-              arrow: 'mdi:arrow-top-right'
-              action: url
-              link: 'https://www.waze.com/live-map'
-            view_layout:
-              grid-column-start: 1
-              grid-column-end: -1
+    #       - type: 'custom:button-card'
+    #         template: header_card
+    #         variables:
+    #           name: TRAFFIC
+    #           label: Waze
+    #           arrow: 'mdi:arrow-top-right'
+    #           action: url
+    #           link: 'https://www.waze.com/live-map'
+    #         view_layout:
+    #           grid-column-start: 1
+    #           grid-column-end: -1
 
-          - type: picture
-            image: !secret virtualearth_image_path
-            tap_action:
-              action: url
-              url_path: !secret googlemaps_path
+    #       - type: picture
+    #         image: !secret virtualearth_image_path
+    #         tap_action:
+    #           action: url
+    #           url_path: !secret googlemaps_path
 
-          - type: 'custom:decluttering-card'
-            template: multi_graph_card
-            variables:
-              - title: Driving Time to Union Square
-              - lower_bound: 0
-              - entities:
-                  - entity: sensor.waze_travel_time
-                    name: Union Square
-                  - entity: sensor.waze_travel_time_to_hicksville
-                    name: Hicksville
-                  - entity: sensor.waze_travel_time_to_newark
-                    name: Newark
-                  - entity: sensor.waze_travel_time_to_tappan_zee
-                    name: Tappan Zee
-                  - entity: sensor.sun_elevation
-                    show_legend: false
-                    y_axis: secondary
-                    show_line: false
-                    show_points: false
-                    show_labels: false
-                    show_labels_secondary: false
-                    show_indicator: false
-                    line_width: 1
-                    color: 'rgba(255,255,255,.25)'
+    #       - type: 'custom:decluttering-card'
+    #         template: multi_graph_card
+    #         variables:
+    #           - title: Driving Time to Union Square
+    #           - lower_bound: 0
+    #           - entities:
+    #               - entity: sensor.waze_travel_time
+    #                 name: Union Square
+    #               - entity: sensor.waze_travel_time_to_hicksville
+    #                 name: Hicksville
+    #               - entity: sensor.waze_travel_time_to_newark
+    #                 name: Newark
+    #               - entity: sensor.waze_travel_time_to_tappan_zee
+    #                 name: Tappan Zee
+    #               - entity: sensor.sun_elevation
+    #                 show_legend: false
+    #                 y_axis: secondary
+    #                 show_line: false
+    #                 show_points: false
+    #                 show_labels: false
+    #                 show_labels_secondary: false
+    #                 show_indicator: false
+    #                 line_width: 1
+    #                 color: 'rgba(255,255,255,.25)'
 
-          - type: entities
-            entities:
-              - entity: sensor.waze_travel_time
-                type: 'custom:multiple-entity-row'
-                name: Driving to
-                show_state: false
-                entities:
-                  - entity: sensor.waze_travel_time_to_hicksville
-                    name: HICKSVILLE
-                    styles:
-                      text-align: left
-                  - entity: sensor.waze_travel_time_to_newark
-                    name: NEWARK
-                    styles:
-                      text-align: left
-                  - entity: sensor.waze_travel_time_to_tappan_zee
-                    name: TAPPAN ZEE
-                    styles:
-                      text-align: left
+    #       - type: entities
+    #         entities:
+    #           - entity: sensor.waze_travel_time
+    #             type: 'custom:multiple-entity-row'
+    #             name: Driving to
+    #             show_state: false
+    #             entities:
+    #               - entity: sensor.waze_travel_time_to_hicksville
+    #                 name: HICKSVILLE
+    #                 styles:
+    #                   text-align: left
+    #               - entity: sensor.waze_travel_time_to_newark
+    #                 name: NEWARK
+    #                 styles:
+    #                   text-align: left
+    #               - entity: sensor.waze_travel_time_to_tappan_zee
+    #                 name: TAPPAN ZEE
+    #                 styles:
+    #                   text-align: left
 
-    #      - !include cards/traffic-cameras.yaml
+    # #      - !include cards/traffic-cameras.yaml
 
-          - !include cards/traffic-bridges-and-tunnels.yaml
+    #       - !include cards/traffic-bridges-and-tunnels.yaml
 
-          - type: entities
-            title: Parking Rules
-            entities:
-              - entity: sensor.nyc_311_alternate_side_parking_0d
-                type: 'custom:multiple-entity-row'
-                name: Today
-              - entity: sensor.nyc_311_alternate_side_parking_0d
-                type: 'custom:multiple-entity-row'
-                show_state: false
-                name: ' '
-                icon: none
-                styles:
-                  white-space: normal
-                secondary_info:
-                  attribute: details
-                style:
-                  hui-generic-entity-row:
-                    $: |
-                      .info, .info > * {
-                        white-space: normal !important;
-                      }
+    #       - type: entities
+    #         title: Parking Rules
+    #         entities:
+    #           - entity: sensor.nyc_311_alternate_side_parking_0d
+    #             type: 'custom:multiple-entity-row'
+    #             name: Today
+    #           - entity: sensor.nyc_311_alternate_side_parking_0d
+    #             type: 'custom:multiple-entity-row'
+    #             show_state: false
+    #             name: ' '
+    #             icon: none
+    #             styles:
+    #               white-space: normal
+    #             secondary_info:
+    #               attribute: details
+    #             style:
+    #               hui-generic-entity-row:
+    #                 $: |
+    #                   .info, .info > * {
+    #                     white-space: normal !important;
+    #                   }
 
-          - type: entities
-            entities:
-              - entity: sensor.nyc_311_alternate_side_parking_1d
-                type: 'custom:multiple-entity-row'
-                name: Tomorrow
-              - entity: sensor.nyc_311_alternate_side_parking_1d
-                type: 'custom:multiple-entity-row'
-                show_state: false
-                name: ' '
-                icon: none
-                styles:
-                  white-space: normal
-                secondary_info:
-                  attribute: details
-                style:
-                  hui-generic-entity-row:
-                    $: |
-                      .info, .info > * {
-                        white-space: normal !important;
-                      }
+    #       - type: entities
+    #         entities:
+    #           - entity: sensor.nyc_311_alternate_side_parking_1d
+    #             type: 'custom:multiple-entity-row'
+    #             name: Tomorrow
+    #           - entity: sensor.nyc_311_alternate_side_parking_1d
+    #             type: 'custom:multiple-entity-row'
+    #             show_state: false
+    #             name: ' '
+    #             icon: none
+    #             styles:
+    #               white-space: normal
+    #             secondary_info:
+    #               attribute: details
+    #             style:
+    #               hui-generic-entity-row:
+    #                 $: |
+    #                   .info, .info > * {
+    #                     white-space: normal !important;
+    #                   }
 
-          - type: entities
-            entities:
-              - entity: sensor.nyc_311_alternate_side_parking_2d
-                name: In 2 days
-                type: 'custom:multiple-entity-row'
+    #       - type: entities
+    #         entities:
+    #           - entity: sensor.nyc_311_alternate_side_parking_2d
+    #             name: In 2 days
+    #             type: 'custom:multiple-entity-row'
 
           # - type: entities
           #   entities:
@@ -290,17 +290,17 @@ cards:
             hold_action:
               action: none
 
-          - type: 'custom:weather-chart-card'
-            entity: weather.valhalla_hourly
+          # - type: 'custom:weather-chart-card'
+          #   entity: weather.valhalla_hourly
 
-          - type: weather-forecast
-            entity: weather.valhalla_2
-            show_forecast: true
-            title: Daily Forecast
-            card_mod:
-              style: |
-                .content {display: none !important;}
-                .forecast {padding-top: 0 !important;}
+          # - type: weather-forecast
+          #   entity: weather.valhalla_2
+          #   show_forecast: true
+          #   title: Daily Forecast
+          #   card_mod:
+          #     style: |
+          #       .content {display: none !important;}
+          #       .forecast {padding-top: 0 !important;}
 
           - type: entities
             entities:
