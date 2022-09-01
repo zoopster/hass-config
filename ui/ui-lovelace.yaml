@@ -11,7 +11,7 @@ views:
   - !include views/power.yaml
   - !include views/energy.yaml
   - !include views/lights.yaml
-  - !include views/security.yaml
+#  - !include views/security.yaml
   - !include views/maintenance.yaml
   - !include views/environment.yaml
   - !include views/neighborhood.yaml
