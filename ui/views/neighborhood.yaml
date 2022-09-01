@@ -578,12 +578,12 @@ cards:
 
       # [Column] Gas
 
-      - !include secret/neighborhood-gas.yaml
+      # - !include secret/neighborhood-gas.yaml
 
 
       # [Column] Stores
       
-      - !include secret/neighborhood-stores.yaml
+      # - !include secret/neighborhood-stores.yaml
 
 
       # [Column] Bird Watch
