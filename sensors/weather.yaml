@@ -1,6 +1,6 @@
 
-- platform: noaa_tides
-  station_id: 8726384
+# - platform: noaa_tides
+#   station_id: 8726384
 
 - platform: nws_alerts
   zone_id: "FLZ155"
