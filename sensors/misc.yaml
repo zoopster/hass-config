@@ -12,9 +12,9 @@
 #- platform: torque
 #  email: !secret torque_email
 
-- platform: noaa_tides
+#- platform: noaa_tides
 #  name: tides           # Useful when more than one sensor is used. Otherwise a name is generated.
-  station_id: 8726384   # A station ID from https://tidesandcurrents.noaa.gov/
+#  station_id: 8726384   # A station ID from https://tidesandcurrents.noaa.gov/
 #   type: tides           # This station will be used to measure water level
 #   scan_interval: 360    # Polling interval for the NOAA API
 
