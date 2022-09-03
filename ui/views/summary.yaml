@@ -293,15 +293,15 @@ cards:
                     service: floorplan.text_set
                     service_data: '${(entity.state === "on") ? "Wet" : "Dry"}'
 
-                # - entity: binary_sensor.bathroom_leak_sensor_wet
-                #   element: binary_sensor.bathroom_leak_sensor_wet.bg
-                #   state_action:
-                #     action: call-service
-                #     service: floorplan.class_set
-                #     service_data:
-                #       class: >-
-                #         ${(entity.state === "on") ? "bg-urgent" :
-                #         "bg-off"}
+                - entity: binary_sensor.bathroom_leak_sensor_wet
+                  element: binary_sensor.bathroom_leak_sensor_wet.bg
+                  state_action:
+                    action: call-service
+                    service: floorplan.class_set
+                    service_data:
+                      class: >-
+                        ${(entity.state === "on") ? "bg-urgent" :
+                        "bg-off"}
 
                 - entity: binary_sensor.kitchen_leak_sensor_ias_zone
                   element: binary_sensor.kitchen_leak_sensor_ias_zone.bg
@@ -354,10 +354,11 @@ cards:
                       class: '${(entity.state === "on") ? "bg-on" : "bg-off"}'
 
                 - entities:
-                    - sensor.bathroom_env_sensor_temperature
-                    - sensor.workspace_room_hue_sensor_temperature
-                    - sensor.bedroom_hue_sensor_temperature
-                    - sensor.living_room_hue_sensor_temperature
+                    - sensor.lr_multisensor_temperature_measurement 
+                    # - sensor.bathroom_env_sensor_temperature
+                    # - sensor.workspace_room_hue_sensor_temperature
+                    # - sensor.bedroom_hue_sensor_temperature
+                    # - sensor.living_room_hue_sensor_temperature
                   state_action:
                     action: call-service
                     service: floorplan.text_set
@@ -417,7 +418,7 @@ cards:
                   element: bedroom.climate.icon
                   tap_action: false
                   state_action:
-                    action: call-service
+                    action: call-service  
                     service: floorplan.class_set
                     service_data:
                       class: '${(entity.state === "on") ? "icon-spinning" : "icon"}'
