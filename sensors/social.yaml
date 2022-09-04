@@ -10,7 +10,7 @@
   unit_of_measurement: "followers"
 
 - platform: rest
-  name: Reddit Profile (mmakes)
+  name: Reddit Profile (zoopster)
   resource: http://reddit.com/user/johnmpugh/about.json
   value_template: "{{ value_json.data.total_karma | int }}"
   unit_of_measurement: "karma"
