@@ -126,13 +126,13 @@ cards:
               action: url
               link: 'https://'
 
-          # - type: 'custom:layout-card'
-          #   layout_type: 'custom:grid-layout'
-          #   layout: !include snippets/layout-page-columns.yaml
-          #   cards:
+          - type: 'custom:layout-card'
+            layout_type: 'custom:grid-layout'
+            layout: !include snippets/layout-page-columns.yaml
+            cards:
 
-          #     - type: vertical-stack
-          #       cards:
+              - type: vertical-stack
+                cards:
 
           - type: 'custom:layout-card'
             layout_type: 'custom:grid-layout'
@@ -193,13 +193,13 @@ cards:
                   - title: 10.7cm Radio Flux
 
 
-              # - type: vertical-stack
-              #   cards:
+              - type: vertical-stack
+                cards:
 
-              #     - type: 'custom:layout-card'
-              #       layout_type: 'custom:grid-layout'
-              #       layout: !include snippets/layout-live-tile.yaml
-              #       cards:
+                  - type: 'custom:layout-card'
+                    layout_type: 'custom:grid-layout'
+                    layout: !include snippets/layout-live-tile.yaml
+                    cards:
 
               - type: custom:button-card
                 template:
@@ -252,12 +252,12 @@ cards:
                       - filter: grayscale(1) brightness(.85)
                 tap_action:
                   action: none
-          # - type: custom:list-card
-          #   entity: sensor.noaa_space_weather_alerts
-          #   title: Space Weather Alerts
-          #   feed_attribute: entries
-          #   columns:
-          #     - field: product_id
+          - type: custom:list-card
+            entity: sensor.noaa_space_weather_alerts
+            title: Space Weather Alerts
+            feed_attribute: entries
+            columns:
+              - field: product_id
 
           - type: entities
             entities:
@@ -321,42 +321,42 @@ cards:
               action: url
               link: 'https://'
 
-          # - type: 'custom:layout-card'
-          #   layout_type: 'custom:grid-layout'
-          #   layout:
-          #     grid-template-columns: 'repeat(auto-fill, [col-start] minmax(360px, 1fr) [col-end])'
-          #     grid-template-rows: auto
-          #     grid-column-gap: 32px
-          #     margin: -1px
-          #   cards:
+          - type: 'custom:layout-card'
+            layout_type: 'custom:grid-layout'
+            layout:
+              grid-template-columns: 'repeat(auto-fill, [col-start] minmax(360px, 1fr) [col-end])'
+              grid-template-rows: auto
+              grid-column-gap: 32px
+              margin: -1px
+            cards:
 
-              # - type: vertical-stack
-              #   cards:
+              - type: vertical-stack
+                cards:
 
-              #     - type: markdown
-              #       content: '### Inner Planets'
-              #       style: 'ha-card {background: none;}'
+                  - type: markdown
+                    content: '### Inner Planets'
+                    style: 'ha-card {background: none;}'
 
-              #     - type: iframe
-              #       url: >-
-              #         https://mgvez.github.io/jsorrery/?scenario=SolarSystemDwarves&planetScale=10&lookFrom=orbital&lookAt=universe&deltaT=36000&cx=0&cy=0&cz=350&fov=45
-              #       aspect_ratio: 100%
-              #       card_mod:
-              #         style: >
-              #           :host {margin-bottom: 16px !important;}
-              #           ha-card { overflow: hidden; border-radius: 50%; border: 2px solid
-              #           rgba(255,255,255,.1); }
+                  - type: iframe
+                    url: >-
+                      https://mgvez.github.io/jsorrery/?scenario=SolarSystemDwarves&planetScale=10&lookFrom=orbital&lookAt=universe&deltaT=36000&cx=0&cy=0&cz=350&fov=45
+                    aspect_ratio: 100%
+                    card_mod:
+                      style: >
+                        :host {margin-bottom: 16px !important;}
+                        ha-card { overflow: hidden; border-radius: 50%; border: 2px solid
+                        rgba(255,255,255,.1); }
 
-              #           iframe { width: 300% !important; height: 300% !important; position:
-              #           relative; top: -100% !important; left: -100% !important; transform:
-              #           scale(1.75);}
+                        iframe { width: 300% !important; height: 300% !important; position:
+                        relative; top: -100% !important; left: -100% !important; transform:
+                        scale(1.75);}
 
-          # - type: vertical-stack
-          #   cards:
+          - type: vertical-stack
+            cards:
 
-          #     - type: markdown
-          #       content: '### The Belt + Outer Planets'
-          #       style: 'ha-card {background: none;}'
+              - type: markdown
+                content: '### The Belt + Outer Planets'
+                style: 'ha-card {background: none;}'
 
           - type: iframe
             url: https://mgvez.github.io/jsorrery/?scenario=SolarSystemDwarves&planetScale=10&lookFrom=orbital&lookAt=universe&deltaT=36000&cx=0&cy=-550&cz=550&fov=45
