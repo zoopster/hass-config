@@ -46,4 +46,5 @@
 - platform: moon
 
 #- platform: ha_skyfield
+- platform: nooa_space_weather
 

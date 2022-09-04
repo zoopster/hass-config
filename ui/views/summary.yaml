@@ -1135,7 +1135,7 @@ cards:
                     label: |
                       [[[
                         var tempForecast = entity.attributes.forecast.map((item) => { return item.temperature }).slice(0, 4)
-                        if (states['sensor.valhalla_hourly_forecast_temperature_rising'] == 'Rising') {
+                        if (states['sensor.p_house_hourly_forecast_temperature_rising'] == 'Rising') {
                           return '↗ ' + Math.max(...tempForecast) + '°'                      
                         } else {
                           return '↘ ' + Math.min(...tempForecast) + '°'
@@ -1237,15 +1237,15 @@ cards:
                     template:
                       - live_tile_card
                       - live_tile_with_long_state
-                    entity: sensor.tomorrow_io_valhalla_tree_pollen_index
+                    entity: sensor.tomorrow_io_p_house_tree_pollen_index
                     variables:
                       label: |
                         [[[
-                          return "Grass - " + states['sensor.tomorrow_io_valhalla_grass_pollen_index'].state + "<br>Tree - " + states['sensor.tomorrow_io_valhalla_tree_pollen_index'].state + "<br>Weed - " + states['sensor.tomorrow_io_valhalla_weed_pollen_index'].state
+                          return "Grass - " + states['sensor.tomorrow_io_p_house_grass_pollen_index'].state + "<br>Tree - " + states['sensor.tomorrow_io_valhalla_tree_pollen_index'].state + "<br>Weed - " + states['sensor.tomorrow_io_valhalla_weed_pollen_index'].state
                         ]]]
                       state: |
                         [[[
-                          var sum = "Grass - " + states['sensor.tomorrow_io_valhalla_grass_pollen_index'].state + "<br>Tree - " + states['sensor.tomorrow_io_valhalla_tree_pollen_index'].state + "<br>Weed - " + states['sensor.tomorrow_io_valhalla_weed_pollen_index'].state
+                          var sum = "Grass - " + states['sensor.tomorrow_io_p_house_grass_pollen_index'].state + "<br>Tree - " + states['sensor.tomorrow_io_valhalla_tree_pollen_index'].state + "<br>Weed - " + states['sensor.tomorrow_io_valhalla_weed_pollen_index'].state
                           if (sum.includes('very_high')) {return 'Very High' }
                           if (sum.includes('high')) {return 'High' }
                           if (sum.includes('medium')) {return 'Medium' }
@@ -1283,7 +1283,7 @@ cards:
 
                   - type: 'custom:button-card'
                     template: live_tile
-                    entity: sensor.valhalla_uv_index
+                    entity: sensor.curren_uv_index
                     name: UV
                     icon: mdi:sun-wireless-outline
                     label: '[[[ return entity.attributes.level ]]]'
@@ -1312,11 +1312,11 @@ cards:
 
                   - type: 'custom:button-card'
                     template: live_tile_with_unit
-                    entity: sensor.valhalla_wind
+                    entity: sensor.p_house_wind
                     name: '[[[ return states["sensor.wind_strength"].state ]]]'
                     icon: 'mdi:navigation'
                     label: '[[[ return states["sensor.wind_direction"].state ]]]'
-                    state_display: '[[[ return Math.round(parseFloat(states["sensor.valhalla_wind"].state) * 0.6213712 * 10) / 10 ]]]'
+                    state_display: '[[[ return Math.round(parseFloat(states["sensor.p_house_wind"].state) * 0.6213712 * 10) / 10 ]]]'
                     custom_fields:
                       unit: MPH
                     styles:
@@ -1325,7 +1325,7 @@ cards:
                       card:
                         - background: |
                             [[[
-                              var wind_speed_mph = parseFloat(states["sensor.valhalla_wind"].state) * 0.6213712
+                              var wind_speed_mph = parseFloat(states["sensor.p_house_wind"].state) * 0.6213712
                               if (wind_speed_mph <= 30) { return "transparent" }
                               if (wind_speed_mph <= 54) {
                                 return "rgba(var(--rgb-primary-color)," + (wind_speed_mph / 54) + ")"
@@ -1930,7 +1930,7 @@ cards:
 
                   - type: 'custom:button-card'
                     template: live_tile
-                    entity: sensor.moon_phase
+                    entity: sensor.moon
                     name: '[[[ return entity.state.replace("_", " ") ]]]'
                     show_state: false
 
