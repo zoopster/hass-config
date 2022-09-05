@@ -2113,7 +2113,7 @@ cards:
 #         :host .content { width: 75vw; padding: 0 32px 32px; }
 #         @media (max-width: 1100px) { :host .content { width: 100vw; padding: 0 32px 32px; } }
 
-  sensor.nws_alert_rss_feed:
+sensor.nws_alert_rss_feed:
     title: NWS Alerts
     card: !include cards/nws-alerts.yaml
     style:

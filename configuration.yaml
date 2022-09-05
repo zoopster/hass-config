@@ -17,6 +17,9 @@ default_config:
 tts:
   - platform: google_translate
 
+input_number: inputs/input_number.yaml
+input_datetime: inputs/input_datetime.yaml
+input_text: inputs/input_text.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml

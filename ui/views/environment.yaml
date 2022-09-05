@@ -31,7 +31,6 @@ cards:
         view_layout:
           grid-column: 1/-1
         cards:
-
           - type: markdown
             content: >
               # Environment

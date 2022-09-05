@@ -1,7 +1,7 @@
 
 # Get indoor temperature and humidity trends.
 
-# - platform: trend
+- platform: trend
 #   sensors:
 
 #     netatmo_indoor_temperature_rising:

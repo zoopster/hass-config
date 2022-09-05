@@ -1,5 +1,5 @@
 
-# - platform: rest
+ - platform: rest
 #   name: "Front Door Contact Sensor Open Close"
 #   resource: !secret switchbot_contact_sensor_get
 #   method: GET
