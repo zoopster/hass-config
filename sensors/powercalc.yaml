@@ -1,5 +1,5 @@
 
-- platform: powercalc
+# - platform: powercalc
 #   entity_id: light.kitchen_spot_lights
 #   linear:
 #     max_power: 18
