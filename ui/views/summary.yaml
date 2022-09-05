@@ -185,7 +185,7 @@ cards:
                   name: P-House
                   label: Areas
                   link: /config/areas/dashboard
-              Maddy:
+              john_pugh:
                 <<: *summary-floorplan-header
                 styles:
                   card:
@@ -553,7 +553,7 @@ cards:
                   - entities:
 #                      - entity: sensor.total_energy_use
                        - entity: sensor.fpl_4362074298_projected_kwh
-                  - title: Total Energy Usage
+                  - title: Total FPL Energy Usage
                   - icon: 'mdi:home-lightning-bolt'
                   - line_width: 2
 
@@ -581,7 +581,7 @@ cards:
                   - live_tile_card
                   - live_tile_with_long_state
                   - live_tile_with_state_countdown
-                entity: binary_sensor.front_door_switchbot_contact_sensor_door_open
+                entity: binary_sensor.recessed_sensor_2_contact
                 name: Front Door
                 triggers_update: all
                 state_display: |
@@ -614,14 +614,14 @@ cards:
                     icon: mdi:shield-home
                   - value: disarmed
                     color: >-
-                      [[[ return iif( person.madelena.state == "home",
+                      [[[ return iif( person.john_pugh.state == "home",
                       "none", "rgb(var(--rgb-primary-color))") ]]]
                     icon: mdi:shield-off
 
               - type: 'custom:button-card'
                 template: live_tile_with_camera
-                entity: camera.front_door_camera
-                name: Front Door
+                entity: camera.driveway
+                name: Driveway
 
               - type: 'custom:swipe-card'
                 parameters:
