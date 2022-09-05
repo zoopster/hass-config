@@ -8,7 +8,7 @@
 #       column: "value"
 #       unit_of_measurement: MB
 
-- platform: influxdb
+# - platform: influxdb
 #   host: localhost
 #   port: 8086
 #   username: !secret influxdb_user
