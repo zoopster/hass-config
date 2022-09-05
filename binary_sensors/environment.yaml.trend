@@ -1,8 +1,8 @@
 
 # Get indoor temperature and humidity trends.
 
-- platform: trend
-#   sensors:
+#- platform: trend
+#  sensors:
 
 #     netatmo_indoor_temperature_rising:
 #       entity_id: sensor.netatmo_strawberry_land_indoor_temperature
