@@ -1957,7 +1957,7 @@ cards:
                       card:
                         - background: |
                             [[[
-                              return "url('https://dev.virtualearth.net/REST/v1/Imagery/Map/CanvasDark/" + entity.attributes.latitude + "," + entity.attributes.longitude + "/3?mapSize=400,400&format=png&key=X')"
+                              return "url('https://dev.virtualearth.net/REST/v1/Imagery/Map/CanvasDark/" + entity.attributes.latitude + "," + entity.attributes.longitude + "/3?mapSize=400,400&format=png&key=AtrS54AA5rVjxz4laL89yZa3lSVEMaBAEzveAJoa_MLpWxZYDa-iMAx5EhZfsCxY')"
                             ]]]
                         - background-size: 120% 120%
                         - background-position: center center
@@ -2048,22 +2048,22 @@ cards:
 
 
 # [Pop Up Cards]
-popup_cards:
-  sensor.octoprint_current_state:
-    title: Genesis
-    card: !include machines/genesis-cards.yaml
-    style:
-      .: |
-        :host .content { width: 75vw; height: 75vh; }
-        @media (max-width: 1100px) { :host .content { width: 100vw; height: 100vh; } }
+# popup_cards:
+#   sensor.octoprint_current_state:
+#     title: Genesis
+#     card: !include machines/genesis-cards.yaml
+#     style:
+#       .: |
+#         :host .content { width: 75vw; height: 75vh; }
+#         @media (max-width: 1100px) { :host .content { width: 100vw; height: 100vh; } }
 
-  media_player.terpsichora:
-    title: Terpsichora
-    card: !include machines/terpsichora-cards.yaml
-    style:
-      .: |
-        :host .content { width: 75vw; height: 75vh; }
-        @media (max-width: 1100px) { :host .content { width: 100vw; height: 100vh; } }
+#   media_player.terpsichora:
+#     title: Terpsichora
+#     card: !include machines/terpsichora-cards.yaml
+#     style:
+#       .: |
+#         :host .content { width: 75vw; height: 75vh; }
+#         @media (max-width: 1100px) { :host .content { width: 100vw; height: 100vh; } }
 
   # sensor.dorothy_intel_core_i5_750_load_cpu_total:
   #   title: Dorothy
