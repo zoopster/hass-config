@@ -17,9 +17,11 @@ default_config:
 tts:
   - platform: google_translate
 
+resources: !include lovelace-resources.yaml
 input_number: !include inputs/input_number.yaml
 input_datetime: !include inputs/input_datetime.yaml
 input_text: !include inputs/input_text.yaml
+input_select: !include inputs/input_select.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
@@ -27,6 +29,7 @@ frontend:
   themes: !include_dir_merge_named themes
 sensor: !include_dir_merge_list sensors
 binary_sensor: !include_dir_merge_list binary_sensors 
+
 device_tracker:
   - platform: ping
     hosts:

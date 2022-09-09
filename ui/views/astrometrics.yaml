@@ -116,7 +116,6 @@ cards:
       # [Column] The Sun
       - type: vertical-stack
         cards:
-
           - type: 'custom:button-card'
             template: header_card
             variables:
@@ -131,8 +130,8 @@ cards:
             layout: !include snippets/layout-page-columns.yaml
             cards:
 
-              - type: vertical-stack
-                cards:
+              # - type: vertical-stack
+              #   cards:
 
           - type: 'custom:layout-card'
             layout_type: 'custom:grid-layout'

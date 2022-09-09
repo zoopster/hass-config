@@ -1,0 +1,8 @@
+#input select for changing the log level
+logging_level:
+  name: Logging Level
+  options:
+  - 'error'
+  - 'warning'
+  - 'info'
+  - 'debug'

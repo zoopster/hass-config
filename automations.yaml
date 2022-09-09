@@ -40,3 +40,14 @@
     message: Car detected in driveway
     title: Car detected in Driveway
   mode: single
+
+- id: logging_level
+  alias: 'Logging Level'
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: input_select.logging_level
+  action:
+    service: logger.set_default_level
+    data_template:
+      level: "{{ trigger.to_state.state }}"
