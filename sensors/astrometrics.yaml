@@ -49,7 +49,7 @@
   value_template: "{{ value_json.product_id | int }}"
 
 - platform: moon
-- platform: noaa_space_weather
+- platform: nooa_space_weather
 
 #- platform: ha_skyfield - HACS - https://github.com/partofthething/ha_skyfield
 #- platform: noaa_space_weather
