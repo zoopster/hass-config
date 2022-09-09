@@ -4,7 +4,7 @@ lovelace:
   dashboards:
     lovelace-yaml:
       mode: yaml
-#      resources: !include lovelace-resources.yaml
+#      resources: !include lovelace-resources.yaml <--shows a syntax error
       title: YAML
       icon: mdi:script
       show_in_sidebar: true
@@ -17,7 +17,7 @@ default_config:
 tts:
   - platform: google_translate
 
-resources: !include lovelace-resources.yaml
+# resources: !include lovelace-resources.yaml <--fails
 input_number: !include inputs/input_number.yaml
 input_datetime: !include inputs/input_datetime.yaml
 input_text: !include inputs/input_text.yaml
