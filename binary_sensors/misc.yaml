@@ -16,6 +16,6 @@
   host: devopstales.com
     
 # International Space Station
-- platform: iss
+#- platform: iss
   # show_on_map: true 
   # scan_interval: 180
