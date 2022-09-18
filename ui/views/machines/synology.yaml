@@ -1,0 +1,138 @@
+type: vertical-stack
+cards:
+  - type: picture-elements
+    image: /local/image/DS716+II.jpg
+    title: DS918
+    elements:
+      - type: state-icon
+        entity: sensor.ds918_cpu_utilization_total
+        style:
+          left: 15%
+          top: 35%
+      - type: state-label
+        entity: sensor.ds918_cpu_utilization_total
+        prefix: 'CPU: '
+        style:
+          left: 15%
+          top: 45%
+          color: grey
+          font-weigh: null
+          font-size: 100%
+      - type: state-label
+        entity: sensor.ds918_temperature
+        prefix: 'Temp: '
+        style:
+          left: 15%
+          top: 55%
+          color: grey
+          font-weigh: null
+          font-size: 100%
+      - type: state-icon
+        entity: sensor.ds918_memory_usage_real
+        style:
+          left: 15%
+          top: 67%
+      - type: state-label
+        entity: sensor.ds918_memory_usage_real
+        prefix: 'RAM: '
+        style:
+          left: 15%
+          top: 80%
+          color: grey
+          font-weigh: null
+          font-size: 100%
+      - type: state-label
+        entity: sensor.ds918_memory_available_real
+        prefix: 'Free: '
+        style:
+          left: 15%
+          top: 92%
+          color: grey
+          font-weigh: null
+          font-size: 100%
+      - type: state-icon
+        entity: sensor.ds918_volume_used
+        style:
+          left: 85%
+          top: 35%
+      - type: state-label
+        entity: sensor.ds918_volume_used
+        prefix: 'Disk: '
+        style:
+          left: 85%
+          top: 45%
+          color: grey
+          font-weigh: null
+          font-size: 100%
+      - type: state-label
+        entity: sensor.ds918_average_disk_temp
+        prefix: 'Disk Temp: '
+        style:
+          left: 85%
+          top: 55%
+          color: grey
+          font-weight: null
+      - type: state-label
+        entity: binary_sensor.ds918_update_available
+        prefix: null
+        style:
+          left: 85%
+          top: 65%
+          color: grey
+          font-weight: null
+  - type: horizontal-stack
+    cards:
+      - type: gauge
+        name: CPU Usage
+        unit: '%'
+        entity: sensor.ds918_cpu_utilization_total
+        severity:
+          green: 0
+          yellow: 50
+          red: 90
+        min: 0
+        max: 100
+        needle: true
+      - type: gauge
+        name: CPU Temp.
+        severity:
+          green: 0
+          yellow: 125
+          red: 176
+        min: 0
+        max: 200
+        needle: true
+        entity: sensor.ds918_temperature_3
+      - type: gauge
+        name: RAM Usage
+        entity: sensor.ds918_memory_usage_real
+        severity:
+          green: 0
+          yellow: 70
+          red: 90
+        needle: true
+        max: 100
+  - type: custom:bar-card
+    entities:
+      - entity: sensor.ds918_volume_used
+    severity:
+      - from: '0'
+        color: green
+        to: '50'
+      - color: orange
+        from: '50'
+        to: '85'
+      - to: '100'
+        color: red
+        from: '85'
+    entity_row: true
+    direction: right
+    positions:
+      name: inside
+    animation:
+      state: 'on'
+  - entities:
+      - entity: sensor.ds918_last_boot
+        name: Last restart DS716+II
+    show_header_toggle: false
+    type: entities
