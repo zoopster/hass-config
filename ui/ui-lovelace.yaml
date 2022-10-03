@@ -23,7 +23,7 @@ decluttering_templates: !include templates/decluttering-card.yaml
 button_card_templates: !include_dir_merge_named templates/button-card/
 apexcharts_card_templates: !include templates/apexcharts-card.yaml
 popup_cards: !include_dir_merge_named popups/
-multiscrape: !include_dir_named multiscrape/
+multiscrape: !include_dir_list multiscrape/
 
 swipe_nav:
   animate: swipe
