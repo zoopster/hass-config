@@ -1,0 +1,171 @@
+views:
+  - title: Home
+    cards:
+      - type: entities
+        entities:
+          - entity: sensor.fpl_4362074298_daily_average
+          - entity: sensor.fpl_4362074298_daily_average_kwh
+          - entity: sensor.fpl_4362074298_daily_usage
+          - entity: sensor.fpl_4362074298_daily_usage_kwh
+          - entity: sensor.fpl_4362074298_next_bill_date
+          - entity: sensor.fpl_4362074298_current_bill_date
+          - entity: sensor.fpl_4362074298_as_of_days
+          - entity: sensor.fpl_4362074298_remaining_days
+          - entity: sensor.fpl_4362074298_service_days
+          - entity: sensor.fpl_4362074298_projected_bill
+          - entity: sensor.fpl_4362074298_projected_actual_bill
+      - type: custom:apexcharts-card
+        header:
+          show: true
+          title: ApexCharts-Card
+          show_states: true
+          colorize_states: true
+        series:
+          - entity: sensor.fpl_4362074298_daily_usage_kwh
+          - entity: sensor.fpl_4362074298_daily_usage
+      - type: entities
+        entities:
+          - sensor.fpl_4362074298_actual_daily_average
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.fpl_4362074298_daily_usage_kwh
+      - type: vertical-stack
+        cards:
+          - type: entity
+            entity: sensor.fpl_4362074298_as_of_days
+            state_color: true
+            name: ' '
+            icon: days
+            unit: days left
+          - type: entities
+            entities:
+              - entity: sensor.fpl_4362074298_service_days
+                name: Total Service Days
+              - entity: sensor.fpl_4362074298_projected_bill
+                name: Projected Bill
+          - type: custom:bar-card
+            entities:
+              - {}
+      - type: entities
+        entities:
+          - entity: sensor.fpl_4362074298_as_of_days
+          - entity: sensor.fpl_4362074298_service_days
+          - entity: sensor.fpl_4362074298_projected_bill
+      - cards:
+          - card:
+              entities:
+                - entity: sensor.fpl_4362074298_as_of_days
+                  entity_row: true
+                  max: ${ vars[0] }
+                  name: Days
+                  positions:
+                    icon: 'off'
+                    indicator: 'off'
+                    title: inside
+                    value: inside
+                  severity:
+                    - color: Green
+                      from: 0
+                      to: ${ vars[0] * 0.5 }
+                    - color: Yellow
+                      from: ${ vars[0] * 0.5 + 1}
+                      to: ${ vars[0] * 0.80 }
+                    - color: Red
+                      from: ${ vars[0] * 0.80 + 1}
+                      to: ${ vars[0] }
+                  style: 'ha-card{border-radius: 0;}'
+                  type: custom:bar-card
+              title: FPL
+              type: entities
+            entities:
+              - sensor.fpl_4362074298_as_of_days
+            type: custom:config-template-card
+            variables:
+              - states['sensor.fpl_4362074298_service_days'].state
+          - entity: sensor.fpl_4362074298_projected_bill
+            name: Projected Bill
+            type: entity
+        type: custom:vertical-stack-in-card
+      - type: custom:vertical-stack-in-card
+        cards:
+          - card:
+              type: entity
+              entity: sensor.fpl_4362074298_as_of_days
+      - type: custom:bar-card
+        entities:
+          - entity: sensor.fpl_4362074298_service_days
+      - type: custom:vertical-stack-in-card
+        cards:
+          - card:
+              entities:
+                - attribute: as_of_days
+                  entity: sensor.fpl_4362074298_as_of_days
+                  entity_row: true
+                  max: ${ vars[0] }
+                  name: Days
+                  positions:
+                    icon: 'off'
+                    indicator: 'off'
+                    minmax: inside
+                    title: inside
+                    value: inside
+                  severity:
+                    - color: Green
+                      from: 0
+                      to: ${ vars[0] * 0.5 }
+                    - color: Yellow
+                      from: ${ vars[0] * 0.5 + 1}
+                      to: ${ vars[0] * 0.80 }
+                    - color: Red
+                      from: ${ vars[0] * 0.80 + 1}
+                      to: ${ vars[0] }
+                  style: 'ha-card{border-radius: 0;}'
+                  type: custom:bar-card
+              title: FPL
+              type: entities
+            entities:
+              - sensor.fpl_4362074298_service_days
+            type: custom:config-template-card
+            variables:
+              - >-
+                states['sensor.fpl_4362074298_service_days'].attributes.service_days
+          - attribute: projected_bill
+            entity: sensor.fpl_4362074298_projected_bill
+            name: Projected Bill
+            type: entity
+      - type: custom:vertical-stack-in-card
+        card:
+          title: FPL
+          type: entities
+          entities:
+            - attribute: as_of_days
+              entity: sensor.fpl_4362074298_as_of_days
+              entity_row: true
+              max: ${ vars[0] }
+              name: Days
+              positions:
+                icon: 'off'
+                indicator: 'off'
+                minmax: inside
+                title: inside
+                value: inside
+              severity:
+                - color: Green
+                  from: 0
+                  to: ${ vars[0] * 0.5 }
+                - color: Yellow
+                  from: ${ vars[0] * 0.5 + 1}
+                  to: ${ vars[0] * 0.80 }
+                - color: Red
+                  from: ${ vars[0] * 0.80 + 1}
+                  to: ${ vars[0] }
+              style: 'ha-card{border-radius: 0;}'
+              type: custom:bar-card
+              entities:
+                - sensor.fpl_4362074298_service_days
+      - type: custom:vertical-stack-in-card
+        cards:
+          - type: glance
+            entities:
+              - sensor.fpl_4362074298_as_of_days
+              - sensor.fpl_4362074298_daily_average

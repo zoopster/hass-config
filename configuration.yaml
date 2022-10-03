@@ -35,4 +35,7 @@ device_tracker:
     hosts:
       router: 192.168.50.1
       cloudflare: 1.1.1.1
-
+logger:
+  default: info
+  logs:
+    custom_components.multiscrape: debug
