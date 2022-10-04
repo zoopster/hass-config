@@ -252,9 +252,9 @@ cards:
                 tap_action:
                   action: none
           - type: custom:list-card
-            entity: sensor.noaa_space_weather_alerts
+            entity: sensor.noaa_space_weather_alerts_feed
             title: Space Weather Alerts
-            feed_attribute: entries
+            feed_attribute: Entries
             columns:
               - field: product_id
 
