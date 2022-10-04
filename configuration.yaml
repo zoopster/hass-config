@@ -33,7 +33,7 @@ multiscrape: !include_dir_merge_list multiscrape
 decluttering_templates: !include ui/templates/decluttering-card.yaml
 button_card_templates: !include_dir_merge_named ui/templates/button-card/
 apexcharts_card_templates: !include ui/templates/apexcharts-card.yaml
-popup_cards: !include_dir_merge_named popups/
+popup_cards: !include_dir_merge_named ui/popups/
 
 device_tracker:
   - platform: ping
