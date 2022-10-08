@@ -623,17 +623,17 @@ cards:
                 entity: camera.driveway
                 name: Driveway
 
-              - type: 'custom:swipe-card'
-                parameters:
-                  direction: vertical
-                  autoHeight: true
-                  height: 112
-                  effect: cube
-                  cubeEffect:
-                    - slideShadows: false
-                  xautoplay:
-                    delay: 60000
-               # cards: !include secret/summary-cameras.yaml
+              # - type: 'custom:swipe-card'
+              #   parameters:
+              #     direction: vertical
+              #     autoHeight: true
+              #     height: 112
+              #     effect: cube
+              #     cubeEffect:
+              #       - slideShadows: false
+              #     xautoplay:
+              #       delay: 60000
+              #  # cards: !include secret/summary-cameras.yaml
 
 
       # [Column] Network / Lights

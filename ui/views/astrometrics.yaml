@@ -254,7 +254,7 @@ cards:
           - type: custom:list-card
             entity: sensor.noaa_space_weather_alerts_feed
             title: Space Weather Alerts
-            feed_attribute: Entries
+            feed_attribute: entries
             columns:
               - field: product_id
 
