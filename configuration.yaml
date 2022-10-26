@@ -30,7 +30,7 @@ frontend:
 sensor: !include_dir_merge_list sensors
 binary_sensor: !include_dir_merge_list binary_sensors 
 multiscrape: !include_dir_merge_list multiscrape
-# decluttering_templates: !include ui/templates/decluttering-card.yaml
+decluttering_templates: !include ui/templates/decluttering-card.yaml
 # button_card_templates: !include_dir_merge_named ui/templates/button-card/
 # apexcharts_card_templates: !include ui/templates/apexcharts-card.yaml
 # popup_cards: !include_dir_merge_named ui/popups/
