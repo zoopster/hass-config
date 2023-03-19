@@ -255,7 +255,7 @@
         - name: Tags
           value_template: '{{ value_json.result[0].tags | map(attribute="text") | join(" / ") }}'
         - name: Link
-          value_template: '{{ value_json.result[0].quicktext | regex_replace(find=".*(?=http)", replace="") | regex_replace(find=" for info.*", replace="") }}'
+          value_template: '{{ value_json.result[0].quicktext | regex_replace(find=".*(?=https)", replace="") | regex_replace(find=" for info.*", replace="") }}'
     - unique_id: rocketlaunch_live_next_2
       name: Rocket Launch - Next 2
       value_template: '{{ value_json.result[1].name }}'
