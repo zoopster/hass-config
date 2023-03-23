@@ -1144,7 +1144,7 @@ cards:
                     state_display: >-
                       [[[ return Math.round(entity.attributes.temperature) + "°"
                       ]]]
-                    entity: weather.valhalla_hourly
+                    entity: weather.tomorrow_io_p_house_hourly
                     styles:
                       name:
                         - width: 50%
@@ -1334,7 +1334,7 @@ cards:
                               }
                             ]]]
                       icon:
-                        - transform: '[[[ return "rotate(" + parseFloat(states["weather.valhalla_hourly"].attributes.wind_bearing) + "deg)" ]]]'
+                        - transform: '[[[ return "rotate(" + parseFloat(states["weather.p_house_hourly"].attributes.wind_bearing) + "deg)" ]]]'
 
 
                   - type: 'custom:auto-entities'
