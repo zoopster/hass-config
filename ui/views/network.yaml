@@ -192,7 +192,7 @@ cards:
                 label: '[[[ entity.last_changed ]]]'
                 state_display: '[[[ return entity.attributes.round_trip_time_avg ? (Math.round(entity.attributes.round_trip_time_avg)) + "ms" : "Off" ]]]'
 
-              - entity: sensor.external_ip
+              - entity: sensor.myip
                 type: 'custom:button-card'
                 template: rail_interchange_row
                 variables:
