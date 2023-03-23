@@ -949,7 +949,7 @@ cards:
                 template: mini_graph_tile
                 variables:
                   - entities:
-                      - entity: sensor.dorothy_intel_core_i5_750_load_cpu_total
+                      - entity: sensor.unison_load_im
                   - title: Dorothy
                   - icon: 'mdi:cpu-64-bit'
 
@@ -1944,7 +1944,7 @@ cards:
 
                   - type: 'custom:button-card'
                     template: live_tile
-                    entity: binary_sensor.iss
+                    entity: sensor.iss
                     name: ISS
                     icon: mdi:space-station
                     show_state: false
@@ -1964,7 +1964,7 @@ cards:
 
                   - type: map
                     entities:
-                      - entity: binary_sensor.iss
+                      - entity: sensor.iss
                     default_zoom: 0.25
                     hours_to_show: 12
                     card_mod:
