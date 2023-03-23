@@ -1957,7 +1957,7 @@ cards:
                       card:
                         - background: |
                             [[[
-                              return "url('https://dev.virtualearth.net/REST/v1/Imagery/Map/CanvasDark/" + entity.attributes.latitude + "," + entity.attributes.longitude + "/3?mapSize=400,400&format=png&key=AtrS54AA5rVjxz4laL89yZa3lSVEMaBAEzveAJoa_MLpWxZYDa-iMAx5EhZfsCxY')"
+                              return "url('https://dev.virtualearth.net/REST/v1/Imagery/Map/CanvasDark/" + entity.attributes.lat+ "," + entity.attributes.long + "/3?mapSize=400,400&format=png&key=AtrS54AA5rVjxz4laL89yZa3lSVEMaBAEzveAJoa_MLpWxZYDa-iMAx5EhZfsCxY')"
                             ]]]
                         - background-size: 120% 120%
                         - background-position: center center
