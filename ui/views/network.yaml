@@ -635,7 +635,7 @@ cards:
               label: Open
               arrow: 'mdi:arrow-top-right'
               action: url
-#              link: !secret router_url
+              url: router.home.arpa
             view_layout:
               grid-column-start: 1
               grid-column-end: -1
@@ -660,13 +660,13 @@ cards:
             template: multi_graph_card
             variables:
               - entities:
-                  - entity: sensor.valhalla_router_ram
+                  - entity: sensor.mikrotik_memory_usage
               - title: RAM
               - height: 120
 
           - type: sensor
             graph: line
-            entity: sensor.valhalla_router_connected_devices
+            entity: sensor.mikrotik_wired_clients
             name: Devices Connected
             detail: 2
 
