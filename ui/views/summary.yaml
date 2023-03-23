@@ -1241,11 +1241,11 @@ cards:
                     variables:
                       label: |
                         [[[
-                          return "Grass - " + states['sensor.tomorrow_io_p_house_grass_pollen_index'].state + "<br>Tree - " + states['sensor.tomorrow_io_valhalla_tree_pollen_index'].state + "<br>Weed - " + states['sensor.tomorrow_io_valhalla_weed_pollen_index'].state
+                          return "Grass - " + states['sensor.tomorrow_io_p_house_grass_pollen_index'].state + "<br>Tree - " + states['sensor.tomorrow_io_p_house_tree_pollen_index'].state + "<br>Weed - " + states['sensor.tomorrow_io_p_house_weed_pollen_index'].state
                         ]]]
                       state: |
                         [[[
-                          var sum = "Grass - " + states['sensor.tomorrow_io_p_house_grass_pollen_index'].state + "<br>Tree - " + states['sensor.tomorrow_io_valhalla_tree_pollen_index'].state + "<br>Weed - " + states['sensor.tomorrow_io_valhalla_weed_pollen_index'].state
+                          var sum = "Grass - " + states['sensor.tomorrow_io_p_house_grass_pollen_index'].state + "<br>Tree - " + states['sensor.tomorrow_io_p_house_tree_pollen_index'].state + "<br>Weed - " + states['sensor.tomorrow_io_p_house_weed_pollen_index'].state
                           if (sum.includes('very_high')) {return 'Very High' }
                           if (sum.includes('high')) {return 'High' }
                           if (sum.includes('medium')) {return 'Medium' }
