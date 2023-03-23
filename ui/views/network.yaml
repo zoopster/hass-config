@@ -36,7 +36,7 @@ cards:
               # Network
 
               The Internet is {{ states('binary_sensor.ping_cloudflare') }}
-              and {{ states('sensor.asuswrt_devices_connected') }} devices
+              and {{ states('sensor.mikrotik_wired_clients') }} devices
               are connected.{%- if states('sensor.speedtest_download') !=
               'unavailable' -%}{{ ' ' }}The speed is {{ iif(
               states('sensor.speedtest_download')|int >= 100, 'normal',
@@ -107,7 +107,7 @@ cards:
                         style: 'ha-card {background: none;}'
                         tap_action:
                           action: url
- #                         url_path: !secret router_url
+                          url_path: router.home.arpa
                       "(min-width: 800px) and (max-width: 1023.99px)":
                         <<: *title-badge-2
                         layout: vertical
@@ -192,7 +192,7 @@ cards:
                 label: '[[[ entity.last_changed ]]]'
                 state_display: '[[[ return entity.attributes.round_trip_time_avg ? (Math.round(entity.attributes.round_trip_time_avg)) + "ms" : "Off" ]]]'
 
-              - entity: sensor.myip
+              - entity: sensor.external_ip
                 type: 'custom:button-card'
                 template: rail_interchange_row
                 variables:
