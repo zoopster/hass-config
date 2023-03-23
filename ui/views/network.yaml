@@ -548,12 +548,12 @@ cards:
             template: multi_graph_card
             variables:
               - entities:
-                  - entity: sensor.valhalla_router_wired_upload_speed
+                  - entity: sensor.mikrotik_wan_tx
                     name: Router
-                  - entity: sensor.workspace_mesh_node_wired_upload_speed
-                    name: Workspace Node
-                  - entity: sensor.bedroom_mesh_node_wired_upload_speed
-                    name: Bedroom Node
+#                  - entity: sensor.workspace_mesh_node_wired_upload_speed
+#                    name: Workspace Node
+#                  - entity: sensor.bedroom_mesh_node_wired_upload_speed
+#                    name: Bedroom Node
               - title: Upload Speed (Wired)
               - height: 120
 
@@ -561,12 +561,12 @@ cards:
             template: multi_graph_card
             variables:
               - entities:
-                  - entity: sensor.valhalla_router_wired_upload
+                  - entity: sensor.mikrotik_wan_tx
                     name: Router
-                  - entity: sensor.workspace_mesh_node_wired_upload
-                    name: Workspace Node
-                  - entity: sensor.bedroom_mesh_node_wired_upload
-                    name: Bedroom Node
+ #                 - entity: sensor.workspace_mesh_node_wired_upload
+ #                   name: Workspace Node
+ #                 - entity: sensor.bedroom_mesh_node_wired_upload
+ #                   name: Bedroom Node
               - title: Upload (Wired)
               - height: 120
 
