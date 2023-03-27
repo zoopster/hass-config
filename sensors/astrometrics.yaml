@@ -43,10 +43,10 @@
   json_attributes:
     - Timestamp
 
-# - platform: rest
-#   name: NOAA Space Weather Alerts
-#   resource: https://services.swpc.noaa.gov/products/alerts.json
-#   value_template: "{{ value_json.product_id | int }}"
+ - platform: rest
+   name: NOAA Space Weather Alerts
+   resource: https://services.swpc.noaa.gov/products/alerts.json
+   value_template: "{{ value_json.product_id | int }}"
 
 # - platform: moon
 
