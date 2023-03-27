@@ -1,6 +1,7 @@
 
-- platform: noaa_tides
-  station_id: 8726247
+# Moved to sensors/misc.yaml
+#- platform: noaa_tides
+#  station_id: 8726247
 
 - platform: nws_alerts
   zone_id: "FLZ155"
