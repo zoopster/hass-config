@@ -1,18 +1,18 @@
 
-# - platform: noaa_tides
-#   station_id: 8726384
+- platform: noaa_tides
+  station_id: 8726384
 
 - platform: nws_alerts
   zone_id: "FLZ155"
 
-# - platform: feedparser
-#   name: NWS Alert RSS Feed
-#   feed_url: https://alerts.weather.gov/cap/wwaatmget.php?x=FLZ155&y=0
-#   date_format: "%a, %b %d %I:%M %p"
-#   inclusions:
-#     - title
-#     - summary
-#     - cap_expires
+- platform: feedparser
+  name: NWS Alert RSS Feed
+  feed_url: https://alerts.weather.gov/cap/wwaatmget.php?x=FLZ155&y=0
+  date_format: "%a, %b %d %I:%M %p"
+  inclusions:
+    - title
+    - summary
+    - cap_expires
 
 # - platform: waqi
 #   token: !secret waqi_token
