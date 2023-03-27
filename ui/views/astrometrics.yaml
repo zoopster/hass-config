@@ -251,12 +251,12 @@ cards:
                       - filter: grayscale(1) brightness(.85)
                 tap_action:
                   action: none
-          - type: custom:list-card
-            entity: sensor.noaa_space_weather_alerts_feed
-            title: Space Weather Alerts
-            feed_attribute: entries
-            columns:
-              - field: product_id
+#          - type: custom:list-card
+#            entity: sensor.noaa_space_weather_alerts_feed
+#            title: Space Weather Alerts
+ #           feed_attribute: entries
+ #           columns:
+ #             - field: product_id
 
           - type: entities
             entities:
@@ -358,9 +358,8 @@ cards:
                 style: 'ha-card {background: none;}'
 
           - type: iframe
-            url: https://mgvez.github.io/jsorrery/?scenario=SolarSystemDwarves&planetScale=10&lookFrom=orbital&lookAt=universe&deltaT=36000&cx=0&cy=-550&cz=550&fov=45
-            # url: >-
-              # https://mgvez.github.io/jsorrery/?scenario=SolarSystemDwarves&planetScale=10&lookFrom=orbital&lookAt=universe&deltaT=36000&cx=0&cy=0&cz=7500&fov=45
+            url: >-
+              https://mgvez.github.io/jsorrery/?scenario=SolarSystemDwarves&planetScale=10&lookFrom=orbital&lookAt=universe&deltaT=36000&cx=0&cy=0&cz=7500&fov=45
             aspect_ratio: 66.67%
             card_mod:
               style: >
