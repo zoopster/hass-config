@@ -1,13 +1,13 @@
 
-- platform: rest
-  name: My Twitter Followers Count
-  json_attributes_path: "$.[0]"
-  json_attributes:
-    - name
-    - screen_name
-  resource: https://cdn.syndication.twimg.com/widgets/followbutton/info.json?screen_names=zoopster
-  value_template: "{{ value_json[0].followers_count | int }}"
-  unit_of_measurement: "followers"
+- #platform: rest
+  #name: My Twitter Followers Count
+  #json_attributes_path: "$.[0]"
+  #json_attributes:
+  #  - name
+  #  - screen_name
+  #resource: https://cdn.syndication.twimg.com/widgets/followbutton/info.json?screen_names=zoopster
+  #value_template: "{{ value_json[0].followers_count | int }}"
+  #unit_of_measurement: "followers"
 
 - platform: rest
   name: Reddit Profile (zoopster)
