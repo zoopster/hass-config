@@ -27,15 +27,15 @@
   sensor:
 
 # My First Template!
- - name: Active NWS Alert
-    state: >
-       {% if states('sensor.nws_alerts') | int > 0 %}
+- name: Active NWS Alert
+  state: >
+    {% if states('sensor.nws_alerts') | int > 0 %}
        on
        {% else %}
        off
        {% endif %}
 
-    - name: Sun Elevation
-      state: >
+- name: Sun Elevation
+  state: >
         {{ state_attr('sun.sun', 'elevation') | float }}
-      unit_of_measurement: "°"
+  unit_of_measurement: "°"
