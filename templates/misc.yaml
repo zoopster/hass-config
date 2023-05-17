@@ -27,13 +27,13 @@
   sensor:
 
 # My First Template!
-- name: Active NWS Alert
-  state: >
-    {% if states('sensor.nws_alerts') | int > 0 %}
-       on
-       {% else %}
-       off
-       {% endif %}
+#- name: Active NWS Alert
+#  state: >
+#    {% if states('sensor.nws_alerts') | int > 0 %}
+#       on
+#       {% else %}
+#       off
+#       {% endif %}
 
 - name: Sun Elevation
   state: >
