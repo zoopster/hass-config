@@ -2,8 +2,8 @@
 - platform: noaa_tides
   station_id: 8726247
 
-- platform: nws_alerts
-  zone_id: "FLZ155"
+#- platform: nws_alerts
+#  zone_id: "FLZ155"
 
 - platform: feedparser
   name: NWS Alert RSS Feed
