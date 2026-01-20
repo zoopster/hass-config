@@ -1,13 +1,3 @@
-
-# - platform: opensky
-#   radius: 5
-#   latitude: !secret opensky_latitude
-#   longitude: !secret opensky_longitude
-
-#- platform: google_fit
-#  name: Google Fit
-#  client_id: !secret google_client_id
-#  client_secret: !secret google_client_secret
-
-#- platform: torque
-#  email: !secret torque_email
+# Misc sensors - placeholder file
+# Add sensors here as needed
+[]
