@@ -21,8 +21,6 @@ apexcharts_card_templates: !include templates/apexcharts-card.yaml
 swipe_nav:
   animate: swipe
   prevent_default: true
-<<<<<<< Updated upstream
-=======
 
 kiosk_mode:
   user_settings:
@@ -34,9 +32,3 @@ kiosk_mode:
   mobile_settings:
     hide_menubutton: true
     hide_overflow: true
-
-# Remove the x for background.
-xbackground: >-
-  linear-gradient(to bottom, rgba(var(--rgb-primary-color),.2),
-  var(--primary-background-color))
->>>>>>> Stashed changes

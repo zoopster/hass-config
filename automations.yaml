@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 - id: '1650203295394'
   alias: Frigate Notification
   description: ''
@@ -41,9 +40,6 @@
     message: Car detected in driveway
     title: Car detected in Driveway
   mode: single
-
-=======
->>>>>>> Stashed changes
 - id: logging_level
   alias: 'Logging Level'
   initial_state: true
@@ -53,10 +49,7 @@
   action:
     service: logger.set_default_level
     data_template:
-<<<<<<< Updated upstream
       level: "{{ trigger.to_state.state }}"
-=======
-      level: '{{ trigger.to_state.state }}'
 - id: '1668037400731'
   alias: Update OpenUV
   description: ''
@@ -169,7 +162,7 @@
     action: notify.mobile_app_jpip
   mode: single
 - id: '1765202015282'
-  alias: Driveway Notification
+  alias: Driveway Notification 2
   description: ''
   use_blueprint:
     path: SgtBatten/Stable.yaml
@@ -177,4 +170,3 @@
       camera: camera.driveway
       notify_device: e142d3fc2c20fbfa7f6154b2465048dd
       message: Driveway movement
->>>>>>> Stashed changes
