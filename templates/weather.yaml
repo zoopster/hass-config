@@ -32,42 +32,41 @@
 
     - name: Wind Direction
       state: >
-        {% set wind_bearing = state_attr('weather.p_house_hourly', 'wind_bearing') %}
-        {% if wind_bearing | float<=11 %}N
-        {% elif wind_bearing | float>348 %}N
-        {% elif wind_bearing | float<=34 | float>11 %}NNE
-        {% elif wind_bearing | float<=56 | float>34 %}NE
-        {% elif wind_bearing | float<=79 | float>56 %}ENE
-        {% elif wind_bearing | float<=101 | float>79 %}E
-        {% elif wind_bearing | float<=124 | float>101 %}ESE
-        {% elif wind_bearing | float<=146 | float>124 %}SE
-        {% elif wind_bearing | float<=169 | float>146 %}SSE
-        {% elif wind_bearing | float<=191 | float>169 %}S
-        {% elif wind_bearing | float<=214 | float>191 %}SSW
-        {% elif wind_bearing | float<=236 | float>214 %}SW
-        {% elif wind_bearing | float<=259 | float>236 %}WSW
-        {% elif wind_bearing | float<=281 | float>259 %}W
-        {% elif wind_bearing | float<=304 | float>281 %}WNW
-        {% elif wind_bearing | float<=326 | float>304 %}NW
-        {% elif wind_bearing | float<=348 | float>326 %}NNW
+        {% set wind_bearing = state_attr('weather.p_house_hourly', 'wind_bearing') | float(0) %}
+        {% if wind_bearing <= 11 or wind_bearing > 348 %}N
+        {% elif wind_bearing <= 34 %}NNE
+        {% elif wind_bearing <= 56 %}NE
+        {% elif wind_bearing <= 79 %}ENE
+        {% elif wind_bearing <= 101 %}E
+        {% elif wind_bearing <= 124 %}ESE
+        {% elif wind_bearing <= 146 %}SE
+        {% elif wind_bearing <= 169 %}SSE
+        {% elif wind_bearing <= 191 %}S
+        {% elif wind_bearing <= 214 %}SSW
+        {% elif wind_bearing <= 236 %}SW
+        {% elif wind_bearing <= 259 %}WSW
+        {% elif wind_bearing <= 281 %}W
+        {% elif wind_bearing <= 304 %}WNW
+        {% elif wind_bearing <= 326 %}NW
+        {% elif wind_bearing <= 348 %}NNW
         {%- endif %}
         
     - name: Wind Strength
       state: >
-        {% set wind_speed_mph = states('sensor.p_house_wind') | float * 0.6213712 %}
-        {% if wind_speed_mph | float<=1 %}No wind
-        {% elif wind_speed_mph | float<=3 | float>1 %}Light air
-        {% elif wind_speed_mph | float<=7 | float>3 %}Light breeze
-        {% elif wind_speed_mph | float<=12 | float>7 %}Gentle breeze
-        {% elif wind_speed_mph | float<=17 | float>12 %}Moderate breeze
-        {% elif wind_speed_mph | float<=24 | float>17 %}Fresh breeze
-        {% elif wind_speed_mph | float<=30 | float>24 %}Strong breeze
-        {% elif wind_speed_mph | float<=38 | float>30 %}High wind
-        {% elif wind_speed_mph | float<=46 | float>38 %}Fresh gale
-        {% elif wind_speed_mph | float<=54 | float>46 %}Strong gale
-        {% elif wind_speed_mph | float<=63 | float>54 %}Storm
-        {% elif wind_speed_mph | float<=72 | float>63 %}Violent storm
-        {% elif wind_speed_mph | float>72 %}Hurricane
+        {% set wind_speed_mph = states('sensor.p_house_wind') | float(0) * 0.6213712 %}
+        {% if wind_speed_mph <= 1 %}No wind
+        {% elif wind_speed_mph <= 3 %}Light air
+        {% elif wind_speed_mph <= 7 %}Light breeze
+        {% elif wind_speed_mph <= 12 %}Gentle breeze
+        {% elif wind_speed_mph <= 17 %}Moderate breeze
+        {% elif wind_speed_mph <= 24 %}Fresh breeze
+        {% elif wind_speed_mph <= 30 %}Strong breeze
+        {% elif wind_speed_mph <= 38 %}High wind
+        {% elif wind_speed_mph <= 46 %}Fresh gale
+        {% elif wind_speed_mph <= 54 %}Strong gale
+        {% elif wind_speed_mph <= 63 %}Storm
+        {% elif wind_speed_mph <= 72 %}Violent storm
+        {% else %}Hurricane
         {%- endif %}
 
     - name: P-House Hourly Forecast Temperature Rising

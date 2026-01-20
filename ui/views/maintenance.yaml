@@ -1,9 +1,10 @@
-# MAXIMALIST DASHBOARD
+# DASHBOARD
 # Maintenance View
-# Made by Madelena Mak 2022
+# Updated for P-House configuration
 
 title: Maintenance
 path: maintenance
+icon: mdi:wrench
 
 type: 'custom:grid-layout'
 layout: !include snippets/layout-page-margin.yaml
@@ -14,229 +15,230 @@ cards:
     layout: !include snippets/layout-page-columns.yaml
     view_layout:
       grid-area: cc
-
     cards:
 
-      # [Header] Summary 
-      - type: markdown
-        style: !include snippets/style-markdown-page-title.yaml
+      # [Header] Summary
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout: !include snippets/layout-page-title.yaml
         view_layout:
           grid-column: 1/-1
-        content: >
-          # Maintenance
-
-          Peanut Hamper is {{ states('vacuum.peanut_hamper') }}{{ iif(
-          is_state('binary_sensor.peanut_hamper_bin_full', 'on'), ' and
-          needs to be emptied. ', '. ') }} There are {{ state_attr('sensor.chores_done', 'entities')|length }} chores done, {{
-          state_attr('sensor.chores_to_do', 'entities')|length }} to do soon, and {{
-          state_attr('sensor.chores_overdue', 'entities')|length }} overdue.
-
-
-      # [Column] My Machines
-
-      - type: vertical-stack
-        cards:
-          - type: 'custom:button-card'
-            template: header_card_no_link
-            variables:
-              name: MY MACHINES
-            view_layout:
-              grid-column: 1/-1
-
-          - type: horizontal-stack
-            cards:
-
-              - type: 'custom:vacuum-card'
-                entity: vacuum.peanut_hamper
-                image: default
-                show_toolbar: true
-                show_status: true
-                compact_view: false
-                card_mod:
-                  style: >
-                    .preview {font-size: var(--body-font-size); font-weight:
-                    normal;} .metadata {position: absolute; top: 0;
-                    text-align: left; padding: 0 16px;} .vacuum-name
-                    {font-size: var(--card-title-font-size) !important;
-                    font-weight: 500 !important;} .status {justify-content:
-                    flex-start !important;} .status-text {margin-left: 0
-                    !important;} ha-card .header {padding-top: 0 !important;
-                    height: auto !important;} .battery {padding: 12px 16px
-                    !important;} .stats-block {text-align: left !important;
-                    padding: 8px 16px;} .vacuum {filter: invert(1);} ha-card
-                    {--vc-background: none; --vc-spacing: 16px;} .tips
-                    {flex-direction: row-reverse;} .toolbar {background:
-                    none !important;}
-
-          - type: entities
-            entities:
-              - entity: binary_sensor.peanut_hamper_bin_full
-                type: 'custom:template-entity-row'
-                name: Vacuum Bin
-                state: >-
-                  {{ iif( is_state('binary_sensor.peanut_hamper_bin_full',
-                  'on'), 'Full', 'Not Full') }}
-                secondary: >-
-                  Since {{
-                  states.binary_sensor.peanut_hamper_bin_full.last_changed |
-                  relative_time }} ago
-
-          - type: 'custom:logbook-card'
-            entity: vacuum.peanut_hamper
-            history: 5
-            max_items: 10
-            date_format: 'MMM D hh:mm'
-            show:
-              state: true
-              duration: true
-              start_date: true
-              end_date: true
-              icon: false
-              separator: false
-            collapse: 3
-            title: ' '
-
-          - type: entities
-            entities:
-              - type: 'custom:multiple-entity-row'
-                entity: sensor.bedroom_humidifier_power
-                secondary_info:
-                  attribute: lackWater
-            title: Bedroom Humidifier
-
-          - type: entities
-            entities:
-              - entity: sensor.pure_hot_cool_link_filter_life
-            title: Bedroom Dyson Pure
-
-
-      # [Column] Chores
-
-      - type: vertical-stack
-        view_layout:
-          grid-column: 2/-2
         cards:
 
-          - type: 'custom:button-card'
-            template: header_card_no_link
-            variables:
-              name: CHORES
+          - type: markdown
+            style: !include snippets/style-markdown-page-title.yaml
+            content: >
+              # Maintenance
+
+              Home Assistant is {{ states('update.home_assistant_core_update') }}.
+              There are {{ states('sensor.hacs') }} HACS updates available.
 
           - type: 'custom:layout-card'
-            layout_type: 'custom:masonry-layout'
+            layout_type: 'custom:grid-layout'
             layout:
-              margin: 0 -16px
-              card_margin: 1px 16px
-              width: 360
-
-
+              margin: 0
+            view_layout:
+              place-self: center start
             cards:
-
-              - type: 'custom:auto-entities'
-                filter:
-                  include:
-                    - group: group.chore_plants
-                      options:
-                        type: 'custom:button-card'
-                        template: chore_card
-                card:
-                  type: entities
-                  title: Plants
-
-              - type: 'custom:auto-entities'
-                filter:
-                  include:
-                    - group: group.chore_kitchen
-                      options:
-                        type: 'custom:button-card'
-                        template: chore_card
-                card:
-                  type: entities
-                  title: Kitchen
-
-              - type: 'custom:auto-entities'
-                filter:
-                  include:
-                    - group: group.chore_bathroom
-                      options:
-                        type: 'custom:button-card'
-                        template: chore_card
-                card:
-                  type: entities
-                  title: Bathroom
-
-              - type: 'custom:auto-entities'
-                filter:
-                  include:
-                    - group: group.chore_living_room
-                      options:
-                        type: 'custom:button-card'
-                        template: chore_card
-                card:
-                  type: entities
-                  title: Living Room
-
-              - type: 'custom:auto-entities'
-                filter:
-                  include:
-                    - group: group.chore_personal
-                      options:
-                        type: 'custom:button-card'
-                        template: chore_card
-                card:
-                  type: entities
-                  title: Personal
+              - type: 'custom:mushroom-entity-card'
+                entity: sensor.hacs
+                name: HACS Updates
+                icon: mdi:alpha-h-box
+                icon_color: teal
+                style: 'ha-card {background: none;}'
 
 
-      # [Column] Batteries
-
-      - type: vertical-stack
+      # [Column] System Updates
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout:
+          margin: -1
         cards:
 
           - type: 'custom:button-card'
             template: header_card_no_link
             variables:
-              name: BATTERIES
-            view_layout:
-              grid-column: 1/-1
+              name: SYSTEM UPDATES
 
-          - type: 'custom:decluttering-card'
-            template: metro_bar_card_no_icon
-            variables:
-              - entities:
-                  - entity: sensor.front_door_camera_battery
-                  - entity: sensor.front_door_switchbot_contact_sensor_battery
-                  - entity: sensor.kitchen_leak_sensor_power
-              - title: Crucial
+          - type: 'custom:mushroom-update-card'
+            entity: update.home_assistant_core_update
+            name: Home Assistant Core
+            show_buttons_control: true
 
-          - type: 'custom:decluttering-card'
-            template: metro_bar_card_no_icon
-            variables:
-              - entities:
-                  - entity: sensor.netatmo_strawberry_land_indoor_outdoor_battery_percent
-                  - entity: sensor.living_room_window_sensor_center_power
-                  - entity: sensor.living_room_window_sensor_right_power
-                  - entity: sensor.bedroom_window_sensor_left_power
-                  - entity: sensor.bedroom_window_sensor_center_power
-                  - entity: sensor.bedroom_hue_sensor_battery
-                  - entity: sensor.living_room_hue_sensor_battery
-                  - entity: sensor.workspace_room_hue_sensor_battery
-                  - entity: binary_sensor.kitchen_sink_motion_sensor_battery
-                  - entity: sensor.kitchen_leak_sensor_power
-                  - entity: sensor.bathroom_env_sensor_power
-              - title: Sensors
+          - type: 'custom:mushroom-update-card'
+            entity: update.home_assistant_supervisor_update
+            name: HA Supervisor
+            show_buttons_control: true
 
-          - type: 'custom:decluttering-card'
-            template: metro_bar_card_no_icon
+          - type: 'custom:mushroom-update-card'
+            entity: update.home_assistant_operating_system_update
+            name: HA Operating System
+            show_buttons_control: true
+
+
+      # [Column] Router Updates
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout:
+          margin: -1
+        cards:
+
+          - type: 'custom:button-card'
+            template: header_card_no_link
             variables:
-              - entities:
-                  - entity: sensor.bedroom_window_curtain_left_battery
-                  - entity: sensor.bedroom_window_curtain_right_battery
-                  - entity: sensor.astralplane_hue_dimmer_battery_level
-                  - entity: sensor.bedroom_hue_dimmer_battery_level
-                  - entity: sensor.living_room_hue_dimmer_battery_level
-                  - entity: sensor.living_room_accents_dimmer_battery_level
-                  - entity: sensor.living_room_dining_table_dimmer_power
-                  - entity: sensor.living_room_dimmer_knob_power
-                  - entity: sensor.hallway_dimmer_battery_level
-              - title: Remotes
+              name: ROUTER UPDATES
+
+          - type: 'custom:mushroom-update-card'
+            entity: update.mikrotik_routeros_update
+            name: MikroTik RouterOS
+            show_buttons_control: true
+
+          - type: 'custom:mushroom-update-card'
+            entity: update.mikrotik_routerboard_firmware_update
+            name: MikroTik Firmware
+            show_buttons_control: true
+
+          - type: 'custom:mushroom-update-card'
+            entity: update.mikrotik_office_hap_ac_2_routeros_update
+            name: Office AP RouterOS
+            show_buttons_control: true
+
+
+      # [Column] Backup
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout:
+          margin: -1
+        cards:
+
+          - type: 'custom:button-card'
+            template: header_card_no_link
+            variables:
+              name: BACKUPS
+
+          - type: 'custom:mushroom-entity-card'
+            entity: sensor.backup_backup_manager_state
+            name: Backup Manager
+            icon: mdi:backup-restore
+
+          - type: 'custom:mushroom-entity-card'
+            entity: sensor.backup_last_successful_automatic_backup
+            name: Last Backup
+            icon: mdi:calendar-check
+
+          - type: 'custom:mushroom-entity-card'
+            entity: sensor.backup_next_scheduled_automatic_backup
+            name: Next Backup
+            icon: mdi:calendar-clock
+
+
+      # [Column] Battery Status
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout:
+          margin: -1
+        cards:
+
+          - type: 'custom:button-card'
+            template: header_card_no_link
+            variables:
+              name: BATTERY STATUS
+
+          - type: 'custom:mushroom-entity-card'
+            entity: sensor.back_door_battery
+            name: Back Door Sensor
+            icon: mdi:battery
+
+          - type: 'custom:mushroom-entity-card'
+            entity: sensor.office_switch_battery
+            name: Office Switch
+            icon: mdi:battery
+
+
+      # [Column] Network Status
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout:
+          margin: -1
+        cards:
+
+          - type: 'custom:button-card'
+            template: header_card_no_link
+            variables:
+              name: NETWORK STATUS
+
+          - type: 'custom:mushroom-entity-card'
+            entity: binary_sensor.ping_cloudflare
+            name: Cloudflare (1.1.1.1)
+            icon: mdi:cloud
+
+          - type: 'custom:mushroom-entity-card'
+            entity: binary_sensor.ping_google
+            name: Google (8.8.8.8)
+            icon: mdi:google
+
+          - type: 'custom:mushroom-entity-card'
+            entity: binary_sensor.ping_router
+            name: Local Router
+            icon: mdi:router-wireless
+
+          - type: 'custom:mushroom-entity-card'
+            entity: binary_sensor.ping_frigate
+            name: Frigate NVR
+            icon: mdi:cctv
+
+
+      # [Column] Frigate Status
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout:
+          margin: -1
+        cards:
+
+          - type: 'custom:button-card'
+            template: header_card_no_link
+            variables:
+              name: FRIGATE STATUS
+
+          - type: 'custom:mushroom-entity-card'
+            entity: sensor.driveway_camera_fps
+            name: Driveway FPS
+            icon: mdi:video
+
+          - type: 'custom:mushroom-entity-card'
+            entity: sensor.driveway_detection_fps
+            name: Driveway Detection FPS
+            icon: mdi:eye
+
+          - type: 'custom:mushroom-entity-card'
+            entity: sensor.backyard_camera_fps
+            name: Backyard FPS
+            icon: mdi:video
+
+          - type: 'custom:mushroom-entity-card'
+            entity: sensor.se_corner_camera_fps
+            name: SE Corner FPS
+            icon: mdi:video
+
+
+      # [Column] Device Uptime
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout:
+          margin: -1
+        cards:
+
+          - type: 'custom:button-card'
+            template: header_card_no_link
+            variables:
+              name: DEVICE UPTIME
+
+          - type: 'custom:mushroom-entity-card'
+            entity: sensor.mikrotik_uptime
+            name: Router Uptime
+            icon: mdi:router-wireless
+
+          - type: 'custom:mushroom-entity-card'
+            entity: sensor.mikrotik_office_hap_ac_2_uptime
+            name: Office AP Uptime
+            icon: mdi:access-point

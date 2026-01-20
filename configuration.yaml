@@ -1,23 +1,18 @@
 lovelace:
   mode: storage
-  # Add yaml dashboards
   dashboards:
     lovelace-yaml:
       mode: yaml
-#      resources: !include lovelace-resources.yaml <--shows a syntax error
       title: YAML
       icon: mdi:script
       show_in_sidebar: true
       filename: ui/ui-lovelace.yaml
 
-# Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
 
-# Text to speech
 tts:
   - platform: google_translate
 
-# resources: !include lovelace-resources.yaml <--fails
 input_number: !include inputs/input_number.yaml
 input_datetime: !include inputs/input_datetime.yaml
 input_text: !include inputs/input_text.yaml
@@ -30,17 +25,12 @@ frontend:
 sensor: !include_dir_merge_list sensors
 binary_sensor: !include_dir_merge_list binary_sensors 
 multiscrape: !include_dir_merge_list multiscrape
-# decluttering_templates: !include ui/templates/decluttering-card.yaml
-# button_card_templates: !include_dir_merge_named ui/templates/button-card/
-# apexcharts_card_templates: !include ui/templates/apexcharts-card.yaml
-# popup_cards: !include_dir_merge_named ui/popups/
 
 device_tracker:
   - platform: ping
     hosts:
       router: 192.168.50.1
       cloudflare: 1.1.1.1
+
 logger:
   default: info
-  logs:
-    custom_components.multiscrape: debug

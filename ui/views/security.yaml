@@ -1,0 +1,297 @@
+# DASHBOARD
+# Security View
+# Created for P-House configuration
+
+title: Security
+path: security
+icon: mdi:shield-home
+
+type: 'custom:grid-layout'
+layout: !include snippets/layout-page-margin.yaml
+
+cards:
+  - type: 'custom:layout-card'
+    layout_type: 'custom:grid-layout'
+    layout: !include snippets/layout-page-columns.yaml
+    view_layout:
+      grid-area: cc
+    cards:
+
+      # [Header] Summary
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout: !include snippets/layout-page-title.yaml
+        view_layout:
+          grid-column: 1/-1
+        cards:
+          - type: markdown
+            style: !include snippets/style-markdown-page-title.yaml
+            content: >
+              # Security
+
+              {% set doors_open = states.binary_sensor|selectattr('attributes.device_class','equalto','door')|selectattr('state','equalto','on')|list|length %}
+              {{ doors_open }} door{{ iif(doors_open != 1, 's are', ' is') }} currently open.
+
+          - type: 'custom:layout-card'
+            layout_type: 'custom:grid-layout'
+            layout:
+              margin: 0
+            view_layout:
+              place-self: center start
+            cards:
+              - type: 'custom:mushroom-entity-card'
+                entity: binary_sensor.front_door_door
+                name: Front Door
+                icon_color: red
+                style: 'ha-card {background: none;}'
+
+              - type: 'custom:mushroom-entity-card'
+                entity: binary_sensor.back_door_door
+                name: Back Door
+                icon_color: red
+                style: 'ha-card {background: none;}'
+
+
+      # [Column] Driveway Camera
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout:
+          margin: -1
+        cards:
+
+          - type: 'custom:button-card'
+            template: header_card_no_link
+            variables:
+              name: DRIVEWAY
+
+          - type: picture-entity
+            entity: camera.driveway
+            camera_view: live
+            show_name: false
+            show_state: false
+
+          - type: 'custom:mushroom-entity-card'
+            entity: binary_sensor.driveway_person_occupancy
+            name: Person Detected
+            icon: mdi:walk
+
+          - type: 'custom:mushroom-entity-card'
+            entity: binary_sensor.driveway_car_occupancy
+            name: Car Detected
+            icon: mdi:car
+
+          - type: 'custom:mushroom-entity-card'
+            entity: binary_sensor.driveway_motion
+            name: Motion
+            icon: mdi:motion-sensor
+
+          - type: 'custom:mushroom-entity-card'
+            entity: sensor.driveway_person_count
+            name: Person Count
+            icon: mdi:counter
+
+
+      # [Column] Backyard Camera
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout:
+          margin: -1
+        cards:
+
+          - type: 'custom:button-card'
+            template: header_card_no_link
+            variables:
+              name: BACKYARD
+
+          - type: picture-entity
+            entity: camera.backyard
+            camera_view: live
+            show_name: false
+            show_state: false
+
+          - type: 'custom:mushroom-entity-card'
+            entity: binary_sensor.backyard_person_occupancy
+            name: Person Detected
+            icon: mdi:walk
+
+          - type: 'custom:mushroom-entity-card'
+            entity: binary_sensor.backyard_dog_occupancy
+            name: Dog Detected
+            icon: mdi:dog
+
+          - type: 'custom:mushroom-entity-card'
+            entity: binary_sensor.backyard_motion
+            name: Motion
+            icon: mdi:motion-sensor
+
+
+      # [Column] SE Corner Camera
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout:
+          margin: -1
+        cards:
+
+          - type: 'custom:button-card'
+            template: header_card_no_link
+            variables:
+              name: SE CORNER
+
+          - type: picture-entity
+            entity: camera.se_corner
+            camera_view: live
+            show_name: false
+            show_state: false
+
+          - type: 'custom:mushroom-entity-card'
+            entity: binary_sensor.se_corner_person_occupancy
+            name: Person Detected
+            icon: mdi:walk
+
+          - type: 'custom:mushroom-entity-card'
+            entity: binary_sensor.se_corner_car_occupancy
+            name: Car Detected
+            icon: mdi:car
+
+          - type: 'custom:mushroom-entity-card'
+            entity: binary_sensor.se_corner_motion
+            name: Motion
+            icon: mdi:motion-sensor
+
+
+      # [Column] Doors
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout:
+          margin: -1
+        cards:
+
+          - type: 'custom:button-card'
+            template: header_card_no_link
+            variables:
+              name: DOORS
+
+          - type: 'custom:mushroom-entity-card'
+            entity: binary_sensor.front_door_door
+            name: Front Door
+            icon: mdi:door
+
+          - type: 'custom:mushroom-entity-card'
+            entity: binary_sensor.back_door_door
+            name: Back Door
+            icon: mdi:door-sliding
+
+          - type: 'custom:mushroom-entity-card'
+            entity: binary_sensor.main_bedroom_slider_door
+            name: Bedroom Slider
+            icon: mdi:door-sliding
+
+          - type: 'custom:mushroom-entity-card'
+            entity: binary_sensor.office_slider_door
+            name: Office Slider
+            icon: mdi:door-sliding
+
+
+      # [Column] Frigate Controls
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout:
+          margin: -1
+        cards:
+
+          - type: 'custom:button-card'
+            template: header_card_no_link
+            variables:
+              name: FRIGATE CONTROLS
+
+          - type: entities
+            title: Driveway
+            entities:
+              - entity: switch.driveway_detect
+                name: Detection
+              - entity: switch.driveway_motion
+                name: Motion Alerts
+              - entity: switch.driveway_recordings
+                name: Recording
+              - entity: switch.driveway_snapshots
+                name: Snapshots
+
+          - type: entities
+            title: Backyard
+            entities:
+              - entity: switch.backyard_detect
+                name: Detection
+              - entity: switch.backyard_motion
+                name: Motion Alerts
+              - entity: switch.backyard_recordings
+                name: Recording
+              - entity: switch.backyard_snapshots
+                name: Snapshots
+
+          - type: entities
+            title: SE Corner
+            entities:
+              - entity: switch.se_corner_detect
+                name: Detection
+              - entity: switch.se_corner_motion
+                name: Motion Alerts
+              - entity: switch.se_corner_recordings
+                name: Recording
+              - entity: switch.se_corner_snapshots
+                name: Snapshots
+
+
+      # [Column] Recent Detections
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout:
+          margin: -1
+        cards:
+
+          - type: 'custom:button-card'
+            template: header_card_no_link
+            variables:
+              name: RECENT DETECTIONS
+
+          - type: picture-entity
+            entity: image.driveway_person
+            name: Driveway Person
+            show_state: false
+
+          - type: picture-entity
+            entity: image.driveway_car
+            name: Driveway Car
+            show_state: false
+
+          - type: picture-entity
+            entity: image.backyard_person
+            name: Backyard Person
+            show_state: false
+
+          - type: picture-entity
+            entity: image.backyard_dog
+            name: Backyard Dog
+            show_state: false
+
+
+      # [Column] Doorbell
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout:
+          margin: -1
+        cards:
+
+          - type: 'custom:button-card'
+            template: header_card_no_link
+            variables:
+              name: DOORBELL
+
+          - type: 'custom:mushroom-entity-card'
+            entity: sensor.aeotec_doorbell_alarm
+            name: Doorbell Status
+            icon: mdi:bell
+
+          - type: 'custom:mushroom-entity-card'
+            entity: binary_sensor.aeotec_doorbell_tamper
+            name: Tamper Alert
+            icon: mdi:alert

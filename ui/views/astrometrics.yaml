@@ -1,9 +1,10 @@
-# MAXIMALIST DASHBOARD
-# Astrometrics Showxating
-# Made by Madelena Mak 2022
+# DASHBOARD
+# Astrometrics View
+# Updated for P-House configuration
 
 title: Astrometrics
 path: astrometrics
+icon: mdi:rocket-launch
 
 type: 'custom:grid-layout'
 layout: !include snippets/layout-page-margin.yaml
@@ -13,46 +14,24 @@ cards:
     layout_type: 'custom:grid-layout'
     view_layout:
       grid-area: cc
-    layout:
-      grid-template-columns: 'repeat(auto-fill, [col-start] minmax(360px, 1fr) [col-end])'
-      grid-template-rows: auto
-      grid-column-gap: 32px
-      margin: -1px
-      mediaquery:
-        # '(min-width: 2320px)':
-        #   grid-template-columns: 'repeat(auto-fill, [col-start] minmax(720px, 1fr) [col-end])'
-        '(max-width: 800px)':
-          grid-template-columns: 'repeat(auto-fill, [col-start] minmax(256px, 1fr) [col-end])'
-
+    layout: !include snippets/layout-page-columns.yaml
     cards:
 
       # [Header] Summary
       - type: 'custom:layout-card'
         layout_type: 'custom:grid-layout'
-      #  layout: !include snippets/layout-page-title-with-2-badges.yaml
         layout: !include snippets/layout-page-title.yaml
         view_layout:
           grid-column: 1/-1
         cards:
-
           - type: markdown
+            style: !include snippets/style-markdown-page-title.yaml
             content: >
               # Sol System
 
-              Welcome to Sector 001. R3 (Strong) Flare at 9:55 am EDT on 10 May, 2022. Sky is clear for observations.
-            style:
-              .: |
-                ha-card {
-                  background: none;
-                }
-              ha-markdown$: |
-                h1 {
-                  font-size: var(--title-font-size);
-                  font-weight: 500;
-                  line-height: 1.1;
-                  margin-left: -2px;
-                  margin-block-end: -8px;
-                }
+              The Sun is {{ states('sun.sun') }}.
+              Moon phase: {{ states('sensor.moon') }}.
+              Aurora visibility: {{ states('sensor.aurora_visibility_aurora_visibility') }}%.
 
           - type: 'custom:layout-card'
             layout_type: 'custom:grid-layout'
@@ -61,679 +40,308 @@ cards:
             view_layout:
               place-self: center start
             cards:
-
-              - type: 'custom:swipe-card'
-                parameters:
-                  enabled: true
-                  slidesPerView: 1.66
-                  width: 480
-                  breakpoints:
-                    '800':
-                      enabled: false
-                      slidesPerView: 2
-                      width: 240
-                    '1024':
-                      enabled: false
-                      slidesPerView: 2
-                      width: 400
-                cards:
-
-                  - type: custom:state-switch
-                    entity: mediaquery
-                    states:
-                      "(max-width: 799.99px), (min-width: 1024px)": &title-badge-1
-                        type: 'custom:mushroom-entity-card'
-                        entity: binary_sensor.ping_my_website
-                        name: OPAS Tynan ↗
-                        icon: mdi:rocket-launch
-                        icon_color: pink
-                        style: 'ha-card {background: none;}'
-                        tap_action:
-                          action: url
-                          url_path: 'https://zoopster.org'
-                      "(min-width: 800px) and (max-width: 1023.99px)":
-                        <<: *title-badge-1
-                        layout: vertical
-
-                  - type: custom:state-switch
-                    entity: mediaquery
-                    states:
-                      "(max-width: 799.99px), (min-width: 1024px)": &title-badge-2
-                        type: 'custom:mushroom-entity-card'
-                        entity: binary_sensor.ping_my_website
-                        name: Sky Watch ↗
-                        icon: 'mdi:cloud'
-                        icon_color: pink
-                        style: 'ha-card {background: none;}'
-                        tap_action:
-                          action: url
-                          url_path: 'https://www.astrospheric.com/'
-                      "(min-width: 800px) and (max-width: 1023.99px)":
-                        <<: *title-badge-2
-                        layout: vertical
-
-
-      # [Column] The Sun
-      - type: vertical-stack
-        cards:
-          - type: 'custom:button-card'
-            template: header_card
-            variables:
-              name: SOL
-              label: null
-              arrow: 'mdi:arrow-top-right'
-              action: url
-              link: 'https://'
-
-          - type: 'custom:layout-card'
-            layout_type: 'custom:grid-layout'
-            layout: !include snippets/layout-page-columns.yaml
-            cards:
-
-              # - type: vertical-stack
-              #   cards:
-
-          - type: 'custom:layout-card'
-            layout_type: 'custom:grid-layout'
-            layout: !include snippets/layout-live-tile.yaml
-            cards:
-
-              - type: custom:button-card
-                template:
-                  - live_tile_card
-                  - live_tile_with_picture
-                name: CMEs
-                color_type: icon
-                variables:
-                  picture: https://services.swpc.noaa.gov/images/animations/lasco-c3/latest.jpg
-                styles:
-                  custom_fields:
-                    picture:
-                      - background-size: 110% 110%
-                      - filter: grayscale(1) brightness(.85) contrast(2.5)
-                tap_action:
-                  action: none
-                view_layout:
-                  grid-column: span 2
-                  grid-row: span 2
-                  margin: 0
-
-
-              - type: 'custom:decluttering-card'
-                template: mini_graph_tile
-                variables:
-                  - entities:
-                    - entity: sensor.noaa_space_weather_solar_wind_magnetic_fields_bt
-                  - title: Magnetic Fields - Bt
-
-              - type: 'custom:decluttering-card'
-                template: mini_graph_tile
-                variables:
-                  - entities:
-                    - entity: sensor.noaa_space_weather_solar_wind_magnetic_fields_bz
-                  - title: Magnetic Fields - Bz
-
-              - type: 'custom:decluttering-card'
-                template: mini_graph_tile
-                variables:
-                  - entities:
-                    - entity: sensor.noaa_space_weather_solar_wind_speed
-                  - title: Solar Wind Speed
-                  - aspect_ratio: 2/1
-                  - line_width: 2
-                view_layout:
-                  grid-column: span 2
-
-              - type: 'custom:decluttering-card'
-                template: mini_graph_tile
-                variables:
-                  - entities:
-                    - entity: sensor.noaa_space_weather_noon_10_7cm_radio_flux
-                  - title: 10.7cm Radio Flux
-
-
-              - type: vertical-stack
-                cards:
-
-                  - type: 'custom:layout-card'
-                    layout_type: 'custom:grid-layout'
-                    layout: !include snippets/layout-live-tile.yaml
-                    cards:
-
-              - type: custom:button-card
-                template:
-                  - live_tile_card
-                  - live_tile_with_picture
-                name: Aurora
-                color_type: icon
-                variables:
-                  picture: https://services.swpc.noaa.gov/images/animations/ovation/north/latest.jpg
-                styles:
-                  custom_fields:
-                    picture:
-                      - background-size: 127% 127%
-                      - filter: grayscale(.8) contrast(1)
-                tap_action:
-                  action: none
-                view_layout:
-                  grid-column: span 2
-                  grid-row: span 2
-                  margin: 0
-
-              - type: custom:button-card
-                template:
-                  - live_tile_card
-                  - live_tile_with_picture
-                name: Visible Light
-                color_type: icon
-                variables:
-                  picture: https://services.swpc.noaa.gov/images/animations/sdo-hmii/latest.jpg
-                styles:
-                  custom_fields:
-                    picture:
-                      - background-size: 110% 110%
-                      - filter: grayscale(1) brightness(.85) contrast(2.5)
-                tap_action:
-                  action: none
-
-              - type: custom:button-card
-                template:
-                  - live_tile_card
-                  - live_tile_with_picture
-                name: UV Comp
-                color_type: icon
-                variables:
-                  picture: https://services.swpc.noaa.gov/images/animations/suvi/primary/195/latest.png
-                styles:
-                  custom_fields:
-                    picture:
-                      - background-size: 110% 110%
-                      - filter: grayscale(1) brightness(.85)
-                tap_action:
-                  action: none
-#          - type: custom:list-card
-#            entity: sensor.noaa_space_weather_alerts_feed
-#            title: Space Weather Alerts
- #           feed_attribute: entries
- #           columns:
- #             - field: product_id
-
-          - type: entities
-            entities:
-              - &astrometrics-noaa-alert
-                type: 'custom:button-card'
-                entity: sensor.noaa_space_weather_alert_1
-                show_icon: false
-                show_state: true
-                show_label: true
-                name: '[[[ return entity.state + " &bull; " + entity.attributes.summary.split(": ")[0] + " &bull; " + moment(entity.attributes.date).subtract(5, "h").fromNow() ]]]'
-                state_display: '[[[ return entity.attributes.summary.split(": ")[1] ]]]'
-                label: '[[[ return entity.attributes.potential_impacts ]]]'
-                styles:
-                  card:
-                    - background: none
-                    - padding: 8px 0
-                  grid:
-                    - grid-template-areas: '"n" "s" "l"'
-                    - grid-template-rows: min-content min-content min-content
-                  name:
-                    - font-size: var(--small-font-size)
-                    - place-self: center start
-                    - padding-bottom: 4px
-                  state:
-                    - font-size: var(--h5-font-size)
-                    - font-weight: 500
-                    - place-self: center start
-                    - white-space: normal
-                    - text-align: left
-                    - padding-bottom: 4px
-                  label:
-                    - font-size: var(--body-font-size)
-                    - place-self: center start
-                    - white-space: normal
-                    - text-align: left
-              - <<: *astrometrics-noaa-alert
-                entity: sensor.noaa_space_weather_alert_2
-              - <<: *astrometrics-noaa-alert
-                entity: sensor.noaa_space_weather_alert_3
-              - <<: *astrometrics-noaa-alert
-                entity: sensor.noaa_space_weather_alert_4
-              - <<: *astrometrics-noaa-alert
-                entity: sensor.noaa_space_weather_alert_5
-            title: NOAA Alerts
-
-      # Space Weather, Solar Flare
-
-
-      # [Column] The System Only Dreams in Total Darkness
-      - type: vertical-stack
-        view_layout:
-          grid-column: span 2
-        cards:
-
-          - type: 'custom:button-card'
-            template: header_card
-            variables:
-              name: SYSTEM
-              label: null
-              arrow: 'mdi:arrow-top-right'
-              action: url
-              link: 'https://'
-
-          - type: 'custom:layout-card'
-            layout_type: 'custom:grid-layout'
-            layout:
-              grid-template-columns: 'repeat(auto-fill, [col-start] minmax(360px, 1fr) [col-end])'
-              grid-template-rows: auto
-              grid-column-gap: 32px
-              margin: -1px
-            cards:
-
-              - type: vertical-stack
-                cards:
-
-                  - type: markdown
-                    content: '### Inner Planets'
-                    style: 'ha-card {background: none;}'
-
-                  - type: iframe
-                    url: >-
-                      https://mgvez.github.io/jsorrery/?scenario=SolarSystemDwarves&planetScale=10&lookFrom=orbital&lookAt=universe&deltaT=36000&cx=0&cy=0&cz=350&fov=45
-                    aspect_ratio: 100%
-                    card_mod:
-                      style: >
-                        :host {margin-bottom: 16px !important;}
-                        ha-card { overflow: hidden; border-radius: 50%; border: 2px solid
-                        rgba(255,255,255,.1); }
-
-                        iframe { width: 300% !important; height: 300% !important; position:
-                        relative; top: -100% !important; left: -100% !important; transform:
-                        scale(1.75);}
-
-          - type: vertical-stack
-            cards:
-
-              - type: markdown
-                content: '### The Belt + Outer Planets'
+              - type: 'custom:mushroom-entity-card'
+                entity: sun.sun
+                name: Sun
+                icon: mdi:white-balance-sunny
+                icon_color: amber
                 style: 'ha-card {background: none;}'
 
-          - type: iframe
-            url: >-
-              https://mgvez.github.io/jsorrery/?scenario=SolarSystemDwarves&planetScale=10&lookFrom=orbital&lookAt=universe&deltaT=36000&cx=0&cy=0&cz=7500&fov=45
-            aspect_ratio: 66.67%
-            card_mod:
-              style: >
-                :host {margin-bottom: 16px !important;}
-                ha-card { overflow: hidden; }
-
-                iframe { width: 300% !important; height: 300% !important; position:
-                relative; top: -100% !important; left: -100% !important; transform:
-                scale(1.75);}
+              - type: 'custom:mushroom-entity-card'
+                entity: sensor.moon
+                name: Moon
+                icon: mdi:moon-waning-crescent
+                icon_color: blue
+                style: 'ha-card {background: none;}'
 
 
-
-          - type: 'custom:layout-card'
-            layout_type: 'custom:grid-layout'
-            layout:
-              grid-template-columns: 'repeat(auto-fill, [col-start] minmax(112px, 1fr) [col-end])'
-              grid-template-rows: 'repeat(6, [row-start] minmax(56px, 1fr) [row-end])'
-              grid-auto-flow: column
-              margin: -1
-            cards:
-
-              - type: custom:button-card
-                template:
-                  - live_tile
-                  - noaa_space_weather_scale
-                name: Radio Blackout
-                icon: mdi:alpha-r-box
-                entity: sensor.noaa_space_weather_r_24hr
-                variables:
-                  aspect_ratio: 2
-                view_layout:
-                  grid-column: span 2
-                  grid-row: span 2
-
-              - type: custom:button-card
-                template:
-                  - live_tile
-                  - noaa_space_weather_scale
-                name: Solar Radiation Storm
-                icon: mdi:alpha-s-box
-                entity: sensor.noaa_space_weather_s_24hr
-                variables:
-                  aspect_ratio: 2
-                view_layout:
-                  grid-column: span 2
-                  grid-row: span 2
-
-              - type: custom:button-card
-                template:
-                  - live_tile
-                  - noaa_space_weather_scale
-                name: Geomagnetic Storm
-                icon: mdi:alpha-g-box
-                entity: sensor.noaa_space_weather_g_24hr
-                variables:
-                  aspect_ratio: 2
-                view_layout:
-                  grid-column: span 2
-                  grid-row: span 2
-
-
-              - type: custom:button-card
-                template:
-                  - live_tile
-                  - noaa_space_weather_scale
-                name: Now
-                icon: mdi:alpha-r-box
-                entity: sensor.noaa_space_weather_r_latest
-                view_layout:
-                  grid-row: span 2
-
-              - type: custom:button-card
-                template:
-                  - live_tile
-                  - noaa_space_weather_scale
-                name: Now
-                icon: mdi:alpha-s-box
-                entity: sensor.noaa_space_weather_s_latest
-                view_layout:
-                  grid-row: span 2
-
-              - type: custom:button-card
-                template:
-                  - live_tile
-                  - noaa_space_weather_scale
-                name: Now
-                icon: mdi:alpha-g-box
-                entity: sensor.noaa_space_weather_g_latest
-                view_layout:
-                  grid-row: span 2
-
-
-              - type: custom:button-card
-                template:
-                  - live_tile_mini
-                  - noaa_space_weather_prob
-                name: 1d
-                icon: mdi:alpha-r-box
-                entity: sensor.noaa_space_weather_r_majorprob_1day
-                variables:
-                  aspect_ratio: 2
-
-              - type: custom:button-card
-                template:
-                  - live_tile_mini
-                  - noaa_space_weather_prob
-                name: 1d
-                icon: mdi:alpha-r-box
-                entity: sensor.noaa_space_weather_r_minorprob_1day
-                variables:
-                  aspect_ratio: 2
-
-              - type: custom:button-card
-                template:
-                  - live_tile
-                  - noaa_space_weather_prob
-                name: 1d
-                icon: mdi:alpha-s-box
-                entity: sensor.noaa_space_weather_s_1day
-                view_layout:
-                  grid-row: span 2
-
-              - type: custom:button-card
-                template:
-                  - live_tile
-                  - noaa_space_weather_scale
-                name: 1d
-                icon: mdi:alpha-g-box
-                entity: sensor.noaa_space_weather_g_1day
-                view_layout:
-                  grid-row: span 2
-
-
-              - type: custom:button-card
-                template:
-                  - live_tile_mini
-                  - noaa_space_weather_prob
-                name: 2d
-                icon: mdi:alpha-r-box
-                entity: sensor.noaa_space_weather_r_majorprob_2day
-                variables:
-                  aspect_ratio: 2
-
-              - type: custom:button-card
-                template:
-                  - live_tile_mini
-                  - noaa_space_weather_prob
-                name: 2d
-                icon: mdi:alpha-r-box
-                entity: sensor.noaa_space_weather_r_minorprob_2day
-                variables:
-                  aspect_ratio: 2
-
-              - type: custom:button-card
-                template:
-                  - live_tile
-                  - noaa_space_weather_prob
-                name: 2d
-                icon: mdi:alpha-s-box
-                entity: sensor.noaa_space_weather_s_2day
-                view_layout:
-                  grid-row: span 2
-
-              - type: custom:button-card
-                template:
-                  - live_tile
-                  - noaa_space_weather_scale
-                name: 2d
-                icon: mdi:alpha-g-box
-                entity: sensor.noaa_space_weather_g_2day
-                view_layout:
-                  grid-row: span 2
-
-
-              - type: custom:button-card
-                template:
-                  - live_tile_mini
-                  - noaa_space_weather_prob
-                name: 3d
-                icon: mdi:alpha-r-box
-                entity: sensor.noaa_space_weather_r_majorprob_3day
-                variables:
-                  aspect_ratio: 2
-
-              - type: custom:button-card
-                template:
-                  - live_tile_mini
-                  - noaa_space_weather_prob
-                name: 3d
-                icon: mdi:alpha-r-box
-                entity: sensor.noaa_space_weather_r_minorprob_3day
-                variables:
-                  aspect_ratio: 2
-
-              - type: custom:button-card
-                template:
-                  - live_tile
-                  - noaa_space_weather_prob
-                name: 3d
-                icon: mdi:alpha-s-box
-                entity: sensor.noaa_space_weather_s_3day
-                view_layout:
-                  grid-row: span 2
-
-              - type: custom:button-card
-                template:
-                  - live_tile
-                  - noaa_space_weather_scale
-                name: 3d
-                icon: mdi:alpha-g-box
-                entity: sensor.noaa_space_weather_g_3day
-                view_layout:
-                  grid-row: span 2
-
-
-      # Luna Location, Planetary Positions, Man Made Object locations (ISS, etc.)
-
-          - type: custom:list-card
-            entity: sensor.nasa_iss_station_report
-            title: Captain's Log
-            feed_attribute: entries
-            row_limit: 5
-            columns:
-              - field: published
-                style:
-                  - display: inline-block
-                  - font-size: var(--small-font-size)
-                  - padding: 0 0 2px
-              - field: author
-                prefix: '&nbsp;&bull; '
-                style:
-                  - display: inline-block
-                  - font-size: var(--small-font-size)
-                  - padding: 0 0 2px
-              - field: title
-                add_link: link
-                style:
-                  - display: block
-                  - font-weight: bold
-                  - font-size: var(--h5-font-size)
-                  - line-height: 1.5
-                  - padding: 0 0 4px 0
-              - field: summary
-                style:
-                  - display: block
-                  - padding: 0
-                  - padding: 0 0 16px
-            style: >
-              table tbody:first-child { display: none; }
-              tbody tr:nth-child(odd), tbody tr:nth-child(even) {
-              background: none; }
-              td.title a {font-weight: 500;}
-
-
-      # [Column] Look Up The Stars
-      - type: vertical-stack
-        view_layout:
-          grid-column: span 1
+      # [Column] ISS Tracking
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout:
+          margin: -1
         cards:
+
           - type: 'custom:button-card'
-            template: header_card
+            template: header_card_no_link
             variables:
-              name: STARS
-              label: null
-              arrow: 'mdi:arrow-top-right'
-              action: url
-              link: 'https://'
+              name: ISS TRACKING
 
-          - type: 'custom:layout-card'
-            layout_type: 'custom:grid-layout'
-            layout:
-              grid-template-columns: 'repeat(auto-fill, [col-start] minmax(360px, 1fr) [col-end])'
-              grid-template-rows: auto
-              grid-column-gap: 32px
-              margin: -1px
-            cards:
+          - type: 'custom:mushroom-entity-card'
+            entity: input_datetime.iss_next_overhead_date_time
+            name: Next Overhead
+            icon: mdi:space-station
 
-              - type: vertical-stack
-                cards:
-                  - type: markdown
-                    content: '### Northern Hemisphere'
-                    style: 'ha-card {background: none;}'
-                  - type: iframe
-                    url: >-
-                      https://virtualsky.lco.global/embed/index.html?longitude=-73.951442&latitude=40.698470&gradient=false&projection=polar&showstarlabels=true&showorbits=true&showdate=false&showposition=false&gridlines_gal=true&showgalaxy=true&magnitude=4.5&live=true&fontfamily=SegoeUI&fontsize=10px
-                    aspect_ratio: 100%
-                    card_mod:
-                      style: >
-                        :host {margin-bottom: 16px !important;}
-                        ha-card {border-radius: 50%;  border: 2px solid
-                        rgba(255,255,255,.1);}
+          - type: 'custom:mushroom-entity-card'
+            entity: input_number.iss_elevation
+            name: Elevation
+            icon: mdi:angle-acute
 
-                  - type: entities
-                    entities:
-                      - &astrometrics-rocket-launch
-                        type: 'custom:button-card'
-                        entity: sensor.rocketlaunch_live_next_1
-                        show_icon: false
-                        show_state: true
-                        show_label: true
-                        name: '[[[ return `${entity.attributes.date} &bull; ${entity.attributes.tags}` ]]]'
-                        state_display: '[[[ return entity.attributes.name ]]]'
-                        label: '[[[ return entity.attributes.launch_description ]]]'
-                        styles:
-                          card:
-                            - background: none
-                            - padding: 8px 0
-                          grid:
-                            - grid-template-areas: '"n" "s" "l"'
-                            - grid-template-rows: min-content min-content min-content
-                          name:
-                            - font-size: var(--small-font-size)
-                            - place-self: center start
-                            - padding-bottom: 4px
-                          state:
-                            - font-size: var(--h5-font-size)
-                            - font-weight: 500
-                            - place-self: center start
-                            - white-space: normal
-                            - text-align: left
-                            - padding-bottom: 4px
-                          label:
-                            - font-size: var(--body-font-size)
-                            - place-self: center start
-                            - white-space: normal
-                            - text-align: left
-                        tap_action:
-                          action: url
-                          url_path: '[[[ return entity.attributes.link ]]]'
-                        hold_action:
-                          action: more-info
-                        confirmation:
-                          text: '[[[ return `Open link for ${entity.state}?` ]]]'
-                      - <<: *astrometrics-rocket-launch
-                        entity: sensor.rocketlaunch_live_next_2
-                      - <<: *astrometrics-rocket-launch
-                        entity: sensor.rocketlaunch_live_next_3
-                      - <<: *astrometrics-rocket-launch
-                        entity: sensor.rocketlaunch_live_next_4
-                      - <<: *astrometrics-rocket-launch
-                        entity: sensor.rocketlaunch_live_next_5
-                    title: Rocket Launches
-                        
-              - type: vertical-stack
-                cards:
-                  - type: markdown
-                    content: '### Southern Hemisphere'
-                    style: 'ha-card {background: none;}'
-                  - type: iframe
-                    url: >-
-                      https://virtualsky.lco.global/embed/index.html?longitude=106.048558&latitude=-40.698470&az=0&gradient=false&projection=polar&showstarlabels=true&showorbits=true&showdate=false&showposition=false&gridlines_gal=true&showgalaxy=true&magnitude=4.5&live=true&fontfamily=SegoeUI&fontsize=10px
-                    aspect_ratio: 100%
-                    card_mod:
-                      style: >
-                        :host {margin-bottom: 16px !important;}
-                        ha-card {border-radius: 50%;  border: 2px solid
-                        rgba(255,255,255,.1);}
+          - type: 'custom:mushroom-entity-card'
+            entity: input_number.iss_duration
+            name: Duration
+            icon: mdi:timer
 
-                  - type: 'custom:home-feed-card'
-                    title: Astronomy Events
-                    show_empty: false
-                    calendars:
-                      - calendar.astronomy_calendar
-                    calendar_days_back: 7
-                    calendar_days_forward: 30
-                    scrollbars_enabled: false
-                    show_icons: false
-                    show_notification_title: false
-                    id_filter: ^home_feed_.*
-                    card_mod:
-                      style: >
-                        .card-header {padding: 12px 0 !important;}
-                        .item-content { font-size: var(--h6-font-size); }
-                        .markdown-content { font-size: var(--body-font-size); }
-                        hr { border: 0; }
+          - type: 'custom:mushroom-entity-card'
+            entity: input_text.iss_approach
+            name: Approach Direction
+            icon: mdi:compass
 
-      # Sky Watching Weather
+          - type: 'custom:mushroom-entity-card'
+            entity: input_text.iss_departure
+            name: Departure Direction
+            icon: mdi:compass-outline
+
+          - type: entities
+            title: ISS Scripts
+            entities:
+              - entity: script.iss_overhead_now
+                name: ISS Overhead Now
+              - entity: script.iss_overhead_in_10_minutes
+                name: ISS in 10 Minutes
+
+
+      # [Column] Solar Activity
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout:
+          margin: -1
+        cards:
+
+          - type: 'custom:button-card'
+            template: header_card_no_link
+            variables:
+              name: SOLAR ACTIVITY
+
+          - type: sensor
+            entity: sensor.noaa_space_weather_solar_wind_speed
+            graph: line
+            detail: 2
+            name: Solar Wind Speed
+            hours_to_show: 24
+
+          - type: sensor
+            entity: sensor.noaa_space_weather_solar_wind_magnetic_fields_bt
+            graph: line
+            detail: 2
+            name: Magnetic Field Bt
+            hours_to_show: 24
+
+          - type: sensor
+            entity: sensor.noaa_space_weather_solar_wind_magnetic_fields_bz
+            graph: line
+            detail: 2
+            name: Magnetic Field Bz
+            hours_to_show: 24
+
+          - type: 'custom:mushroom-entity-card'
+            entity: sensor.noaa_space_weather_noon_10_7cm_radio_flux
+            name: 10.7cm Radio Flux
+            icon: mdi:sine-wave
+
+
+      # [Column] Space Weather Scales
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout:
+          margin: -1
+        cards:
+
+          - type: 'custom:button-card'
+            template: header_card_no_link
+            variables:
+              name: SPACE WEATHER SCALES
+
+          - type: entities
+            title: Radio Blackout (R)
+            entities:
+              - entity: sensor.noaa_space_weather_r_latest
+                name: Current
+              - entity: sensor.noaa_space_weather_r_24hr
+                name: 24hr Forecast
+
+          - type: entities
+            title: Solar Radiation Storm (S)
+            entities:
+              - entity: sensor.noaa_space_weather_s_latest
+                name: Current
+              - entity: sensor.noaa_space_weather_s_24hr
+                name: 24hr Forecast
+
+          - type: entities
+            title: Geomagnetic Storm (G)
+            entities:
+              - entity: sensor.noaa_space_weather_g_latest
+                name: Current
+              - entity: sensor.noaa_space_weather_g_24hr
+                name: 24hr Forecast
+
+
+      # [Column] Forecast
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout:
+          margin: -1
+        cards:
+
+          - type: 'custom:button-card'
+            template: header_card_no_link
+            variables:
+              name: FORECAST
+
+          - type: entities
+            title: Geomagnetic (G)
+            entities:
+              - entity: sensor.noaa_space_weather_g_1day
+                name: 1-Day
+              - entity: sensor.noaa_space_weather_g_2day
+                name: 2-Day
+              - entity: sensor.noaa_space_weather_g_3day
+                name: 3-Day
+
+          - type: entities
+            title: Solar Radiation (S)
+            entities:
+              - entity: sensor.noaa_space_weather_s_1day
+                name: 1-Day
+              - entity: sensor.noaa_space_weather_s_2day
+                name: 2-Day
+              - entity: sensor.noaa_space_weather_s_3day
+                name: 3-Day
+
+
+      # [Column] Radio Blackout Probability
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout:
+          margin: -1
+        cards:
+
+          - type: 'custom:button-card'
+            template: header_card_no_link
+            variables:
+              name: RADIO BLACKOUT PROB
+
+          - type: entities
+            title: Major Flare
+            entities:
+              - entity: sensor.noaa_space_weather_r_majorprob_1day
+                name: 1-Day
+              - entity: sensor.noaa_space_weather_r_majorprob_2day
+                name: 2-Day
+              - entity: sensor.noaa_space_weather_r_majorprob_3day
+                name: 3-Day
+
+          - type: entities
+            title: Minor Flare
+            entities:
+              - entity: sensor.noaa_space_weather_r_minorprob_1day
+                name: 1-Day
+              - entity: sensor.noaa_space_weather_r_minorprob_2day
+                name: 2-Day
+              - entity: sensor.noaa_space_weather_r_minorprob_3day
+                name: 3-Day
+
+
+      # [Column] Aurora
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout:
+          margin: -1
+        cards:
+
+          - type: 'custom:button-card'
+            template: header_card_no_link
+            variables:
+              name: AURORA
+
+          - type: 'custom:mushroom-entity-card'
+            entity: sensor.aurora_visibility_aurora_visibility
+            name: Aurora Visibility
+            icon: mdi:aurora
+
+          - type: 'custom:mushroom-entity-card'
+            entity: binary_sensor.aurora_visibility_aurora_visibility_alert
+            name: Aurora Alert
+            icon: mdi:alert
+
+
+      # [Column] Sun Position
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout:
+          margin: -1
+        cards:
+
+          - type: 'custom:button-card'
+            template: header_card_no_link
+            variables:
+              name: SUN POSITION
+
+          - type: 'custom:mushroom-entity-card'
+            entity: sensor.sun_solar_elevation
+            name: Elevation
+            icon: mdi:angle-acute
+
+          - type: 'custom:mushroom-entity-card'
+            entity: sensor.sun_solar_azimuth
+            name: Azimuth
+            icon: mdi:compass
+
+          - type: 'custom:mushroom-entity-card'
+            entity: sensor.sun_next_rising
+            name: Next Sunrise
+            icon: mdi:weather-sunset-up
+
+          - type: 'custom:mushroom-entity-card'
+            entity: sensor.sun_next_setting
+            name: Next Sunset
+            icon: mdi:weather-sunset-down
+
+          - type: 'custom:mushroom-entity-card'
+            entity: sensor.sun_next_dawn
+            name: Next Dawn
+            icon: mdi:weather-sunset-up
+
+          - type: 'custom:mushroom-entity-card'
+            entity: sensor.sun_next_dusk
+            name: Next Dusk
+            icon: mdi:weather-sunset-down
+
+
+      # [Column] Moon
+      - type: 'custom:layout-card'
+        layout_type: 'custom:grid-layout'
+        layout:
+          margin: -1
+        cards:
+
+          - type: 'custom:button-card'
+            template: header_card_no_link
+            variables:
+              name: MOON PHASES
+
+          - type: 'custom:mushroom-entity-card'
+            entity: sensor.moon
+            name: Current Phase
+            icon: mdi:moon-waning-crescent
+
+          - type: 'custom:mushroom-entity-card'
+            entity: sensor.next_moon_phase_date
+            name: Next Phase
+            icon: mdi:calendar
+
+          - type: 'custom:mushroom-entity-card'
+            entity: sensor.next_but_one_moon_phase_date
+            name: Phase +1
+            icon: mdi:calendar
+
+          - type: 'custom:mushroom-entity-card'
+            entity: sensor.next_but_two_moon_phase_date
+            name: Phase +2
+            icon: mdi:calendar
+
+          - type: 'custom:mushroom-entity-card'
+            entity: sensor.next_but_three_moon_phase_date
+            name: Phase +3
+            icon: mdi:calendar

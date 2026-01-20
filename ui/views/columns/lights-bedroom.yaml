@@ -1,35 +1,33 @@
-# - view_layout:
-#     grid-column: span 2
-#   type: 'custom:button-card'
-#   template:
-#     - light_button_card_group
-#   entity: group.bedroom_lights
-#   name: All Bedroom Lights
-#   icon: 'mdi:lightbulb-multiple'
-#   variables:
-#     aspect_ratio: 2/1
+# Bedroom Lights Column
+# Updated for P-House configuration
 
-# - type: 'custom:decluttering-card'
-#   template: mini_graph_tile
-#   variables:
-#     - entities:
-#         - entity: sensor.bedroom_hue_sensor_light_level
-#     - title: Light Level
+- view_layout:
+    grid-column: span 2
+  type: 'custom:mushroom-light-card'
+  entity: light.bedroom
+  name: All Bedroom Lights
+  icon: mdi:lightbulb-group
+  use_light_color: true
+  show_brightness_control: true
+  show_color_control: true
+  collapsible_controls: true
 
-# - type: 'custom:decluttering-card'
-#   template: light_card
-#   variables:
-#     - entity: light.bedroom_ceiling_lights
-#     - name: Ceiling
+- type: 'custom:mushroom-light-card'
+  entity: light.ceiling_light
+  name: Queen Ceiling Light
+  use_light_color: true
+  show_brightness_control: true
 
-# - type: 'custom:decluttering-card'
-#   template: light_card
-#   variables:
-#     - entity: light.bedroom_cloud_light
-#     - name: Cloud Light
+- type: 'custom:mushroom-light-card'
+  entity: light.johns_light
+  name: John's Light
+  use_light_color: true
+  show_brightness_control: true
+  show_color_control: true
 
-# - type: 'custom:decluttering-card'
-#   template: light_card
-#   variables:
-#     - entity: light.bedroom_hue_bowl
-#     - name: Hue Bowl
+- type: 'custom:mushroom-light-card'
+  entity: light.queens_light
+  name: Queen's Light
+  use_light_color: true
+  show_brightness_control: true
+  show_color_control: true
