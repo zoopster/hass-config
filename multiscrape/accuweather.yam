@@ -2,14 +2,14 @@
 # Get the details from Accuweather that I want that isn't in the official integration.
 
 - name: Accuweather - Detailed Hourly Forecast
-  resource: !secret accuweather_hourly
+  resource: http://dataservice.accuweather.com/currentconditions/v1/337603/historical?apikey=8AQmw0c87WS2aKCIOBg0jPwxGocl6gho
   scan_interval: 3600
   sensor:
 
     - unique_id: accuweather_condition_hourly
       name: Accuweather - Condition - Detailed Hourly Forecast
       value_template: '{{ value_json[0].IconPhrase }}'
-      unit_of_measurement: '°C'
+      unit_of_measurement: 'F'
       icon: mdi:weather-windy
       attributes:
         - name: 0h

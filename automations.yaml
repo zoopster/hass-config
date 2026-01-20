@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 - id: '1650203295394'
   alias: Frigate Notification
   description: ''
@@ -41,6 +42,8 @@
     title: Car detected in Driveway
   mode: single
 
+=======
+>>>>>>> Stashed changes
 - id: logging_level
   alias: 'Logging Level'
   initial_state: true
@@ -50,4 +53,128 @@
   action:
     service: logger.set_default_level
     data_template:
+<<<<<<< Updated upstream
       level: "{{ trigger.to_state.state }}"
+=======
+      level: '{{ trigger.to_state.state }}'
+- id: '1668037400731'
+  alias: Update OpenUV
+  description: ''
+  trigger:
+  - platform: time_pattern
+    hours: '1'
+  - platform: numeric_state
+    entity_id: sun.sun
+    attribute: elevation
+    above: 10
+  condition: []
+  action:
+  - service: homeassistant.update_entity
+    data: {}
+    target:
+      entity_id: sensor.current_uv_index
+  mode: single
+- id: '1687898460183'
+  alias: JP-Zone Notification
+  description: ''
+  use_blueprint:
+    path: homeassistant/notify_leaving_zone.yaml
+    input:
+      person_entity: person.john_pugh
+      zone_entity: zone.home
+      notify_device: e142d3fc2c20fbfa7f6154b2465048dd
+- id: '1692823581668'
+  alias: Front door opened
+  description: ''
+  triggers:
+  - entity_id:
+    - binary_sensor.front_door_door
+    from: 'off'
+    to: 'on'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 0
+    trigger: state
+  conditions: []
+  actions:
+  - data:
+      message: The front door opened
+    action: notify.mobile_app_jpip
+  mode: single
+- id: '1692836502781'
+  alias: Driveway Notification
+  description: ''
+  use_blueprint:
+    path: SgtBatten/Stable.yaml
+    input:
+      camera: camera.driveway
+      notify_device: e142d3fc2c20fbfa7f6154b2465048dd
+      base_url: https://04291gjw53u17ovvh8s0mv93fm9ddhte.ui.nabu.casa
+      message: Someone is in the driveway
+      ios_live_view: true
+- id: '1695579399287'
+  alias: Frigate status
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.frigate_status
+    for:
+      hours: 0
+      minutes: 1
+      seconds: 0
+  condition: []
+  action:
+  - service: notify.mobile_app_jpip
+    data:
+      message: Frigate is not responding
+  mode: single
+- id: '1752268375541'
+  alias: Cabana room door opened
+  description: ''
+  triggers:
+  - entity_id:
+    - binary_sensor.office_slider_door
+    from: 'off'
+    to: 'on'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 0
+    trigger: state
+  conditions: []
+  actions:
+  - data:
+      message: The cabana room slider opened
+    action: notify.mobile_app_jpip
+  mode: single
+- id: '1752268446575'
+  alias: Back door opened
+  description: ''
+  triggers:
+  - entity_id:
+    - binary_sensor.back_door_door
+    from: 'off'
+    to: 'on'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 0
+    trigger: state
+  conditions: []
+  actions:
+  - data:
+      message: The back door opened
+    action: notify.mobile_app_jpip
+  mode: single
+- id: '1765202015282'
+  alias: Driveway Notification
+  description: ''
+  use_blueprint:
+    path: SgtBatten/Stable.yaml
+    input:
+      camera: camera.driveway
+      notify_device: e142d3fc2c20fbfa7f6154b2465048dd
+      message: Driveway movement
+>>>>>>> Stashed changes

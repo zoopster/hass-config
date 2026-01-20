@@ -14,7 +14,10 @@
 - platform: ping
   name: "ping_devopstales"
   host: devopstales.com
-    
+- platform: ping
+  name: ping_frigate
+  host: frigate
+      
 # International Space Station
 #- platform: iss
   # show_on_map: true 

@@ -9,6 +9,8 @@ lovelace:
       filename: ui/ui-lovelace.yaml
 
 default_config:
+http:
+  server_port: 8124
 
 tts:
   - platform: google_translate
@@ -25,12 +27,46 @@ frontend:
 sensor: !include_dir_merge_list sensors
 binary_sensor: !include_dir_merge_list binary_sensors 
 multiscrape: !include_dir_merge_list multiscrape
+<<<<<<< Updated upstream
+=======
+
+# Setup REST platform to fix rest sensor issue
+rest: !include_dir_merge_list rests
+
+# These need to go in the dashboard yaml
+# decluttering_templates: !include ui/templates/decluttering-card.yaml
+# button_card_templates: !include_dir_merge_named ui/templates/button-card/
+# apexcharts_card_templates: !include ui/templates/apexcharts-card.yaml
+# popup_cards: !include_dir_merge_named ui/popups/
+>>>>>>> Stashed changes
 
 device_tracker:
   - platform: ping
     hosts:
       router: 192.168.50.1
       cloudflare: 1.1.1.1
+<<<<<<< Updated upstream
 
 logger:
   default: info
+=======
+      sensecap: 192.168.50.164
+
+#panel_iframe:
+#  vscode:
+#    title: "Visual Studio Code"
+#    url: "http://192.168.50.31:8443"
+#   icon: mdi:microsoft-visual-studio-code
+#  esphome:
+#    title: "ESPHome Dashboard"
+#    url: "http://192.168.50.31:6052/"
+#    icon: mdi:car-esp
+
+#logger:
+#  default: info
+#  logs:
+#    custom_components.multiscrape: debug
+camera:
+    platform: ha_skyfield
+    show_constellations: false
+>>>>>>> Stashed changes
