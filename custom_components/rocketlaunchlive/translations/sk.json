@@ -1,0 +1,20 @@
+{
+  "title": "Štart Rakiet Živé vysielanie - Nasledujúcich 5 štartov",
+  "config": {
+    "step": {
+      "user": {
+        "data": {
+          "api_key": "Voliteľné: Zadajte svoj platený RocketLaunch.live API kľúč."
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "[%key:common::config_flow::error::cannot_connect%]",
+      "invalid_auth": "[%key:common::config_flow::error::invalid_auth%]",
+      "unknown": "[%key:common::config_flow::error::unknown%]"
+    },
+    "abort": {
+      "single_instance_allowed": "[%key:common::config_flow::abort::single_instance_allowed%]"
+    }
+  }
+}

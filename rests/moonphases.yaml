@@ -1,0 +1,42 @@
+
+  - authentication: basic
+    scan_interval: 5400
+    resource_template: |-
+      https://aa.usno.navy.mil/api/moon/phases/date?date={{now().date()|string}}&nump=4
+    sensor:
+      - name: "Next Moon Phase Date"
+        unique_id: next_moon_phase_date_0001
+        value_template: |
+          {% set x = value_json.phasedata[0] %}
+          {{x.year}}-{{x.month if x.month > 9 else '0'~x.month|string}}-{{x.day if x.day > 9 else '0'~x.day|string}}
+        json_attributes_path: "$.phasedata[0]"
+        json_attributes: 
+          - "phase" 
+          - "time"
+      - name: "Next but One Moon Phase Date"
+        unique_id: next_1_moon_phase_date_0001
+        value_template: |
+          {% set x = value_json.phasedata[1] %}
+          {{x.year}}-{{x.month if x.month > 9 else '0'~x.month|string}}-{{x.day if x.day > 9 else '0'~x.day|string}}
+        json_attributes_path: "$.phasedata[1]"
+        json_attributes: 
+          - "phase" 
+          - "time"
+      - name: "Next but Two Moon Phase Date"
+        unique_id: next_2_moon_phase_date_0001
+        value_template: |
+          {% set x = value_json.phasedata[2] %}
+          {{x.year}}-{{x.month if x.month > 9 else '0'~x.month|string}}-{{x.day if x.day > 9 else '0'~x.day|string}}
+        json_attributes_path: "$.phasedata[2]"
+        json_attributes: 
+          - "phase" 
+          - "time"
+      - name: "Next but Three Moon Phase Date"
+        unique_id: next_3_moon_phase_date_0001
+        value_template: |
+          {% set x = value_json.phasedata[3] %}
+          {{x.year}}-{{x.month if x.month > 9 else '0'~x.month|string}}-{{x.day if x.day > 9 else '0'~x.day|string}}
+        json_attributes_path: "$.phasedata[3]"
+        json_attributes: 
+          - "phase" 
+          - "time"

@@ -39,3 +39,12 @@
   state: >
         {{ state_attr('sun.sun', 'elevation') | float }}
   unit_of_measurement: "°"
+
+sensor:
+  - platform: template
+    sensors:
+      sensor.wind_direction_8726412_middle_tampa_bay_fl:
+        value_template: >
+          {% set direction = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW','N'] %}
+          {% set degree = states('sensor.wind_direction_8726412_middle_tampa_bay_fl')|float %}
+          {{ direction[((degree+11.25)/22.5)|int] }}

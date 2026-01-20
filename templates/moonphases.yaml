@@ -1,0 +1,10 @@
+template:
+  - sensor:
+      - name: Days Until Full Moon
+        unit_of_measurement: days
+        state: >
+          {% set s_list = ['sensor.next_but_three_moon_phase_date','sensor.next_but_two_moon_phase_date',
+          'sensor.next_but_one_moon_phase_date','sensor.next_moon_phase_date'] %}
+          {% set next_full = expand(s_list) | selectattr('attributes.phase', 'eq', 'Full Moon')
+          | map(attribute='state') | join | as_datetime | as_local %}
+          {{ (next_full - today_at()).days }}

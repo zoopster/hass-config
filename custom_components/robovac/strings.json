@@ -1,0 +1,40 @@
+{
+    "config": {
+        "abort": {
+            "already_configured": "Device is already configured"
+        },
+        "error": {
+            "cannot_connect": "Failed to connect",
+            "invalid_auth": "Invalid authentication",
+            "unknown": "Unexpected error"
+        },
+        "step": {
+            "user": {
+                "data": {
+                    "host": "Host",
+                    "password": "Password",
+                    "username": "Username"
+                },
+                "description": "Enter your Eufy account details"
+            }
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "title": "Manage vacuums",
+                "data": {
+                    "selected_vacuum": "Select the Vacuum to edit"
+                }
+            },
+            "edit": {
+                "title": "Edit vacuum",
+                "data": {
+                    "autodiscovery": "Enable autodiscovery",
+                    "ip_address": "IP Address"
+                },
+                "description": "Autodiscovery will automatically update the IP address"
+            }
+        }
+    }
+}

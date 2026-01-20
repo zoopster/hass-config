@@ -1,0 +1,32 @@
+
+  - resource: https://services.swpc.noaa.gov/products/summary/solar-wind-mag-field.json
+    scan_interval: 60
+    sensor:
+      - name: NOAA Space Weather - Solar Wind Magnetic Fields - Bt
+        value_template: "{{ value_json.Bt | int }}"
+        unit_of_measurement: "nT"
+        
+      - name: NOAA Space Weather - Solar Wind Magnetic Fields - Bz
+        value_template: "{{ value_json.Bz | int }}"
+        unit_of_measurement: "nT"
+
+  - resource: https://services.swpc.noaa.gov/products/summary/10cm-flux.json
+    scan_interval: 60
+    sensor: 
+      - name: NOAA Space Weather - Solar Wind 10cm Flux
+        value_template: "{{ value_json.Flux | int }}"
+        unit_of_measurement: "sfu"
+
+  - resource: https://services.swpc.noaa.gov/products/summary/solar-wind-speed.json
+    scan_interval: 60
+    sensor:
+      - name: NOAA Space Weather - Solar Wind Speed
+        value_template: "{{ value_json.WindSpeed | int }}"
+        unit_of_measurement: "km/sec"
+
+  - resource: https://services.swpc.noaa.gov/products/summary/10cm-flux.json
+    scan_interval: 60
+    sensor:
+      - name: NOAA Space Weather - Noon 10.7cm Radio Flux
+        value_template: "{{ value_json.Flux | int }}"
+        unit_of_measurement: "sfu"
