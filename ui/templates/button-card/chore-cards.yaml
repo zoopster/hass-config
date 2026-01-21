@@ -146,14 +146,14 @@ chore_tile:
       - color: |
           [[[
             if ((variables.diff < 2) && (variables.last_done.getDay() == variables.now.getDay())) { return 'var(--accent-text-color)' }
-            if ((variables.due > 0) && (variables.due < variables.diff + (variables.due / 4))) { return 'var(--accent-text-color)' } else {return 'var(--disabled-text-color'}
+            if ((variables.due > 0) && (variables.due < variables.diff + (variables.due / 4))) { return 'var(--accent-text-color)' } else {return 'var(--disabled-text-color)'}
           ]]]
 
     icon:
       - color: |
           [[[
             if ((variables.diff < 2) && (variables.last_done.getDay() == variables.now.getDay())) { return 'var(--accent-text-color)' }
-            if ((variables.due > 0) && (variables.due < variables.diff + (variables.due / 4))) { return 'var(--accent-text-color)' } else {return 'var(--disabled-text-color'}
+            if ((variables.due > 0) && (variables.due < variables.diff + (variables.due / 4))) { return 'var(--accent-text-color)' } else {return 'var(--disabled-text-color)'}
           ]]]
 
     state:

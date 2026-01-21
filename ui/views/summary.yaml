@@ -1134,9 +1134,10 @@ cards:
                       ]]]
                     label: |
                       [[[
+                        if (!entity.attributes.forecast) return '';
                         var tempForecast = entity.attributes.forecast.map((item) => { return item.temperature }).slice(0, 4)
-                        if (states['sensor.p_house_hourly_forecast_temperature_rising'] == 'Rising') {
-                          return '↗ ' + Math.max(...tempForecast) + '°'                      
+                        if (states['sensor.p_house_hourly_forecast_temperature_rising']?.state == 'Rising') {
+                          return '↗ ' + Math.max(...tempForecast) + '°'
                         } else {
                           return '↘ ' + Math.min(...tempForecast) + '°'
                         }
@@ -1175,13 +1176,13 @@ cards:
                         ]]]
                     entity: weather.valhalla_2
                     name: Precipitation
-                    state_display: '[[[ return entity.attributes.forecast[variables.day].precipitation_probability + "%" ]]]'
-                    icon: '[[[ return (entity.attributes.forecast[variables.day].precipitation_probability >= 33) ? "mdi:water" : "mdi:water-outline" ]]]'
-                    label: '[[[ return entity.attributes.forecast[variables.day].precipitation ]]]'
+                    state_display: '[[[ return entity.attributes.forecast?.[variables.day]?.precipitation_probability + "%" ?? "N/A" ]]]'
+                    icon: '[[[ return (entity.attributes.forecast?.[variables.day]?.precipitation_probability >= 33) ? "mdi:water" : "mdi:water-outline" ]]]'
+                    label: '[[[ return entity.attributes.forecast?.[variables.day]?.precipitation ?? "" ]]]'
                     show_units: false
                     styles:
                       grid:
-                        - background: '[[[ return "rgba(var(--rgb-primary-color)," + (parseInt(entity.attributes.forecast[variables.day].precipitation_probability)/100) + ")" ]]]'
+                        - background: '[[[ return entity.attributes.forecast?.[variables.day] ? "rgba(var(--rgb-primary-color)," + (parseInt(entity.attributes.forecast[variables.day].precipitation_probability)/100) + ")" : "transparent" ]]]'
                       card:
                         - background: var(--ha-card-background)
 
@@ -1241,11 +1242,17 @@ cards:
                     variables:
                       label: |
                         [[[
-                          return "Grass - " + states['sensor.tomorrow_io_p_house_grass_pollen_index'].state + "<br>Tree - " + states['sensor.tomorrow_io_p_house_tree_pollen_index'].state + "<br>Weed - " + states['sensor.tomorrow_io_p_house_weed_pollen_index'].state
+                          var grass = states['sensor.tomorrow_io_p_house_grass_pollen_index']?.state ?? 'Unknown'
+                          var tree = states['sensor.tomorrow_io_p_house_tree_pollen_index']?.state ?? 'Unknown'
+                          var weed = states['sensor.tomorrow_io_p_house_weed_pollen_index']?.state ?? 'Unknown'
+                          return "Grass - " + grass + "<br>Tree - " + tree + "<br>Weed - " + weed
                         ]]]
                       state: |
                         [[[
-                          var sum = "Grass - " + states['sensor.tomorrow_io_p_house_grass_pollen_index'].state + "<br>Tree - " + states['sensor.tomorrow_io_p_house_tree_pollen_index'].state + "<br>Weed - " + states['sensor.tomorrow_io_p_house_weed_pollen_index'].state
+                          var grass = states['sensor.tomorrow_io_p_house_grass_pollen_index']?.state ?? ''
+                          var tree = states['sensor.tomorrow_io_p_house_tree_pollen_index']?.state ?? ''
+                          var weed = states['sensor.tomorrow_io_p_house_weed_pollen_index']?.state ?? ''
+                          var sum = grass + tree + weed
                           if (sum.includes('very_high')) {return 'Very High' }
                           if (sum.includes('high')) {return 'High' }
                           if (sum.includes('medium')) {return 'Medium' }
@@ -1255,7 +1262,7 @@ cards:
                         ]]]
                     name: Pollen
                     state_display: '[[[ return variables.state ]]]'
-                    label: '[[[ return variables.label.replace("_", " ") ]]]'
+                    label: '[[[ return variables.label.replaceAll("_", " ") ]]]'
                     styles:
                       card:
                         - color: |
@@ -1274,7 +1281,7 @@ cards:
                                 case 'High': return 'var(--primary-color)'
                                 case 'Medium': return 'rgba(var(--rgb-primary-color), .75)'
                                 case 'Low': return 'rgba(var(--rgb-primary-color), .5)'
-                                case 'Very Low': 'rgba(var(--rgb-primary-color), .25)'
+                                case 'Very Low': return 'rgba(var(--rgb-primary-color), .25)'
                                 default: return 'var(--ha-card-background)'
                               }
                             ]]]
@@ -1286,8 +1293,8 @@ cards:
                     entity: sensor.curren_uv_index
                     name: UV
                     icon: mdi:sun-wireless-outline
-                    label: '[[[ return entity.attributes.level ]]]'
-                    state_display: '[[[ return entity.state.split(" ") ]]]'
+                    label: '[[[ return entity.attributes?.level ?? "" ]]]'
+                    state_display: '[[[ return entity.state?.split(" ") ?? "" ]]]'
                     styles:
                       card:
                         - color: |
@@ -1313,10 +1320,10 @@ cards:
                   - type: 'custom:button-card'
                     template: live_tile_with_unit
                     entity: sensor.p_house_wind
-                    name: '[[[ return states["sensor.wind_strength"].state ]]]'
+                    name: '[[[ return states["sensor.wind_strength"]?.state ?? "" ]]]'
                     icon: 'mdi:navigation'
-                    label: '[[[ return states["sensor.wind_direction"].state ]]]'
-                    state_display: '[[[ return Math.round(parseFloat(states["sensor.p_house_wind"].state) * 0.6213712 * 10) / 10 ]]]'
+                    label: '[[[ return states["sensor.wind_direction"]?.state ?? "" ]]]'
+                    state_display: '[[[ return Math.round(parseFloat(states["sensor.p_house_wind"]?.state ?? 0) * 0.6213712 * 10) / 10 ]]]'
                     custom_fields:
                       unit: MPH
                     styles:
@@ -1325,7 +1332,7 @@ cards:
                       card:
                         - background: |
                             [[[
-                              var wind_speed_mph = parseFloat(states["sensor.p_house_wind"].state) * 0.6213712
+                              var wind_speed_mph = parseFloat(states["sensor.p_house_wind"]?.state ?? 0) * 0.6213712
                               if (wind_speed_mph <= 30) { return "transparent" }
                               if (wind_speed_mph <= 54) {
                                 return "rgba(var(--rgb-primary-color)," + (wind_speed_mph / 54) + ")"
@@ -1334,7 +1341,7 @@ cards:
                               }
                             ]]]
                       icon:
-                        - transform: '[[[ return "rotate(" + parseFloat(states["weather.p_house_hourly"].attributes.wind_bearing) + "deg)" ]]]'
+                        - transform: '[[[ return "rotate(" + parseFloat(states["weather.p_house_hourly"]?.attributes?.wind_bearing ?? 0) + "deg)" ]]]'
 
 
                   - type: 'custom:auto-entities'
@@ -1998,9 +2005,9 @@ cards:
                           - live_tile_card
                           - live_tile_with_long_state
                         entity: sensor.noaa_space_weather_alert_1
-                        name: '[[[ return entity.state + " &bull; " + entity.attributes.summary.split(": ")[0] + " &bull; " + moment(entity.attributes.date).subtract(5, "h").fromNow() ]]]'
-                        state_display: '[[[ return entity.attributes.summary.split(": ")[1] ]]]'
-                        label: '[[[ return entity.attributes.potential_impacts ]]]'
+                        name: '[[[ return entity.state + " &bull; " + (entity.attributes.summary?.split(": ")[0] ?? "") + " &bull; " + (entity.attributes.date ? moment(entity.attributes.date).subtract(5, "h").fromNow() : "") ]]]'
+                        state_display: '[[[ return entity.attributes.summary?.split(": ")[1] ?? "" ]]]'
+                        label: '[[[ return entity.attributes.potential_impacts ?? "" ]]]'
                         color: var(--ha-card-background)
                         icon: mdi:alert-octagram
                         styles:
